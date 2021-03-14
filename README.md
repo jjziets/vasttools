@@ -15,8 +15,8 @@ https://raw.githubusercontent.com/jjziets/vasttools/main/set_mem.sh
 setup the monitoring programe that will change the memory oc based on what programe is running. it desinged for RTX3090's and targets ethminer at this stage.
 It requires both set_mem.sh and ocmonitor.sh to run in the root.
 
-https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor
-https://raw.githubusercontent.com/jjziets/vasttools/main/set_mem.sh
+https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor.sh
+
 
 (crontab -l; echo "@reboot screen -dmS ocmonitor /root/home/jzietsman/ocminitor.sh") | crontab -
 
