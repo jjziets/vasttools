@@ -17,7 +17,7 @@ It requires both set_mem.sh and ocmonitor.sh to run in the root.
 
 https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor.sh
 
-the load at reboot use the crontab below
+To load at reboot use the crontab below
 
 (crontab -l; echo "@reboot screen -dmS ocmonitor /root/home/jzietsman/ocminitor.sh") | crontab -
 
