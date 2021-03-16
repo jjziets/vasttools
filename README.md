@@ -19,6 +19,10 @@ https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor.sh
 
 To load at reboot use the crontab below
 
-(crontab -l; echo "@reboot screen -dmS ocmonitor /root/home/jzietsman/ocminitor.sh") | crontab -
+(crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
+
+*benchmark of RTX3090's
+
+https://github.com/jjziets/pytorch-benchmark-volta
 
 
