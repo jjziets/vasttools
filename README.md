@@ -2,7 +2,7 @@
 
 The aim is to setup a list of usble tools that can be used with vastai.
 
-##Memory oc
+"Memory oc"
 set the OC of the RTX 3090
 It requires the folliwing
 
