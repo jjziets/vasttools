@@ -8,6 +8,8 @@ It requires the folliwing
 
 sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
 
+sudo nvidia-xconfig -a --cool-bits=31 --allow-empty-initial-configuration --enable-all-gpus
+
 https://raw.githubusercontent.com/jjziets/vasttools/main/set_mem.sh
 
 
