@@ -20,14 +20,16 @@ while true;do
         then
                 echo "ethminer is running and mem oc not set"
                 let OCset=1
-                ./set_mem.sh 2000
+                /home/jzietsman/set_mem.sh 2000
+                nvidia-smi --lock-gpu-clocks=1200
         fi
 
         if [ "$running" -eq 0  ] && [ "$OCset" -eq 1 ]
         then
                 echo "ethminer not running and mem oc is set"
                 let OCset=0
-                ./set_mem.sh 0
+                /home/jzietsman/set_mem.sh 0
+                nvidia-smi -rgc
         fi
 
 
