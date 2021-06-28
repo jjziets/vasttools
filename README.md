@@ -27,4 +27,9 @@ To load at reboot use the crontab below
 
 https://github.com/jjziets/pytorch-benchmark-volta
 
+## auto update the price for host listing based on mining porfits.
+based on RTX 3090 120Mhs for eth. it sets the price of my 3 host. 
+https://github.com/jjziets/vasttools/blob/main/setprice.sh
+
+
 
