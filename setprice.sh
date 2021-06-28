@@ -1,5 +1,5 @@
 #/bin/bash
-#this script sets the pricing of listed host on vast to x1.8 mining of etherum
+#this script sets the pricing of listed host on vast to x mining of etherum for my RTX 3090/120Mhs every 10min
 
 get_json() {
     local response=$(curl --silent -H "accept: application/json" "$1" -w "\t\t%{http_code}")
@@ -23,11 +23,11 @@ do
 now=$(date +"%T")
 echo "Update pricing : $now"
 
-rev=$(get_json "https://whattomine.com/coins/151.json?hr=120&p=420.0&fee=0.0&cost=0.1&hcost=0.0&span_br=1h&span_d=24&commit=Calculate" | jq .revenue )
+rev=$(get_json "https://whattomine.com/coins/151.json?hr=120&p=420.0&fee=0.0&cost=0.1&hcost=0.0&span_br=1h&span_d=24&commit=Calculate" | jq .revenue ) # sends 120mhs to wtm and get revenue back
 rev=$(echo $rev | sed  's/\$//g')
 rev=$(echo $rev | sed  's/"//g')
 rev=$(bc <<< "scale=2; $rev/24*2")
-echo "New Price $rev"
+echo "New Price  $rev/gpu"
 
 ./vast list machine 3451 --price_gpu $rev --price_disk 2 --price_inetu 0.02 --price_inetd 0.02 --min_chunk 1
 
