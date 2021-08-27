@@ -21,7 +21,7 @@ https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor.sh
 
 To load at reboot use the crontab below
 
-(crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
+(crontab -l; echo "@reboot root screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
 
 ## Benchmark of RTX3090's
 
