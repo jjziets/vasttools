@@ -29,7 +29,7 @@ while true;do
         then
                 echo "ethminer not running and mem oc is set"
                 let OCset=0
-                nvidia-smi --lock-gpu-clocks=100,1800
+                nvidia-smi --lock-gpu-clocks=100,1740
                 /home/jzietsman/set_mem.sh 0
                 
         fi
