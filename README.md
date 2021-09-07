@@ -27,9 +27,11 @@ sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.
 
 https://github.com/jjziets/pytorch-benchmark-volta
 
-## auto update the price for host listing based on mining porfits.
-based on RTX 3090 120Mhs for eth. it sets the price of my 3 host. 
-https://github.com/jjziets/vasttools/blob/main/setprice.sh
+## Auto update the price for host listing based on mining porfits.
+
+based on RTX 3090 120Mhs for eth. it sets the price of my 2 host. 
+it works with a custom Vast-cli which can be found here https://github.com/jjziets/vast-python/blob/master/vast.py
+The manager is here https://github.com/jjziets/vasttools/blob/main/setprice.sh
 
 
 
