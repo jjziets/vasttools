@@ -33,5 +33,13 @@ based on RTX 3090 120Mhs for eth. it sets the price of my 2 host.
 it works with a custom Vast-cli which can be found here https://github.com/jjziets/vast-python/blob/master/vast.py
 The manager is here https://github.com/jjziets/vasttools/blob/main/setprice.sh
 
+This should be run on a vps not on a host. do not expose your Vast API keys by using it on the host.
+
+wget https://github.com/jjziets/vast-python/blob/master/vast.py 
+sudo chmod +x vast.py
+./vast.py  set api-key UseYourVasset
+wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
+sudo chmod +x setprice.sh
+
 
 
