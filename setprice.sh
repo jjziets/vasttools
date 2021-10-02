@@ -1,9 +1,9 @@
 #/bin/bash
 #this script sets the pricing of listed host on vast to x1.8 mining of etherum
-gpuhash=120
-OD_margin=5
-BJ_margin=1.5
-contract_lenght=25 # lenght of  days a contract 
+gpuhash=120  #hashrate of the gpu that you intened to base your scaling on. this is for RTX3090
+OD_margin=3
+BJ_margin=1.3
+contract_lenght=25 # lenght of  days a contract 25 here gives 20 days time. 
 
 get_json() {
     local response=$(curl --silent -H "accept: application/json" "$1" -w "\t\t%{http_code}")
