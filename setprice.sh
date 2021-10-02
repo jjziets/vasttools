@@ -1,8 +1,8 @@
 #/bin/bash
 #this script sets the pricing of listed host on vast to x1.8 mining of etherum
 gpuhash=120
-OD_margin=2.5
-BJ_margin=1.45
+OD_margin=5
+BJ_margin=1.5
 contract_lenght=25 # lenght of  days a contract 
 
 get_json() {
@@ -27,7 +27,7 @@ set_bj_instance() { # arg id price
         while [ $? -gt 0 ]
         do
                 echo "Faild to  send command resend"
-                sleep 1
+                sleep 2
                        ./vast change bid $1 --price $2
         done
 }
@@ -36,7 +36,7 @@ list_machine() { # arg id price
        echo "vast list machine $1  --price_gpu $2 --price_disk $3 --price_inetu 0.02 --price_inetd 0.02 --min_chunk $4 --end_date $5"
  	./vast list machine $1  --price_gpu $2 --price_disk $3 --price_inetu 0.02 --price_inetd 0.02 --min_chunk $4 --end_date $5
 #       echo "return value = $?"
-#        sleep 2
+       sleep 2
         while [ $? -gt 0 ]
         do
                 echo "Faild to  send command resend"
@@ -102,4 +102,4 @@ then
         sleep 600 # sleep for 10 min
 fi
 sleep 1
-donene
+done
