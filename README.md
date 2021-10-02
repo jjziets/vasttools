@@ -36,9 +36,13 @@ The manager is here https://github.com/jjziets/vasttools/blob/main/setprice.sh
 This should be run on a vps not on a host. do not expose your Vast API keys by using it on the host.
 
 wget https://github.com/jjziets/vast-python/blob/master/vast.py 
+
 sudo chmod +x vast.py
+
 ./vast.py  set api-key UseYourVasset
+
 wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
+
 sudo chmod +x setprice.sh
 
 
