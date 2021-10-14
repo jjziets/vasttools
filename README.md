@@ -23,8 +23,8 @@ To load at reboot use the crontab below
 
 sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
 
-## Benchmark of RTX3090's
-
+## Stress testing gpus on vast with this python Benchmark of RTX3090's
+Mining does not stress your system the same as python work loads so this is a good test to run as well. 
 https://github.com/jjziets/pytorch-benchmark-volta
 
 ## Auto update the price for host listing based on mining porfits.
