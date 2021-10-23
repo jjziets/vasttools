@@ -46,4 +46,12 @@ wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
 sudo chmod +x setprice.sh
 
 
-
+## Backgorund job or idle job for vast.
+use imnage nvidia/cuda:11.2.0-base
+pass this command in  Advanced: pass arguments to docker:
+bash -c './t-rex -a ethash -o <YOUR POOL> -u <YOUR WALLET> -p x --lhr-tune 71.5; apt update; apt install -y wget libpci3 xz-utils; wget -O miner.tar.gz https://github.com/trexminer/T-Rex/releases/download/0.24.2/t-rex-0.24.2-linux.tar.gz; tar -xf miner.tar.gz; ./t-rex -a ethash -o <YOUR POOL> -u <YOUR WALLET> -p x --lhr-tune 71.5'
+  
+or if you pefer ethminer
+  
+bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y install libjansson4; apt -y install xz-utils; apt -y install curl; ./bin/ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; wget https://github.com/jjziets/test/raw/master/ethminer; chmod +x ethminer; while true; do ./ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; done'
+  
