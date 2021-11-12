@@ -17,24 +17,22 @@ set the OC of the RTX 3090
 It requires the folliwing
 
 on the host run the following command:
-
+```
 sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
-
 wget https://raw.githubusercontent.com/jjziets/vasttools/main/set_mem.sh
-
 sudo chmod +x set_mem.sh
-
 sudo ./set_mem.sh 2000 # this will set the memory OC to +1000mhs you can use 3000 on some gpu's which will give 1500mhs OC. 
-
+```
 
 ## OC monitor
 setup the monitoring programe that will change the memory oc based on what programe is running. it desinged for RTX3090's and targets ethminer at this stage.
 It requires both set_mem.sh and ocmonitor.sh to run in the root.
 
+```
 wget https://raw.githubusercontent.com/jjziets/vasttools/main/ocminitor.sh
-
 sudo chmod +x ocminitor.sh
 sudo ./ocminitor.sh # I suggest running this in tmux or screen so that when you close the ssh connetion. It looks for ethminer and if it finds it it will set the oc based on your choice. you can also set powerlimits with nvidia-smi -pl 350 
+```
 
 Too load at reboot use the crontab below
 
