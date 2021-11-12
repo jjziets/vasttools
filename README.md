@@ -21,7 +21,7 @@ on the host run the following command:
 sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
 wget https://raw.githubusercontent.com/jjziets/vasttools/main/set_mem.sh
 sudo chmod +x set_mem.sh
-sudo ./set_mem.sh 2000 # this will set the memory OC to +1000mhs you can use 3000 on some gpu's which will give 1500mhs OC. 
+sudo ./set_mem.sh 2000 # this will set the memory OC to +1000mhs on all the gpus. You can use 3000 on some gpu's which will give 1500mhs OC. 
 ```
 
 ## OC monitor
