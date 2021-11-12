@@ -35,8 +35,9 @@ sudo ./ocminitor.sh # I suggest running this in tmux or screen so that when you 
 ```
 
 Too load at reboot use the crontab below
-
+```
 sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
+```
 
 ## Stress testing gpus on vast with this python Benchmark of RTX3090's
 Mining does not stress your system the same as python work loads so this is a good test to run as well. 
@@ -49,24 +50,22 @@ it works with a custom Vast-cli which can be found here https://github.com/jjzie
 The manager is here https://github.com/jjziets/vasttools/blob/main/setprice.sh
 
 This should be run on a vps not on a host. do not expose your Vast API keys by using it on the host.
-
+```
 wget https://github.com/jjziets/vast-python/blob/master/vast.py 
-
 sudo chmod +x vast.py
-
 ./vast.py  set api-key UseYourVasset
-
 wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
-
 sudo chmod +x setprice.sh
-
+```
 
 ## Backgorund job or idle job for vast.
+
 use imnage nvidia/cuda:11.2.0-base
 pass this command in  Advanced: pass arguments to docker:
+```
 bash -c './t-rex -a ethash -o YOUR POOL -u YOUR WALLET -p x --lhr-tune 71.5; apt update; apt install -y wget libpci3 xz-utils; wget -O miner.tar.gz https://github.com/trexminer/T-Rex/releases/download/0.24.2/t-rex-0.24.2-linux.tar.gz; tar -xf miner.tar.gz; ./t-rex -a ethash -o YOUR POOL -u YOUR WALLET -p x --lhr-tune 71.5'
-  
+```  
 or if you pefer ethminer
-  
+```  
 bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y install libjansson4; apt -y install xz-utils; apt -y install curl; ./bin/ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; wget https://github.com/jjziets/test/raw/master/ethminer; chmod +x ethminer; while true; do ./ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; done'
-  
+```  
