@@ -11,7 +11,7 @@ RVN RSgWs9Co8nQeyPqQAAqHkHhc5ykXyoMDUp
 
 USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
-##Analytics dashboard
+## Analytics dashboard
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
 https://github.com/jjziets/vast.ai-tools/blob/master/analytics
 
