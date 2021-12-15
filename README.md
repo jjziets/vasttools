@@ -48,9 +48,21 @@ Mining does not stress your system the same as python work loads so this is a go
 https://github.com/jjziets/pytorch-benchmark-volta
 
 a full suit of stress testest can be found docker image jjziets/vastai-benchmarks:latest 
-docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks:latest /bin/bash
+```
+stress-ng - CPU stress
+stress-ng - Drive stress
+stress-ng - Memory stress
+sysbench - Memory latency and speed benchmark
+dd - Drive speed benchmark
+Hashcat - MD5 Benchmark
+Hashcat - SHA-512 Benchmark
+bandwithTest - GPU bandwith benchmark
+pytorch - Pytorch DL  benchmark
+```
+```
+sudo docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks:latest /bin/bash
 > ./benchmark.sh
-
+```
 
 ## Auto update the price for host listing based on mining porfits.
 
