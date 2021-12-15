@@ -54,8 +54,7 @@ stress-ng - Drive stress
 stress-ng - Memory stress
 sysbench - Memory latency and speed benchmark
 dd - Drive speed benchmark
-Hashcat - MD5 Benchmark
-Hashcat - SHA-512 Benchmark
+Hashcat - Benchmark
 bandwithTest - GPU bandwith benchmark
 pytorch - Pytorch DL  benchmark
 ```
