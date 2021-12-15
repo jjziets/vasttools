@@ -47,6 +47,11 @@ sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.
 Mining does not stress your system the same as python work loads so this is a good test to run as well. 
 https://github.com/jjziets/pytorch-benchmark-volta
 
+a full suit of stress testest can be found docker image jjziets/vastai-benchmarks:latest 
+docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks:latest /bin/bash
+> ./benchmark.sh
+
+
 ## Auto update the price for host listing based on mining porfits.
 
 based on RTX 3090 120Mhs for eth. it sets the price of my 2 host. 
