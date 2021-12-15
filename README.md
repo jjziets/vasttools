@@ -59,10 +59,21 @@ Hashcat - SHA-512 Benchmark
 bandwithTest - GPU bandwith benchmark
 pytorch - Pytorch DL  benchmark
 ```
+#test or bash inteface
 ```
-sudo docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks:latest /bin/bash
-> ./benchmark.sh
+sudo docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks /bin/bash
+./benchmark.sh
 ```
+#Run using default settings
+Results are saved to ./output.
+
+```
+sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks
+Run with params SLEEP_TIME/BENCH_TIME
+sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it -e SLEEP_TIME=2 -e BENCH_TIME=2 --gpus all jjziets/vastai-benchmarks
+```
+
+*based on leona / vast.ai-tools
 
 ## Auto update the price for host listing based on mining porfits.
 
