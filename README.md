@@ -48,6 +48,7 @@ Mining does not stress your system the same as python work loads so this is a go
 https://github.com/jjziets/pytorch-benchmark-volta
 
 a full suit of stress testest can be found docker image jjziets/vastai-benchmarks:latest 
+in folder /app/
 ```
 stress-ng - CPU stress
 stress-ng - Drive stress
