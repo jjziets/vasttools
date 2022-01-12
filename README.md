@@ -101,3 +101,15 @@ or if you pefer ethminer
 ```  
 bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y install libjansson4; apt -y install xz-utils; apt -y install curl; ./bin/ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; wget https://github.com/jjziets/test/raw/master/ethminer; chmod +x ethminer; while true; do ./ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; done'
 ```  
+
+## setting fans speeds if you have headless system.
+I have two scripts that you can use to set the fan speeds of all the gpus. Single or Dual fans use https://github.com/jjziets/test/blob/master/cool_gpu.sh and tripple fans use https://github.com/jjziets/test/blob/master/cool_gpu2.sh
+
+to use run this command
+```
+sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
+wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu.sh
+or wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu2.sh
+sudo chmod +x cool_gpu.sh
+sudo ./cool_gpu.sh 100 # this sets the fans to 100%
+```
