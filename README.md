@@ -120,9 +120,9 @@ sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 ```
 ./vast show machines | grep "current_rentals_running_on_demand"
 ```
-it if returns 0, then it's an interruptable rent.
+ if returns 0, then it's an interruptable rent.
 
-Command on host that provides glogs of the deamon running 
+Command on host that provides logs of the deamon running 
 ```
 tail /var/lib/vastai_kaalia/kaalia.log -f 
 ```
