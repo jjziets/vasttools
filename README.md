@@ -116,9 +116,13 @@ sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 
 
 ## Usefill commands 
-"If you set up the vast CLI, you can enter 
+"If you set up the vast CLI, you can enter this
 ```
-./vast show machines | grep "current_rentals_running_on_demand" #it if returns 0, then it's an interruptable rent. "
+./vast show machines | grep "current_rentals_running_on_demand"
 ```
-tail /var/lib/vastai_kaalia/kaalia.log -f #gives logs of the deamon running 
+it if returns 0, then it's an interruptable rent.
+
+Command on host that provides glogs of the deamon running 
+```
+tail /var/lib/vastai_kaalia/kaalia.log -f 
 ```
