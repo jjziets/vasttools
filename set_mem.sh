@@ -73,7 +73,7 @@ then
     while [  $n -lt  $NUMGPU ];
     do
         # start an x session, and call nvidia-settings to enable mem oc
-        xinit ${SET} -a [gpu:${n}]/GPUMemoryTransferRateOffset[4]=0 --  :0 -once
+        xinit ${SET} -a [gpu:%s]/GPUMemoryTransferRateOffsetAllPerformanceLevels=0 --  :0 -once
         let n=n+1
     done
 
