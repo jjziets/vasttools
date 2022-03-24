@@ -114,6 +114,14 @@ sudo chmod +x cool_gpu.sh
 sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 ```
 
+## Remove unattended-upgrades Packag
+```
+sudo apt purge --auto-remove unattended-upgrades
+sudo systemctl disable apt-daily-upgrade.timer
+sudo systemctl mask apt-daily-upgrade.service
+sudo systemctl disable apt-daily.timer
+sudo systemctl mask apt-daily.service
+```
 
 ## Usefill commands 
 "If you set up the vast CLI, you can enter this
