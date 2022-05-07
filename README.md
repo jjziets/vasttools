@@ -123,6 +123,26 @@ sudo systemctl disable apt-daily.timer
 sudo systemctl mask apt-daily.service
 ```
 
+## Connecting to running instance with vnc to see applications gui 
+
+Using a instance with open ports 30996
+For some reason the display color depth is 16 not 16bit 
+The below commands can be placed in onstart.sh to run on restart 
+
+
+```
+apt-get update 
+apt-get -y upgrade 
+apt-get install -y x11vnc xvfb firefox xfce4 xfce4-goodies
+
+export DISPLAY=:20
+Xvfb :20 -screen 0 1366x768x16 &
+x11vnc -passwd TestVNC -display :20 -N -forever -rfbport 30996 &
+startxfce4
+```
+To connect use the ip of the host and the port that was provided. In this care it is 30996
+
+
 ## Usefill commands 
 "If you set up the vast CLI, you can enter this
 ```
