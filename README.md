@@ -154,3 +154,8 @@ Command on host that provides logs of the deamon running
 ```
 tail /var/lib/vastai_kaalia/kaalia.log -f 
 ```
+uninstall vast
+```
+wget https://s3.amazonaws.com/vast.ai/uninstall.py
+sudo python uninstall.py
+```
