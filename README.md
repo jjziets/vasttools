@@ -103,7 +103,9 @@ bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y ins
 ```  
 
 ## setting fans speeds if you have headless system.
-I have two scripts that you can use to set the fan speeds of all the gpus. Single or Dual fans use https://github.com/jjziets/test/blob/master/cool_gpu.sh and tripple fans use https://github.com/jjziets/test/blob/master/cool_gpu2.sh
+I have two scripts that you can use to set the fan speeds of all the gpus. Single or Dual fans use https://github.com/jjziets/test/blob/master/cool_gpu.sh 
+
+and tripple fans use https://github.com/jjziets/test/blob/master/cool_gpu2.sh
 
 to use run this command
 ```
