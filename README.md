@@ -111,7 +111,7 @@ to use run this command
 ```
 sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
 wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu.sh
-or wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu2.sh
+#or wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu2.sh
 sudo chmod +x cool_gpu.sh
 sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 ```
