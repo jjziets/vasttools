@@ -128,7 +128,7 @@ sudo systemctl mask apt-daily.service
 ## Connecting to running instance with vnc to see applications gui 
 
 Using a instance with open ports 30996
-If display is color depth is 16 not 16bit try another vnc viewer. RealVNC worked for me on windows 
+If display is color depth is 16 not 16bit try another vnc viewer. [TightVNC](https://www.tightvnc.com/download.php) worked for me on windows 
 The below commands can be placed in onstart.sh to run on restart 
 
 
