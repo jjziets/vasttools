@@ -21,7 +21,7 @@ while true;do
                 echo "ethminer is running and mem oc not set"
                 let OCset=1
                 nvidia-smi -rgc
-                /home/jzietsman/set_mem.sh 2000                
+                /home/user/set_mem.sh 2000                #change the path to where set_men.sh is stored
                 
         fi
 
@@ -30,7 +30,7 @@ while true;do
                 echo "ethminer not running and mem oc is set"
                 let OCset=0
                 nvidia-smi --lock-gpu-clocks=100,1740
-                /home/jzietsman/set_mem.sh 0
+                /home/user/set_mem.sh 0 #change the path to where set_men.sh is stored
                 
         fi
 
