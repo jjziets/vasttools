@@ -11,7 +11,7 @@ RVN RSgWs9Co8nQeyPqQAAqHkHhc5ykXyoMDUp
 
 USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
-I am open to office for assistance is deployment on vast and continued support. Find me on vast discourd.
+I am open to offers for assistance is deployment on vast and continued support. 
 
 ## Analytics dashboard
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
