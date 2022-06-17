@@ -15,7 +15,7 @@ I am open to offers for assistance in deployment on vast and continued support.
 
 ## Analytics dashboard
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
-https://github.com/jjziets/vast.ai-tools/blob/master/analytics
+[https://github.com/jjziets/vast.ai-tools/blob/master/analytics](https://github.com/jjziets/vastai_analytics_dasboard)
 
 ## Memory oc
 
