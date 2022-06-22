@@ -77,6 +77,10 @@ sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it -e SLEEP_TIM
 
 *based on leona / vast.ai-tools
 
+## Telegram-Vast-Uptime-Bot
+This is a set of scripts for monitoring machine crashes. Run the client on your vast machine and the server on a remote one. You get notifications on Telegram if no heartbeats are sent within the timeout (default 12 seconds).
+https://github.com/jjziets/Telegram-Vast-Uptime-Bot
+
 ## Auto update the price for host listing based on mining porfits.
 
 based on RTX 3090 120Mhs for eth. it sets the price of my 2 host. 
