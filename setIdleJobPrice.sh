@@ -1,3 +1,4 @@
+#!/bin/bash
 # Parse and Execute Arguments passed to script                           {{{1
  if (( $(echo "$1 > 0" |bc -l) )); then
         Instances=($(./vast show instances  | sed 's/|/ /'  | awk '{print $1}' )) # get all the instanses number from vast
