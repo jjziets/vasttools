@@ -151,7 +151,7 @@ startxfce4
 To connect use the ip of the host and the port that was provided. In this care it is 30996
 
 
-## Usefill commands 
+## Usefull commands 
 "If you set up the vast CLI, you can enter this
 ```
 ./vast show machines | grep "current_rentals_running_on_demand"
