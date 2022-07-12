@@ -1,6 +1,5 @@
-#this script will create a window in tmux for each docker running shwoing the logs .
-
 #!/bin/bash
+#this script will create a window in tmux for each docker running shwoing the logs .
 
         containerIDs=($(docker ps | sed 's/|/ /'  | awk '{print $1}' )) # get all the instanses number from vast
         unset containerIDs[0] #delte the first index as it containe ID
