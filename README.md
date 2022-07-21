@@ -97,6 +97,7 @@ sudo chmod +x setprice.sh
 ```
 
 ## Backgorund job or idle job for vast.
+![image](https://user-images.githubusercontent.com/19214485/180140050-75547875-6a1b-41c6-a0c0-6f235f673a4b.png)
 
 use imnage nvidia/cuda:11.2.0-base
 pass this command in  Advanced: pass arguments to docker:
