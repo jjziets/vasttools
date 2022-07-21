@@ -140,9 +140,8 @@ The below commands can be placed in onstart.sh to run on restart
 
 
 ```
-apt-get update 
-apt-get -y upgrade 
-bash -c 'apt-get install -y x11vnc; apt-get install -y xvfb; apt-get install -y firefox;apt-get install -y xfce4;apt-get install -y  xfce4-goodies'
+bash -c 'apt-get update; apt-get -y upgrade;  apt-get install -y x11vnc; apt-get install -y xvfb; apt-get install -y firefox;apt-get install -y xfce4;apt-get install -y  xfce4-goodies'
+
 
 export DISPLAY=:20
 Xvfb :20 -screen 0 1366x768x16 &
