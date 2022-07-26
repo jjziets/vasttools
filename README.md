@@ -155,7 +155,7 @@ bash -c 'apt-get update; apt-get -y upgrade;  apt-get install -y x11vnc; apt-get
 
 
 export DISPLAY=:20
-Xvfb :20 -screen 0 1366x768x16 &
+Xvfb :20 -screen 0 1920x1080x16 &
 x11vnc -passwd TestVNC -display :20 -N -forever -rfbport 8081 &
 startxfce4
 ```
