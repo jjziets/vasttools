@@ -164,7 +164,7 @@ To connect use the ip of the host and the port that was provided. In this case  
 
 ![image](https://user-images.githubusercontent.com/19214485/180971471-b18ef371-c508-4e35-b55e-07605bef29b5.png)
 
-then enjoy the destkop
+then enjoy the destkop. sady this is not hardware accelarted. so no games will work 
 
 
 ## Usefull commands 
