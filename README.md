@@ -134,10 +134,21 @@ sudo systemctl mask apt-daily.service
 
 ## Connecting to running instance with vnc to see applications gui 
 
-Using a instance with open ports 30996
+Using a instance with open ports 
 If display is color depth is 16 not 16bit try another vnc viewer. [TightVNC](https://www.tightvnc.com/download.php) worked for me on windows 
-The below commands can be placed in onstart.sh to run on restart 
 
+first tell vast to allow a port to be assinged. use the -p 8081:8081 and tick the direct command.
+
+![image](https://user-images.githubusercontent.com/19214485/180969969-569add29-1d3b-4293-96a8-b808b5979987.png)
+
+find a host with open ports and then rent it. preferbly on demand. go to the client instances page and wait for the connect button
+
+![image](https://user-images.githubusercontent.com/19214485/180970637-b92743c1-8924-481a-92be-d5905c6baef8.png)
+
+use ssh to connect to the instances. 
+![image](https://user-images.githubusercontent.com/19214485/180970916-b04966ee-4b70-4d2d-beff-935245e3e094.png)
+
+run the below commands. the second part can be placed in the onstart.sh to run on restart 
 
 ```
 bash -c 'apt-get update; apt-get -y upgrade;  apt-get install -y x11vnc; apt-get install -y xvfb; apt-get install -y firefox;apt-get install -y xfce4;apt-get install -y  xfce4-goodies'
@@ -145,10 +156,15 @@ bash -c 'apt-get update; apt-get -y upgrade;  apt-get install -y x11vnc; apt-get
 
 export DISPLAY=:20
 Xvfb :20 -screen 0 1366x768x16 &
-x11vnc -passwd TestVNC -display :20 -N -forever -rfbport 30996 &
+x11vnc -passwd TestVNC -display :20 -N -forever -rfbport 8081 &
 startxfce4
 ```
-To connect use the ip of the host and the port that was provided. In this care it is 30996
+To connect use the ip of the host and the port that was provided. In this case  it is 400010
+![image](https://user-images.githubusercontent.com/19214485/180971332-16962c8d-a655-44ec-a1a7-9e8308f5f9cd.png)
+
+![image](https://user-images.githubusercontent.com/19214485/180971471-b18ef371-c508-4e35-b55e-07605bef29b5.png)
+
+then enjoy the destkop
 
 
 ## Usefull commands 
