@@ -124,12 +124,20 @@ sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 ```
 
 ## Remove unattended-upgrades Packag
+If your system updates while vast is running or even worse when a client is renting you then you might get de-verified or banned. It's advised to only update when the system is unrented and delisted. best would be to set an end date of your listing and conduct updates and upgrades at that stage. 
+to stop unattended-upgrades run the following commands.
 ```
 sudo apt purge --auto-remove unattended-upgrades
 sudo systemctl disable apt-daily-upgrade.timer
 sudo systemctl mask apt-daily-upgrade.service 
 sudo systemctl disable apt-daily.timer
 sudo systemctl mask apt-daily.service
+```
+
+## How to update a host.
+When the system is idle and delisted run the following commands. vast demon and docker services are stopped. It is also a good idea to upgrade Nvidia drivers like this. If you don't and the upgrades brakes a package you might get de-verifyed or even banned from vast. 
+```
+bash -c ' sudo systemctl stop vastai; sudo systemctl stop docker.socket; sudo systemctl stop docker; sudo apt update; sudo apt upgrade -y; sudo systemctl start docker.socket ; sudo systemctl start docker; sudo systemctl start vastai'
 ```
 
 ## Connecting to running instance with vnc to see applications gui 
