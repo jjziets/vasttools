@@ -1,5 +1,7 @@
 # vasttools
 
+***I am open to offers for assistance in deployment on vast and continued support.***
+
 The aim is to setup a list of usble tools that can be used with vastai.
 The tools are free to use, modify and distribute. If you find this useful and wish to donate your welcome to send your donations to the following wallets.
 
@@ -11,7 +13,7 @@ RVN RSgWs9Co8nQeyPqQAAqHkHhc5ykXyoMDUp
 
 USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
-I am open to offers for assistance in deployment on vast and continued support. 
+
 
 ## Analytics dashboard
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
