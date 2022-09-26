@@ -13,6 +13,8 @@ RVN RSgWs9Co8nQeyPqQAAqHkHhc5ykXyoMDUp
 
 USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
+Paypal  PayPal.Me/cryptolabsZA
+
 
 
 ## Analytics dashboard
