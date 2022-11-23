@@ -179,6 +179,32 @@ To connect use the ip of the host and the port that was provided. In this case  
 then enjoy the destkop. sadly this is not hardware accelarted. so no games will work 
 
 
+## Setting up 3D accelerated Desktop in webbrowser on
+We will be using ghcr.io/ehfd/nvidia-glx-desktop:latest
+![image](https://user-images.githubusercontent.com/19214485/203529896-d0e68c96-e2d5-4171-8a57-5ce1fefe3394.png)
+use this env paramters
+
+```
+-e TZ=UTC -e SIZEW=1920 -e SIZEH=1080 -e REFRESH=60 -e DPI=96 -e CDEPTH=24 -e VIDEO_PORT=DFP -e PASSWD=mypasswd -e WEBRTC_ENCODER=nvh264enc -e BASIC_AUTH_PASSWORD=mypasswd -p 8080:8080
+
+```
+find a system that has open ports
+![image](https://user-images.githubusercontent.com/19214485/203530107-67ac5b89-7014-4b37-b646-4a15fa9da6a1.png)
+
+when done loading click open
+![image](https://user-images.githubusercontent.com/19214485/203530801-a17b89c5-2fc1-4780-b262-77183918f8fe.png)
+
+username is **user** and password is what you set **mypasswd** in this case
+![image](https://user-images.githubusercontent.com/19214485/203530916-c655dd69-a0dc-4225-b0a0-fac5469cd44c.png)
+
+hit start
+![image](https://user-images.githubusercontent.com/19214485/203531080-cb475042-ebf9-45a4-8713-4ed618a7c16c.png)
+
+3D accelerated desktop environment in a web browser
+![image](https://user-images.githubusercontent.com/19214485/203531203-14415d38-1db2-43f8-9ec1-dfe68a61206b.png)
+
+
+
 ## Usefull commands 
 "If you set up the vast CLI, you can enter this
 ```
