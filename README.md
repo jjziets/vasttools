@@ -179,7 +179,7 @@ To connect use the ip of the host and the port that was provided. In this case  
 then enjoy the destkop. sadly this is not hardware accelarted. so no games will work 
 
 
-## Setting up 3D accelerated Desktop in webbrowser on
+## Setting up 3D accelerated Desktop in webbrowser on vastai
 We will be using ghcr.io/ehfd/nvidia-glx-desktop:latest
 ![image](https://user-images.githubusercontent.com/19214485/203529896-d0e68c96-e2d5-4171-8a57-5ce1fefe3394.png)
 use this env paramters
