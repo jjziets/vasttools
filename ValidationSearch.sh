@@ -11,7 +11,7 @@ pause () {
         done
 }
 
- Instances=($(./vast search offers 'verified=false  gpu_frac=1 reliability > 0.80  reliability < 0.971 direct_port_count > 10 pcie_bw > 4 inet_down > 50 inet_up > 50 gpu_ram > 7'  -o 'dlperf-'  | sed 's/|/ /'  | awk '{print $1}' )) # ge$
+ Instances=($(./vast search offers 'verified=false  gpu_frac=1 reliability > 0.95 direct_port_count > 10 pcie_bw > 4 inet_down > 50 inet_up > 50 gpu_ram > 7'  -o 'dlperf-'  | sed 's/|/ /'  | awk '{print $1}' )) # ge$
  unset Instances[0] #delte the first index as it containe ID
         let "cnt=0"
         echo "There are ${#Instances[@]} systems to verify starting first 10"
