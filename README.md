@@ -17,7 +17,7 @@ Paypal  PayPal.Me/cryptolabsZA
 
 
 
-## Analytics dashboard
+## Analytics dashboard(Outdated and broken) 
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
 https://github.com/jjziets/vastai_analytics_dasboard
 
