@@ -1,0 +1,10 @@
+#!/bin/bash
+
+d=$(date +"%Y-%m-%dT%H:%M:%S")
+#echo "48238,Atomic Access,Cape Town,$d.594063Z,1.6152414789930105,4.318,993534902.4358028,950012404.9210701,,102.65.3.114"
+#echo "$d $1 $2 $3 $4"  >> '/var/lib/vastai_kaalia/latest/s/speedtest.log'
+
+
+JSON='{"client": {"rating": "0", "loggedin": "0", "isprating": "3.7", "ispdlavg": "0", "ip": "102.65.3.114", "isp": "Web-Africa-Networks", "lon": "18.4129", "ispulavg": "0", "country": "ZA", "lat": "-33.914"}, "bytes_sent": 142606336, "download": 918097776.2982486, "timestamp": "'"$d"'0884Z", "share": null, "bytes_received": 409373932, "ping": 4.139, "upload": 956488508.9353635, "server": {"latency": 4.139, "name": "Cape Town", "url": "http://speedtest.cpt.web.africa:8080/speedtest/upload.php", "country": "South Africa", "lon": "18.4239", "cc": "ZA", "host": "speedtest.cpt.web.africa:8080", "sponsor": "Webafrica Networks", "lat": "-33.9253", "id": "26527", "d": 1.6152414789930105}}'
+
+printf '%s\n' "$JSON"
