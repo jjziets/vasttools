@@ -24,7 +24,7 @@ https://github.com/jjziets/vastai_analytics_dasboard
 ## Memory oc
 
 set the OC of the RTX 3090
-It requires the folliwing
+It requires the following
 
 on the host run the following command:
 ```
@@ -35,7 +35,7 @@ sudo ./set_mem.sh 2000 # this will set the memory OC to +1000mhs on all the gpus
 ```
 
 ## OC monitor
-setup the monitoring programe that will change the memory oc based on what programe is running. it desinged for RTX3090's and targets ethminer at this stage.
+setup the monitoring program that will change the memory oc based on what programe is running. it designed for RTX3090's and targets ethminer at this stage.
 It requires both set_mem.sh and ocmonitor.sh to run in the root.
 
 ```
@@ -50,10 +50,10 @@ sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.
 ```
 
 ## Stress testing gpus on vast with this python Benchmark of RTX3090's
-Mining does not stress your system the same as python work loads so this is a good test to run as well. 
+Mining does not stress your system the same as python work loads do, so this is a good test to run as well. 
 https://github.com/jjziets/pytorch-benchmark-volta
 
-a full suit of stress testest can be found docker image jjziets/vastai-benchmarks:latest 
+a full suit of stress tests can be found docker image jjziets/vastai-benchmarks:latest 
 in folder /app/
 ```
 stress-ng - CPU stress
@@ -63,7 +63,7 @@ sysbench - Memory latency and speed benchmark
 dd - Drive speed benchmark
 Hashcat - Benchmark
 bandwithTest - GPU bandwith benchmark
-pytorch - Pytorch DL  benchmark
+pytorch - Pytorch DL benchmark
 ```
 #test or bash inteface
 ```
@@ -85,7 +85,7 @@ sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it -e SLEEP_TIM
 This is a set of scripts for monitoring machine crashes. Run the client on your vast machine and the server on a remote one. You get notifications on Telegram if no heartbeats are sent within the timeout (default 12 seconds).
 https://github.com/jjziets/Telegram-Vast-Uptime-Bot
 
-## Auto update the price for host listing based on mining porfits.
+## Auto update the price for host listing based on mining profits.
 
 based on RTX 3090 120Mhs for eth. it sets the price of my 2 host. 
 it works with a custom Vast-cli which can be found here https://github.com/jjziets/vast-python/blob/master/vast.py
@@ -100,7 +100,7 @@ wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
 sudo chmod +x setprice.sh
 ```
 
-## Backgorund job or idle job for vast.
+## Background job or idle job for vast.
 ![image](https://user-images.githubusercontent.com/19214485/180140050-75547875-6a1b-41c6-a0c0-6f235f673a4b.png)
 
 use imnage nvidia/cuda:11.2.0-base
@@ -127,7 +127,7 @@ sudo chmod +x cool_gpu.sh
 sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 ```
 
-## Remove unattended-upgrades Packag
+## Remove unattended-upgrades Package
 If your system updates while vast is running or even worse when a client is renting you then you might get de-verified or banned. It's advised to only update when the system is unrented and delisted. best would be to set an end date of your listing and conduct updates and upgrades at that stage. 
 to stop unattended-upgrades run the following commands.
 ```
@@ -205,7 +205,7 @@ hit start
 
 
 
-## Usefull commands 
+## Useful commands 
 "If you set up the vast CLI, you can enter this
 ```
 ./vast show machines | grep "current_rentals_running_on_demand"
