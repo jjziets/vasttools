@@ -174,6 +174,7 @@ sudo systemctl enable docker.socket
 sudo systemctl enable docker
 sudo reboot
 # After reboot check that the driver you wanted is mounted to /var/lib/docker and that vastai is running.
+```
 
 ## Connecting to running instance with vnc to see applications gui 
 
