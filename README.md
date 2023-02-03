@@ -15,6 +15,21 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
 Paypal  PayPal.Me/cryptolabsZA
 
+## Table of Contents
+- [Analytics dashboard (Outdated and broken)](#analytics-dashboard-outdated-and-broken)
+- [Memory oc](#memory-oc)
+- [OC monitor](#oc-monitor)
+- [Stress testing GPUs on vast with Python benchmark of RTX3090's](#stress-testing-gpus-on-vast-with-python-benchmark-of-rtx3090s)
+- [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
+- [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
+- [Background job or idle job for vast](#background-job-or-idle-job-for-vast)
+- [Setting fan speeds if you have a headless system](#setting-fan-speeds-if-you-have-a-headless-system)
+- [Remove unattended-upgrades package](#remove-unattended-upgrades-package)
+- [How to update a host](#how-to-update-a-host)
+- [How to move your vast docker driver to another drive](#how-to-move-your-vast-docker-driver-to-another-drive)
+- [Connecting to running instance with VNC to see applications GUI](#connecting-to-running-instance-with-vnc-to-see-applications-gui)
+- [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
+- [Useful commands](#useful-commands)
 
 
 ## Analytics dashboard(Outdated and broken) 
