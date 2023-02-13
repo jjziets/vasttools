@@ -16,10 +16,10 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
-- [Analytics dashboard (Outdated and broken)](#analytics-dashboard-outdated-and-broken)
-- [Memory oc](#memory-oc)
-- [OC monitor](#oc-monitor)
-- [Stress testing GPUs on vast with Python benchmark of RTX3090's](#stress-testing-gpus-on-vast-with-python-benchmark-of-rtx3090s)
+- [Analytics dashboard (Outdated and broken)](#Analytics dashboard(Outdated and broken))
+- [Memory oc](#Memory oc)
+- [OC monitor](#OC monitor)
+- [Stress testing GPUs on vast with Python benchmark of RTX3090's](#Stress testing gpus on vast with this python Benchmark of RTX3090's)
 - [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
 - [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
 - [Background job or idle job for vast](#background-job-or-idle-job-for-vast)
