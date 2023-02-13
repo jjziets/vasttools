@@ -16,7 +16,7 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
-- [Analytics dashboard (Outdated and broken)](#Analytics dashboard(Outdated and broken))
+- [Analytics dashboard (Outdated and broken)](#analytics dashboard)
 - [Memory oc](#Memory oc)
 - [OC monitor](#OC monitor)
 - [Stress testing GPUs on vast with Python benchmark of RTX3090's](#Stress testing gpus on vast with this python Benchmark of RTX3090's)
