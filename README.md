@@ -17,8 +17,8 @@ Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
 - [Analytics dashboard (Outdated and broken)](#analytics dashboard)
-- [Memory oc](#Memory oc)
-- [OC monitor](#OC monitor)
+- [Memory oc](#memory oc)
+- [OC monitor](#oc monitor)
 - [Stress testing GPUs on vast with Python benchmark of RTX3090's](#Stress testing gpus on vast with this python Benchmark of RTX3090's)
 - [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
 - [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
