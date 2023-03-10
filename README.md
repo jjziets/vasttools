@@ -32,8 +32,9 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
 - [Useful commands](#useful-commands)
 
-##Here is how I install guid for vast 
-'''
+##Here is how I install guid for vast
+
+```
 #Start with a clean install of ubunut 20.04.5 server. Just add openssh.
 sudo apt update && sudo apt upgrade -y
 sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf" ## this will remove nouveau from the system if it has been installed by the installer
@@ -59,7 +60,7 @@ sudo apt install python2.7
 #follow the Configure Networking as per https://console.vast.ai/host/setup
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
-'''
+```
 
 ## Analytics dashboard(Outdated and broken) 
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
