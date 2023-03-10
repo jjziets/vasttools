@@ -16,6 +16,7 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
+- [Here is how I install guid for vast](https://github.com/jjziets/vasttools#analytics-dashboardoutdated-and-broken)
 - [Analytics dashboard (Outdated and broken)](https://github.com/jjziets/vasttools#analytics-dashboardoutdated-and-broken)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
@@ -31,6 +32,34 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
 - [Useful commands](#useful-commands)
 
+##Here is how I install guid for vast 
+'''
+#Start with a clean install of ubunut 20.04.5 server. Just add openssh.
+sudo apt update && sudo apt upgrade -y
+sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf" ## this will remove nouveau from the system if it has been installed by the installer
+sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
+sudo update-initramfs -u
+echo 'GRUB_CMDLINE_LINUX=systemd.unified_cgroup_hierarchy=false' > /etc/default/grub.d/cgroup.cfg
+update-grub
+sudo reboot
+
+#install the nvidia drivers after reboot
+bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree86/Linux-x86_64/525.89.02/NVIDIA-Linux-x86_64-525.89.02.run; chmod +x NVIDIA-Linux-x86_64-525.89.02.run; ./NVIDIA-Linux-x86_64-525.89.02.run'
+
+bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' # this is needed to remove xserver so that clients can run a desktop gui in an continer wothout problems. It is also needed if one wants to change memory OC and fans speeds. 
+
+#if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions.
+echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 # this is one command that will create the xfs partion and write it to the disk /dev/nvme0n1. 
+bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1 | awk "{print \$NF}"); echo \"UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0\" >> /etc/fstab' #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
+sudo mount -a
+df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
+sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
+sudo apt install python2.7
+#run the install command for vast
+#follow the Configure Networking as per https://console.vast.ai/host/setup
+#test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
+sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
+'''
 
 ## Analytics dashboard(Outdated and broken) 
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
