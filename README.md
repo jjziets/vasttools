@@ -32,7 +32,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
 - [Useful commands](#useful-commands)
 
-##Here is how I install guid for vast
+## Here is how I install guid for vast
 
 ```
 #Start with a clean install of ubunut 20.04.5 server. Just add openssh.
