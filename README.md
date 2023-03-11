@@ -16,7 +16,7 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
-- [Here is how I install guid for vast](https://github.com/jjziets/vasttools/blob/main/README.md#here-is-how-i-install-guid-for-vast)
+- [Host install guid for vast](https://github.com/jjziets/vasttools/blob/main/README.md#here-is-how-i-install-guid-for-vast)
 - [Analytics dashboard (Outdated and broken)](https://github.com/jjziets/vasttools#analytics-dashboardoutdated-and-broken)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
@@ -32,7 +32,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
 - [Useful commands](#useful-commands)
 
-## Install guide for vast.ai 
+## Host install guide for vast.ai 
 
 ```
 #Start with a clean install of ubunut 20.04.5 server. Just add openssh.
