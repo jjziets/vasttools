@@ -59,7 +59,7 @@ df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
 sudo apt install python2.7
 #run the install command for vast
-#follow the Configure Networking as per https://console.vast.ai/host/setup
+#follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
 ```
