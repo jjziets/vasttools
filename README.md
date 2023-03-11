@@ -50,7 +50,8 @@ bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree8
 # this is needed to remove xserver so that clients can run a desktop gui in an continer wothout problems. It is also needed if one wants to change memory OC and fans speeds. 
 bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' 
 
-#if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions.
+#if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions. 
+#WARRNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE change this device to the intended device name that you pan to use. 
 echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 # this is one command that will create the xfs partion and write it to the disk /dev/nvme0n1. 
 bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1 | awk "{print \$NF}"); echo \"UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0\" >> /etc/fstab' #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
 sudo mount -a
