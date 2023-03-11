@@ -16,7 +16,7 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
-- [Host install guid for vast](https://github.com/jjziets/vasttools/blob/main/README.md#here-is-how-i-install-guid-for-vast)
+- [Host install guid for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai) 
 - [Analytics dashboard (Outdated and broken)](https://github.com/jjziets/vasttools#analytics-dashboardoutdated-and-broken)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
