@@ -62,7 +62,7 @@ sudo apt install python2.7
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
-sudo reboot #You don't need to reboot  buts is a good idea to check that everthing comes up right. 
+sudo reboot #After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
 ```
 
 ## Analytics dashboard(Outdated and broken) 
