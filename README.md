@@ -56,7 +56,7 @@ echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme
 bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1 | awk "{print \$NF}"); echo \"UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0\" >> /etc/fstab' #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
 sudo mount -a
 df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
-sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
+sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' #this will enable Persistence mode so that the gpus can go to idle power when not used 
 sudo apt install python2.7
 #run the install command for vast
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
