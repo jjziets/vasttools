@@ -67,7 +67,7 @@ sudo reboot #After reboot check that the drive is mounted to /var/lib/docker and
 ```
 
 ## Speedtest-cli fix for vast
-If you are having problems with your machine not showing its 
+If you are having problems with your machine not showing its upload and download speed correctly. 
 ```
 sudo apt-get install curl
 sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
