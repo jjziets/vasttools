@@ -17,7 +17,7 @@ Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
 - [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai) 
-- [Speedtest-cli fix for vast] (https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
+- [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard (Outdated and broken)](https://github.com/jjziets/vasttools#analytics-dashboardoutdated-and-broken)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
