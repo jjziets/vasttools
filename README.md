@@ -65,6 +65,20 @@ sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
 sudo reboot #After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
 ```
 
+##Speedtest-cli fix for vast
+If you are having problems with your machine not showing its 
+```
+sudo apt-get install curl
+sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+sudo apt-get install speedtest
+sudo speedtest #run this and say yes when prompted. 
+cd /var/lib/vastai_kaalia/latest
+sudo mv speedtest-cli speedtest-cli.old
+sudo wget -O speedtest-cli https://raw.githubusercontent.com/jjziets/vasttools/main/speedtest-cli.py
+sudo chmod +x speedtest-cli
+```
+
+
 ## Analytics dashboard(Outdated and broken) 
 This is an analytics dashboard for remotely monitoring system information as well as tracking earnings.
 https://github.com/jjziets/vastai_analytics_dasboard
