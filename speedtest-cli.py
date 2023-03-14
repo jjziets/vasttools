@@ -46,7 +46,7 @@ result = {
     "upload": data["upload"]["bandwidth"],
     "server": {
         "latency": data["ping"]["latency"],
-        "name": data["server"]["name"],
+        "name": data["server"]["location"],
         "url": "http://{}:{}/upload.php".format(data['server']['host'], data['server']['port']),
         "country": data["server"]["country"],
         "lon": "0",  #data["server"]["lon"],
