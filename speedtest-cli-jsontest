@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import json
+import subprocess
+import jsonschema
+
+# Call speedtest and capture the output as a string
+output = subprocess.check_output(["/var/lib/vastai_kaalia/version_263/speedtest-cli", "--json"])
+
+# Define the JSON schema that describes the expected structure
+schema = {
+    "type": "object",
+    "properties": {
+        "client": {
+            "type": "object",
+            "properties": {
+                "rating": {"type": "string"},
+                "loggedin": {"type": "string"},
+                "isprating": {"type": "string"},
+                "ispdlavg": {"type": "string"},
+                "ip": {"type": "string"},
+                "isp": {"type": "string"},
+                "lon": {"type": "string"},
+                "ispulavg": {"type": "string"},
+                "country": {"type": "string"},
+                "lat": {"type": "string"},
+            },
+            "required": ["rating", "loggedin", "isprating", "ispdlavg", "ip", "isp", "lon", "ispulavg", "country", "lat"]
+        },
+        "bytes_sent": {"type": "number"},
+        "download": {"type": "number"},
+        "timestamp": {"type": "string"},
+        "share": {"type": ["null", "string"]},
+        "bytes_received": {"type": "number"},
+        "ping": {"type": "number"},
+        "upload": {"type": "number"},
+        "server": {
+            "type": "object",
+            "properties": {
+                "latency": {"type": "number"},
+                "name": {"type": "string"},
+                "url": {"type": "string"},
+                "country": {"type": "string"},
+                "lon": {"type": "string"},
+                "cc": {"type": "string"},
+                "host": {"type": "string"},
+                "sponsor": {"type": "string"},
+                "lat": {"type": "string"},
+                "id": {"type": "string"},
+                "d": {"type": "number"},
+            },
+            "required": ["latency", "name", "url", "country", "lon", "cc", "host", "sponsor", "lat", "id", "d"]
+        }
+    },
+    "required": ["client", "bytes_sent", "download", "timestamp", "share", "bytes_received", "ping", "upload", "server"]
+}
+
+# Load the output as JSON
+try:
+    data = json.loads(output)
+except json.JSONDecodeError as e:
+    print("Error: Invalid JSON response")
+    print("JSONDecodeError:", e)
+    print("Output:", output.decode())
+    exit()
+
+# Validate the JSON response against the schema
+try:
+    jsonschema.validate(data, schema)
+except jsonschema.exceptions.ValidationError as e:
+    print("Error: JSON response does not have expected structure")
+    print("ValidationError:", e)
+    exit()
+
+print("Success: JSON response has expected structure")
