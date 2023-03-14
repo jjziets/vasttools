@@ -65,7 +65,7 @@ sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
 sudo reboot #After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
 ```
 
-##Speedtest-cli fix for vast
+## Speedtest-cli fix for vast
 If you are having problems with your machine not showing its 
 ```
 sudo apt-get install curl
