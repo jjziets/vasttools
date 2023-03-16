@@ -73,6 +73,7 @@ sudo apt-get install curl
 sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
 sudo apt-get install speedtest
 sudo speedtest #run this and say yes when promp
+sudo apt install python3
 sudo apt install python3-pip
 pip3 install geopy pycountryted
 cd /var/lib/vastai_kaalia/latest
