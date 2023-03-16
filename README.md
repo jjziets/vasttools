@@ -75,7 +75,7 @@ sudo apt-get install speedtest
 sudo speedtest #run this and say yes when promp
 sudo apt install python3
 sudo apt install python3-pip
-pip3 install geopy pycountryted
+pip3 install geopy pycountry
 cd /var/lib/vastai_kaalia/latest
 sudo mv speedtest-cli speedtest-cli.old
 sudo wget -O speedtest-cli https://raw.githubusercontent.com/jjziets/vasttools/main/speedtest-cli.py
