@@ -4,6 +4,8 @@
 import subprocess
 import json
 import datetime
+from geopy.geocoders import Nominatim
+import pycountry
 
 max_retries = 3
 retry_count = 0
@@ -23,6 +25,28 @@ while retry_count < max_retries:
 # Load the output as a JSON string
 data = json.loads(output)
 
+# Initialize geolocator
+geolocator = Nominatim(user_agent="my_app")
+
+# Enter the city and country name
+city = data["server"]["location"]
+country = data["server"]["country"]
+
+# Combine the city and country name into a single address
+location = geolocator.geocode(f"{city}, {country}")
+
+# Print the latitude and longitude
+print(location.latitude, location.longitude)
+
+def country_to_code(country_name):
+    try:
+        country_code = pycountry.countries.search_fuzzy(country_name)[0].alpha_2
+    except LookupError:
+        country_code = None
+    return country_code
+
+
+
 # Extract the desired fields and format them in a new dictionary
 result = {
     "client": {
@@ -32,10 +56,10 @@ result = {
         "ispdlavg": "0",
         "ip": data["interface"]["externalIp"],
         "isp": data["isp"],
-        "lon": "0", #"data["server"]["lon"],
+        "lon": location.longitude, #"0", #"data["server"]["lon"],
         "ispulavg": "0",
-        "country": data["server"]["country"],
-        "lat": "0", #data["server"]["lat"]
+        "country": country_to_code(data["server"]["country"]),
+        "lat": location.latitude #"0", #data["server"]["lat"]
     },
     "bytes_sent": data["upload"]["bytes"],
     "download": data["download"]["bandwidth"],
@@ -49,11 +73,11 @@ result = {
         "name": data["server"]["location"],
         "url": "http://{}:{}/upload.php".format(data['server']['host'], data['server']['port']),
         "country": data["server"]["country"],
-        "lon": "0",  #data["server"]["lon"],
-        "cc": data["server"]["country"],
+        "lon":  location.longitude, #"0",  #data["server"]["lon"],
+        "cc": country_to_code(data["server"]["country"]),
         "host": "{}:{}".format(data['server']['host'], data['server']['port']),
         "sponsor": data["server"]["name"],
-        "lat": "0", # data["server"]["lat"],
+        "lat": location.latitude, # "0", # data["server"]["lat"],
         "id": str(data["server"]["id"]),
         "d": data["ping"]["latency"]/1000.0
     }
