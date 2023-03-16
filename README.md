@@ -72,7 +72,9 @@ If you are having problems with your machine not showing its upload and download
 sudo apt-get install curl
 sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
 sudo apt-get install speedtest
-sudo speedtest #run this and say yes when prompted. 
+sudo speedtest #run this and say yes when promp
+sudo apt install python3-pip
+pip3 install geopy pycountryted
 cd /var/lib/vastai_kaalia/latest
 sudo mv speedtest-cli speedtest-cli.old
 sudo wget -O speedtest-cli https://raw.githubusercontent.com/jjziets/vasttools/main/speedtest-cli.py
