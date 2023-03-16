@@ -35,8 +35,9 @@ country = data["server"]["country"]
 # Combine the city and country name into a single address
 location = geolocator.geocode(f"{city}, {country}")
 
-# Print the latitude and longitude
-print(location.latitude, location.longitude)
+longitude  = float(location.longitude)
+latitude   = float(location.latitude)
+
 
 def country_to_code(country_name):
     try:
@@ -56,10 +57,10 @@ result = {
         "ispdlavg": "0",
         "ip": data["interface"]["externalIp"],
         "isp": data["isp"],
-        "lon": location.longitude, #"0", #"data["server"]["lon"],
+        "lon": str(longitude), #"0", #"data["server"]["lon"],
         "ispulavg": "0",
         "country": country_to_code(data["server"]["country"]),
-        "lat": location.latitude #"0", #data["server"]["lat"]
+        "lat": str(latitude) #"0", #data["server"]["lat"]
     },
     "bytes_sent": data["upload"]["bytes"],
     "download": data["download"]["bandwidth"],
@@ -73,11 +74,11 @@ result = {
         "name": data["server"]["location"],
         "url": "http://{}:{}/upload.php".format(data['server']['host'], data['server']['port']),
         "country": data["server"]["country"],
-        "lon":  location.longitude, #"0",  #data["server"]["lon"],
+        "lon":  str(longitude), #"0",  #data["server"]["lon"],
         "cc": country_to_code(data["server"]["country"]),
         "host": "{}:{}".format(data['server']['host'], data['server']['port']),
         "sponsor": data["server"]["name"],
-        "lat": location.latitude, # "0", # data["server"]["lat"],
+        "lat": str(latitude), # "0", # data["server"]["lat"],
         "id": str(data["server"]["id"]),
         "d": data["ping"]["latency"]/1000.0
     }
