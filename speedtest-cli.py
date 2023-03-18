@@ -35,8 +35,8 @@ country = data["server"]["country"]
 # Combine the city and country name into a single address
 location = geolocator.geocode(f"{city}, {country}")
 
-longitude  = float(location.longitude)
-latitude   = float(location.latitude)
+longitude  = round(float(location.longitude),4)
+latitude   = round(float(location.latitude),4)
 
 
 def country_to_code(country_name):
@@ -53,22 +53,22 @@ result = {
     "client": {
         "rating": "0",
         "loggedin": "0",
-        "isprating": "0",
+        "isprating": "3.1",
         "ispdlavg": "0",
         "ip": data["interface"]["externalIp"],
         "isp": data["isp"],
-        "lon": str(longitude), #"0", #"data["server"]["lon"],
+        "lon": str(longitude),
         "ispulavg": "0",
         "country": country_to_code(data["server"]["country"]),
-        "lat": str(latitude) #"0", #data["server"]["lat"]
+        "lat": str(latitude)
     },
     "bytes_sent": data["upload"]["bytes"],
-    "download": int(data["download"]["bandwidth"]),
+    "download": float(str(data["download"]["bandwidth"]) + '.123300') * 8,
     "timestamp": datetime.datetime.utcnow().isoformat() + 'Z',
     "share": None,
     "bytes_received": data["download"]["bytes"],
     "ping": data["ping"]["latency"],
-    "upload": int(data["upload"]["bandwidth"]),
+    "upload": float(str(data["upload"]["bandwidth"]) + '.12300') * 8,
     "server": {
         "latency": data["ping"]["latency"],
         "name": data["server"]["location"],
