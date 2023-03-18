@@ -63,12 +63,12 @@ result = {
         "lat": str(latitude) #"0", #data["server"]["lat"]
     },
     "bytes_sent": data["upload"]["bytes"],
-    "download": data["download"]["bandwidth"],
+    "download": int(data["download"]["bandwidth"]),
     "timestamp": datetime.datetime.utcnow().isoformat() + 'Z',
     "share": None,
     "bytes_received": data["download"]["bytes"],
     "ping": data["ping"]["latency"],
-    "upload": data["upload"]["bandwidth"],
+    "upload": int(data["upload"]["bandwidth"]),
     "server": {
         "latency": data["ping"]["latency"],
         "name": data["server"]["location"],
