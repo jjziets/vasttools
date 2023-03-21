@@ -54,7 +54,8 @@ bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y l
 #if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions. 
 #WARRNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE change this device to the intended device name that you pan to use. 
 echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 # this is one command that will create the xfs partion and write it to the disk /dev/nvme0n1. 
-bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1 | awk "{print \$NF}"); echo \"UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0\" >> /etc/fstab' #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
+sudo mkdir /var/lib/docker
+bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1 | awk "{print \$NF}"); echo \'UUID="$uuid" /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0\' >> /etc/fstab' #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
 sudo mount -a
 df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' #this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
