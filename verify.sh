@@ -33,7 +33,7 @@ pause () {
 		let "cnt=cnt+1"
 		if [ $cnt -eq 10 ]; then 
                         let "remaining_instances=${#Instances[@]}-cnt"
-                        printf "\n Remaning Instnaces: $remaining_instances\n"
+                        printf "\nRemaning instances: $remaining_instances\n"
 			pause
 			let "cnt=0"
 		fi
