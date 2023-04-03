@@ -13,6 +13,15 @@ FAILED_DRIVE=$(mdadm --detail "$2" | grep -oP '(/dev/sd\w+)\s+\[F\]')
 # Prepare a message with RAID array information
 RAID_INFO=$(mdadm --detail "$2")
 
+# Get RAID state
+RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{print $3}')
+
+# Check if the RAID state is clean or active, skip sending the message
+if [[ "$RAID_STATE" == "clean" ]] || [[ "$RAID_STATE" == "active" ]]; then
+    echo "RAID array status is '$RAID_STATE', skipping Telegram message."
+    exit 0
+fi
+
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
     MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
