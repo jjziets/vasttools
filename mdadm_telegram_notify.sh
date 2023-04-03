@@ -17,7 +17,7 @@ RAID_INFO=$(mdadm --detail "$2")
 if [ -z "$FAILED_DRIVE" ]; then
     MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
 else
-    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1   info: $3 Failed Drive: $FAILED_DRIVE"
+    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 Failed Drive: $FAILED_DRIVE"
 fi
 
 # Function to send the message
