@@ -8,16 +8,16 @@ API_TOKEN="${TELEGRAM_TOKEN}"
 CHAT_ID="${CHAT_ID}"
 
 # Find the failed drive using mdadm --detail command
-FAILED_DRIVE=$(mdadm --detail "$1" | grep -oP '(/dev/sd\w+)\s+\[F\]')
+FAILED_DRIVE=$(mdadm --detail "$2" | grep -oP '(/dev/sd\w+)\s+\[F\]')
 
 # Prepare a message with RAID array information
-RAID_INFO=$(mdadm --detail "$1")
+RAID_INFO=$(mdadm --detail "$2")
 
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
-    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $1 - Event: $2 - RAID Info:\n${RAID_INFO}"
+    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
 else
-    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $1 - Event: $2 - Failed Drive: $FAILED_DRIVE"
+    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1   info: $3 Failed Drive: $FAILED_DRIVE"
 fi
 
 # Function to send the message
