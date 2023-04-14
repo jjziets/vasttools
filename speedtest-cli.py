@@ -13,7 +13,7 @@ retry_count = 0
 while retry_count < max_retries:
     try:
         # Run the speedtest command and capture the output
-        output = subprocess.check_output(["speedtest", "--accept-license","--format=json"])
+        output = subprocess.check_output(["speedtest", "--accept-license", "--accept-gdpr", "--format=json"])
         break
     except subprocess.CalledProcessError as e:
         print(f"Error running speedtest: {e}")
