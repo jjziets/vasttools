@@ -212,7 +212,7 @@ sudo ./cool_gpu.sh 100 # this sets the fans to 100%
 If your system updates while vast is running or even worse when a client is renting you then you might get de-verified or banned. It's advised to only update when the system is unrented and delisted. best would be to set an end date of your listing and conduct updates and upgrades at that stage. 
 to stop unattended-upgrades run the following commands.
 ```
-sudo apt purge --auto-remove unattended-upgrades
+sudo apt purge --auto-remove unattended-upgrades -y
 sudo systemctl disable apt-daily-upgrade.timer
 sudo systemctl mask apt-daily-upgrade.service 
 sudo systemctl disable apt-daily.timer
