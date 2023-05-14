@@ -1,0 +1,35 @@
+#!/bin/sh
+
+num=0
+
+while [ -n "$1" ]
+do
+case "$1" in
+--device=0) num=0 ;;
+--device=1) num=1 ;;
+--device=2) num=2 ;;
+--device=3) num=3 ;;
+--device=4) num=4 ;;
+--device=5) num=5 ;;
+
+*)  ;;
+esac
+shift
+done
+
+
+echo "
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device $num: NVIDIA GeForce RTX 3090
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 12026.3 MB/s, Time = 0.00133 s, Size = 63554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12834.8 MB/s, Time = 0.00124 s, Size = 63554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 893528.3 MB/s, Time = 0.00003 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled."
+
+return 0
