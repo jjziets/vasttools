@@ -16,17 +16,17 @@ RAID_INFO=$(mdadm --detail "$2")
 # Get RAID state
 RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{print $3}')
 
-# Check if the RAID state is clean or active, skip sending the message
-if [[ "$RAID_STATE" == "clean" ]] || [[ "$RAID_STATE" == "active" ]]; then
+# Check if the RAID state is clean, active or clean, checking, skip sending the message
+if [[ "$RAID_STATE" == "clean" ]] || [[ "$RAID_STATE" == "active" ]] || [[ "$RAID_STATE" == "clean," && $(echo "$RAID_INFO" | grep "State :" | awk '{print $4}') == "checking" ]]; then
     echo "RAID array status is '$RAID_STATE', skipping Telegram message."
     exit 0
 fi
 
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
-    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
+    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
 else
-    MESSAGE="mdadm: Disk failure detected on $(hostname) - Device: $2 - Event: $1  info: $3 Failed Drive: $FAILED_DRIVE"
+    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 Failed Drive: $FAILED_DRIVE"
 fi
 
 # Function to send the message
