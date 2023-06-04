@@ -14,10 +14,13 @@ FAILED_DRIVE=$(mdadm --detail "$2" | grep -oP '(/dev/sd\w+)\s+\[F\]')
 RAID_INFO=$(mdadm --detail "$2")
 
 # Get RAID state
-RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{print $3}')
+RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{print $3, $4}')
 
-# Check if the RAID state is clean, active or clean, checking, skip sending the message
-if [[ "$RAID_STATE" == "clean" ]] || [[ "$RAID_STATE" == "active" ]] || [[ "$RAID_STATE" == "clean," && $(echo "$RAID_INFO" | grep "State :" | awk '{print $4}') == "checking" ]]; then
+# Array of RAID states to exclude
+EXCLUDED_STATES=("clean" "clean, checking" "active" "active, checking")
+
+# Check if the RAID state is in the excluded states, skip sending the message
+if [[ " ${EXCLUDED_STATES[@]} " =~ " ${RAID_STATE} " ]]; then
     echo "RAID array status is '$RAID_STATE', skipping Telegram message."
     exit 0
 fi
