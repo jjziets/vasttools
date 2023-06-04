@@ -17,11 +17,16 @@ RAID_INFO=$(mdadm --detail "$2")
 RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{for(i=3; i<=NF; i++) printf $i" "; print ""}')
 RAID_STATE=$(echo "$RAID_STATE" | xargs)  # trim leading and trailing white space
 
-# Check if the RAID state contains "clean" or "active", skip sending the message
-if [[ "$RAID_STATE" =~ (clean|active) ]]; then
-    echo "RAID array status is '$RAID_STATE', skipping Telegram message."
-    exit 0
-fi
+# Array of RAID states to exclude
+EXCLUDED_STATES=("clean" "clean, checking" "active" "active, checking" "clean, resyncing" "active, resyncing" )
+
+# Check if the RAID state is in the excluded states, skip sending the message
+for state in "${EXCLUDED_STATES[@]}"; do
+    if [[ "$RAID_STATE" == "$state" ]]; then
+        echo "RAID array status is '$RAID_STATE', skipping Telegram message."
+        exit 0
+    fi
+done
 
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
@@ -46,3 +51,4 @@ while [ "$retry_after" -gt 0 ]; do
     response=$(send_message)
     retry_after=$(echo "$response" | jq '.parameters.retry_after // 0')
 done
+
