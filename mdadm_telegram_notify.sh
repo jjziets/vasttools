@@ -18,7 +18,7 @@ RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{for(i=3; i<=NF; i++) pri
 RAID_STATE=$(echo "$RAID_STATE" | xargs)  # trim leading and trailing white space
 
 # Array of RAID states to exclude
-EXCLUDED_STATES=("clean" "clean, checking" "active" "active, checking")
+EXCLUDED_STATES=("clean" "clean, checking" "active" "active, checking" "clean, resyncing" )
 
 # Check if the RAID state is in the excluded states, skip sending the message
 for state in "${EXCLUDED_STATES[@]}"; do
