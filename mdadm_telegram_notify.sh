@@ -27,7 +27,7 @@ fi
 
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
-    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
+    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: ${RAID_INFO}"
 else
     MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 Failed Drive: $FAILED_DRIVE"
 fi
