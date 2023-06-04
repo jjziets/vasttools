@@ -14,20 +14,23 @@ FAILED_DRIVE=$(mdadm --detail "$2" | grep -oP '(/dev/sd\w+)\s+\[F\]')
 RAID_INFO=$(mdadm --detail "$2")
 
 # Get RAID state
-RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{print $3, $4}')
+RAID_STATE=$(echo "$RAID_INFO" | grep "State :" | awk '{for(i=3; i<=NF; i++) printf $i" "; print ""}')
+RAID_STATE=$(echo "$RAID_STATE" | xargs)  # trim leading and trailing white space
 
 # Array of RAID states to exclude
 EXCLUDED_STATES=("clean" "clean, checking" "active" "active, checking")
 
 # Check if the RAID state is in the excluded states, skip sending the message
-if [[ " ${EXCLUDED_STATES[@]} " =~ " ${RAID_STATE} " ]]; then
-    echo "RAID array status is '$RAID_STATE', skipping Telegram message."
-    exit 0
-fi
+for state in "${EXCLUDED_STATES[@]}"; do
+    if [[ "$RAID_STATE" == "$state" ]]; then
+        echo "RAID array status is '$RAID_STATE', skipping Telegram message."
+        exit 0
+    fi
+done
 
 # Check if FAILED_DRIVE is empty, and update the message accordingly
 if [ -z "$FAILED_DRIVE" ]; then
-    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: ${RAID_INFO}"
+    MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 - RAID Info: \n ${RAID_INFO}"
 else
     MESSAGE="mdadm: Disk event detected on $(hostname) - Device: $2 - Event: $1  info: $3 Failed Drive: $FAILED_DRIVE"
 fi
@@ -48,3 +51,5 @@ while [ "$retry_after" -gt 0 ]; do
     response=$(send_message)
     retry_after=$(echo "$response" | jq '.parameters.retry_after // 0')
 done
+
+
