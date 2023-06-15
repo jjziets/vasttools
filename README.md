@@ -195,18 +195,14 @@ bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y ins
 ```  
 
 ## setting fans speeds if you have headless system.
-I have two scripts that you can use to set the fan speeds of all the gpus. Single or Dual fans use https://github.com/jjziets/test/blob/master/cool_gpu.sh 
+Here is a repo with two programs and a few scripts that you can use to manage your fans
+https://github.com/jjziets/GPU_FAN_OC_Manager/tree/main
 
-and tripple fans use https://github.com/jjziets/test/blob/master/cool_gpu2.sh
+```  
+bash -c "wget https://github.com/jjziets/GPU_FAN_OC_Manager/raw/main/set_fan_curve && chmod +x set_fan_curve && nohup bash -c 'while true; do ./set_fan_curve 65; sleep 1; done' > output.txt & (crontab -l; echo '@reboot screen -dmS gpuManager bash -c \"while true; do /home/dafit/set_fan_curve 65; sleep 1; done\"') | crontab -"
+```  
 
-to use run this command
-```
-sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
-wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu.sh
-#or wget https://raw.githubusercontent.com/jjziets/test/master/cool_gpu2.sh
-sudo chmod +x cool_gpu.sh
-sudo ./cool_gpu.sh 100 # this sets the fans to 100%
-```
+
 
 ## Remove unattended-upgrades Package
 If your system updates while vast is running or even worse when a client is renting you then you might get de-verified or banned. It's advised to only update when the system is unrented and delisted. best would be to set an end date of your listing and conduct updates and upgrades at that stage. 
