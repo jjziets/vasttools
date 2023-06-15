@@ -25,7 +25,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
 - [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
 - [Background job or idle job for vast](#background-job-or-idle-job-for-vast)
-- [Setting fan speeds if you have a headless system](#setting-fan-speeds-if-you-have-a-headless-system))
+- [Setting fan speeds if you have a headless system](https://github.com/jjziets/vasttools/blob/main/README.md#setting-fans-speeds-if-you-have-headless-system)
 - [Remove unattended-upgrades package](#remove-unattended-upgrades-package)
 - [How to update a host](#how-to-update-a-host)
 - [How to move your vast docker driver to another drive](#how-to-move-your-vast-docker-driver-to-another-drive)
