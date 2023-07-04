@@ -199,7 +199,8 @@ Here is a repo with two programs and a few scripts that you can use to manage yo
 https://github.com/jjziets/GPU_FAN_OC_Manager/tree/main
 
 ```  
-bash -c "wget https://github.com/jjziets/GPU_FAN_OC_Manager/raw/main/set_fan_curve && chmod +x set_fan_curve && nohup bash -c 'while true; do ./set_fan_curve 65; sleep 1; done' > output.txt & (crontab -l; echo '@reboot screen -dmS gpuManager bash -c \"while true; do /home/dafit/set_fan_curve 65; sleep 1; done\"') | crontab -"
+bash -c "wget https://github.com/jjziets/GPU_FAN_OC_Manager/raw/main/set_fan_curve; chmod +x set_fan_curve; CURRENT_PATH=\$(pwd); nohup bash -c \"while true; do \$CURRENT_PATH/set_fan_curve 65; sleep 1; done\" > output.txt & (crontab -l; echo \"@reboot screen -dmS gpuManger bash -c 'while true; do \$CURRENT_PATH/set_fan_curve 65; sleep 1; done'\") | crontab -"
+
 ```  
 
 
