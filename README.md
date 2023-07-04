@@ -46,7 +46,7 @@ sudo update-grub
 sudo reboot
 
 #install the nvidia drivers after reboot. update the url to the latest driver from nvidia website https://www.nvidia.com/download/index.aspx
-bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree86/Linux-x86_64/525.105.17/NVIDIA-Linux-x86_64-525.105.17.run; chmod +x NVIDIA-Linux-x86_64-525.105.17.run; ./NVIDIA-Linux-x86_64-525.105.17.run'
+bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree86/Linux-x86_64/535.54.03/NVIDIA-Linux-x86_64-535.54.03.run; chmod +x NVIDIA-Linux-x86_64-535.54.03.run; ./NVIDIA-Linux-x86_64-535.54.03.run'
 
 # this is needed to remove xserver so that clients can run a desktop gui in an continer wothout problems. It is also needed if one wants to change memory OC and fans speeds. 
 bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' 
