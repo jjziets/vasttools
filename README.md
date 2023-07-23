@@ -46,6 +46,7 @@ sudo update-grub
 sudo reboot
 
 #install the nvidia drivers after reboot. update the url to the latest driver from nvidia website https://www.nvidia.com/download/index.aspx
+sudo su
 bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree86/Linux-x86_64/535.54.03/NVIDIA-Linux-x86_64-535.54.03.run; chmod +x NVIDIA-Linux-x86_64-535.54.03.run; ./NVIDIA-Linux-x86_64-535.54.03.run'
 
 # this is needed to remove xserver so that clients can run a desktop gui in an continer wothout problems. It is also needed if one wants to change memory OC and fans speeds. 
