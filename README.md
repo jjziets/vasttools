@@ -30,7 +30,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [How to update a host](#how-to-update-a-host)
 - [How to move your vast docker driver to another drive](#how-to-move-your-vast-docker-driver-to-another-drive)
 - [Connecting to running instance with VNC to see applications GUI](#connecting-to-running-instance-with-vnc-to-see-applications-gui)
-- [Setting up 3D accelerated desktop in web browser on vastai](#setting-up-3d-accelerated-desktop-in-web-browser-on-vastai)
+- [Setting up 3D accelerated desktop in web browser on vastai](https://github.com/jjziets/vasttools#setting-up-3d-accelerated-desktop-in-webbrowser-on-vastai)
 - [Useful commands](#useful-commands)
 
 ## Host install guide for vast.ai 
