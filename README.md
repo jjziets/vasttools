@@ -62,7 +62,7 @@ sudo mount -a
 df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' #this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
 #run the install command for vast
-wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
+sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
