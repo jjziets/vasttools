@@ -74,7 +74,7 @@ If you are having problems with your machine not showing its upload and download
 ```
 sudo apt-get install curl
 sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
-sudo apt-get install speedtest
+sudo apt-get install speedtest -y
 sudo apt install python3 -y
 cd /var/lib/vastai_kaalia/latest
 sudo mv speedtest-cli speedtest-cli.old
@@ -89,7 +89,7 @@ If your now get slower speeds follow this
 ## If migrating from prior bintray install instructions please first...
 # sudo rm /etc/apt/sources.list.d/speedtest.list
 # sudo apt-get update
-# sudo apt-get remove speedtest
+# sudo apt-get remove speedtest -y
 ## Other non-official binaries will conflict with Speedtest CLI
 # Example how to remove using apt-get
 # sudo apt-get remove speedtest-cli
