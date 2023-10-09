@@ -155,6 +155,7 @@ pytorch - Pytorch DL benchmark
 #test or bash inteface
 ```
 sudo docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks /bin/bash
+apt update && apt upgrade -y
 ./benchmark.sh
 ```
 #Run using default settings
