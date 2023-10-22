@@ -251,7 +251,7 @@ This guide illustrates how to back up vastai Docker data from an existing drive 
    sudo tar -c -I 'pixz -k -1' -f ./docker.tar.pixz /var/lib/docker | pv  #you can change ./ to a destination directory
    ```
    Note: `pixz` utilizes multiple cores for faster compression.
-4. **Unmount the Docker directory** (Optional):
+4. **Unmount the Docker directory**:
    If you're planning to shut down and install a new drive:
    ```
    sudo umount /var/lib/docker
@@ -298,9 +298,9 @@ This guide illustrates how to back up vastai Docker data from an existing drive 
     ```bash
     cd /
     ```
-    Decompress and restore:
+    Decompress and restore:  Ensure to change the user to the relevent name 
     ```
-    sudo cat /home/user/docker.tar.pixz | pv | sudo tar -x -I 'pixz -d -k' #ensure to change the user to the relveent name 
+    sudo cat /home/user/docker.tar.pixz | pv | sudo tar -x -I 'pixz -d -k'
     ```
 12. **Enable services**:
     ```
