@@ -230,7 +230,7 @@ When the system is idle and delisted run the following commands. vast demon and 
 bash -c ' sudo systemctl stop vastai; sudo systemctl stop docker.socket; sudo systemctl stop docker; sudo apt update; sudo apt upgrade -y; sudo systemctl start docker.socket ; sudo systemctl start docker; sudo systemctl start vastai'
 ```
 
-## Migrate vastai Docker Drive to a New Drive
+## How to move your vast docker driver to another drive
 This guide illustrates how to back up vastai Docker data from an existing drive and transfer it to a new drive.
 ### Prerequisites:
 - No clients are running and that you are un listed from the vast market.
