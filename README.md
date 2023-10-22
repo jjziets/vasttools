@@ -54,21 +54,25 @@ bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree8
 bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' 
 
 #if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions. 
-#WARRNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE change this device to the intended device name that you pan to use. 
-echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 # this is one command that will create the xfs partion and write it to the disk /dev/nvme0n1. 
+#WARRNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE change this device to the intended device name that you pan to use.
+# this is one command that will create the xfs partion and write it to the disk /dev/nvme0n1. 
+echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 
 sudo mkdir /var/lib/docker
-sudo bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1  | sed -n "2p" | awk "{print \$NF}"); echo "UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0" >> /etc/fstab'
  #I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
+sudo bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1  | sed -n "2p" | awk "{print \$NF}"); echo "UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0" >> /etc/fstab'
 sudo mount -a
-df -h # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
-sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' #this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
+# check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
+df -h
+#this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
+sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
 #run the install command for vast
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
-sudo reboot #After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
+sudo reboot 
 ```
+#After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
 
 ## Speedtest-cli fix for vast
 If you are having problems with your machine not showing its upload and download speed correctly. 
