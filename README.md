@@ -39,7 +39,8 @@ Paypal  PayPal.Me/cryptolabsZA
 ```
 #Start with a clean install of ubunut 20.04.x server. Just add openssh.
 sudo apt update && sudo apt upgrade -y
-sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf" ## this will remove nouveau from the system if it has been installed by the installer
+## this will remove nouveau from the system if it has been installed by the installer
+sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf" 
 sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
 sudo update-initramfs -u
 sudo echo 'GRUB_CMDLINE_LINUX=systemd.unified_cgroup_hierarchy=false' > /etc/default/grub.d/cgroup.cfg
