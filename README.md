@@ -246,7 +246,7 @@ This guide illustrates how to back up vastai Docker data from an existing drive 
    sudo systemctl disable vastai docker.socket docker
    ```
 3. **Backup the Docker directory**:
-   Create a compressed backup of the `/var/lib/docker` directory. Ensure there's enough space on the OS drive for this backup. Or use move the data to backup server. see https://github.com/jjziets/vasttools/blob/main/README.md#backup-varlibdocker-to-another-machine-on-your-network
+   Create a compressed backup of the `/var/lib/docker` directory. Ensure there's enough space on the OS drive for this backup. Or move the data to backup server. see https://github.com/jjziets/vasttools/blob/main/README.md#backup-varlibdocker-to-another-machine-on-your-network
    ```
    sudo tar -c -I 'pixz -k -1' -f ./docker.tar.pixz /var/lib/docker | pv  #you can change ./ to a destination directory
    ```
