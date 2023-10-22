@@ -258,8 +258,124 @@ sudo systemctl enable vastai
 sudo systemctl enable docker.socket 
 sudo systemctl enable docker
 sudo reboot
-# After reboot check that the driver you wanted is mounted to /var/lib/docker and that vastai is running.
+# After reboot check that the drive you wanted is mounted to /var/lib/docker and that vastai is running.
 ```
+## Backup `/var/lib/docker` to Another Machine on Your Network
+
+If you're looking to migrate your Docker setup to another machine, whether for replacing the drive or setting up a RAID, follow this guide. For this example, we'll assume the backup server's IP address is `192.168.1.100`.
+
+### Setup on the Backup Server:
+
+1. **Temporarily Enable Root SSH Login**:
+   It's essential to ensure uninterrupted SSH communication during the backup process, especially when transferring large files like compressed Docker data.
+
+   a. Open the SSH configuration:
+   ```bash
+   sudo nano /etc/ssh/sshd_config
+   ```
+
+   b. Locate and change the line:
+   ```bash
+   PermitRootLogin no
+   ```
+   to:
+   ```bash
+   PermitRootLogin yes
+   ```
+
+   c. Reload the SSH configuration:
+   ```bash
+   sudo systemctl restart sshd
+   ```
+
+### Setup on the Source Machine:
+
+2. **Generate an SSH Key and Transfer it to the Backup Server**:
+   
+   a. Create the SSH key:
+   ```bash
+   sudo ssh-keygen
+   ```
+
+   b. Copy the SSH key to the backup server:
+   ```bash
+   sudo ssh-copy-id -i ~/.ssh/id_rsa root@192.168.1.100
+   ```
+
+3. **Disable Root Password Authentication**:
+   Ensure only the SSH key can be used for root login, enhancing security.
+
+   a. Modify the SSH configuration:
+   ```bash
+   sudo nano /etc/ssh/sshd_config
+   ```
+
+   b. Change the line to:
+   ```bash
+   PermitRootLogin prohibit-password
+   ```
+
+   c. Reload the SSH configuration:
+   ```bash
+   sudo systemctl restart sshd
+   ```
+
+4. **Preparation for Backup**:
+
+   Before backing up, ensure relevant services are halted:
+
+   ```bash
+   sudo systemctl stop docker.socket
+   sudo systemctl stop docker
+   sudo systemctl stop vastai
+   sudo systemctl disable vastai 
+   sudo systemctl disable docker.socket 
+   sudo systemctl disable docker
+   ```
+
+5. **Backup Procedure**:
+   
+   This procedure compresses the `/var/lib/docker` directory and transfers it to the backup server.
+
+   a. Switch to the root user and install necessary tools:
+   ```bash
+   sudo su
+   apt install pixz
+   apt install pv
+   ```
+
+   b. Perform the backup:
+   ```bash
+   tar -c -I 'pixz -k -0' -f - /var/lib/docker | pv | ssh root@192.168.1.100 "cat > /mnt/backup/machine/docker.tar.pixz"
+   ```
+
+### Restoration:
+
+6. **Restoring the Backup**:
+
+   Make sure your new drive is mounted at `/var/lib/docker`.
+
+   a. Switch to the root user:
+   ```bash
+   sudo su
+   ```
+
+   b. Restore from the backup:
+   ```bash
+   cd /
+   ssh root@192.168.1.100 "cat /mnt/backup/machine/docker.tar.pixz" | pv | sudo tar -x -I 'pixz -d -k'
+   ```
+
+7. **Reactivate Services**:
+
+   ```bash
+   sudo systemctl enable vastai 
+   sudo systemctl enable docker.socket 
+   sudo systemctl enable docker
+   sudo reboot
+   ```
+
+**Post-reboot**: Ensure your target drive is mounted to `/var/lib/docker` and that `vastai` is operational.
 
 ## Connecting to running instance with vnc to see applications gui 
 
