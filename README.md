@@ -119,7 +119,7 @@ sudo apt-get install speedtest
 
 
 ## Analytics dashboard
-Prometheus Grafana monitoring systems that sends allerts and tracks all metrix regarding your equipment. It does not track ernings yet or rentals. 
+Prometheus Grafana monitoring systems that sends allerts and tracks all metrix regarding your equipment also track ernings and rentals. 
 [https://github.com/jjziets/vastai_analytics_dasboard](https://github.com/jjziets/DCMontoring/blob/main/README.md)
 
 ## Memory oc
