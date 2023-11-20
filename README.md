@@ -244,7 +244,7 @@ bash -c ' sudo systemctl stop vastai; sudo systemctl stop docker.socket; sudo sy
 ```
 
 ## How to move your vast docker driver to another drive
-This guide illustrates how to back up vastai Docker data from an existing drive and transfer it to a new drive.
+This guide illustrates how to back up vastai Docker data from an existing drive and transfer it to a new drive . in this case a raid driver /dev/md0
 ### Prerequisites:
 - No clients are running and that you are un listed from the vast market.
 - Docker data exists on the current drive.
