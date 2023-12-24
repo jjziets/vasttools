@@ -18,7 +18,7 @@ Paypal  PayPal.Me/cryptolabsZA
 ## Table of Contents
 - [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai) 
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
-- [Analytics dashboard](https://github.com/jjziets/vasttools#analytics-dashboard)
+- [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
 - [Stress testing GPUs on vast with Python benchmark of RTX3090's](https://github.com/jjziets/vasttools#stress-testing-gpus-on-vast-with-this-python-benchmark-of-rtx3090s)
@@ -119,8 +119,8 @@ sudo apt-get install speedtest
 
 
 ## Analytics dashboard
-Prometheus Grafana monitoring systems that sends allerts and tracks all metrix regarding your equipment also track ernings and rentals. 
-[https://github.com/jjziets/vastai_analytics_dasboard](https://github.com/jjziets/DCMontoring/blob/main/README.md)
+Prometheus Grafana monitoring systems, send alerts and track all metrics regarding your equipment and also track earnings and rentals. 
+https://github.com/jjziets/DCMontoring
 
 ## Memory oc
 
