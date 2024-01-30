@@ -21,7 +21,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
-- [Stress testing GPUs on vast with Python benchmark of RTX3090's](https://github.com/jjziets/vasttools#stress-testing-gpus-on-vast-with-this-python-benchmark-of-rtx3090s)
+- [Stress testing GPUs on vast with Python benchmark of RTX3090's](https://github.com/jjziets/vasttools?tab=readme-ov-file#stress-testing-gpus-on-vast-with-this-python-benchmark-of-rtx3090s)
 - [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
 - [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
 - [Background job or idle job for vast](#background-job-or-idle-job-for-vast)
