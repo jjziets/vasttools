@@ -475,6 +475,75 @@ hit start
 3D accelerated desktop environment in a web browser
 ![image](https://user-images.githubusercontent.com/19214485/203531203-14415d38-1db2-43f8-9ec1-dfe68a61206b.png)
 
+## How to set up a Docker Registry for the systems on your network. 
+This will reduce the number of pull requests from your public IP. Docker is restricted to 100 pulls per 6h for unanonymous login, and it can speed up the startup time for your rentals.
+This guide provides instructions on how to set up a Docker registry server using Docker Compose, as well as configuring Docker clients to use this registry.
+Prerequisites
+Docker and Docker Compose are installed on the server that has a lot of fast storage on your local LAN.
+Docker is installed on all client machines.
+
+Setting Up the Docker Registry Server
+install docker-compose if you have not already. 
+
+```
+sudo su
+curl -L "https://github.com/docker/compose/releases/download/v2.24.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+apt-get update && sudo apt-get install -y gettext-base
+```
+Create a docker-compose.yml file:
+Create a file named docker-compose.yml on your server with the following content:
+```
+version: '3'
+services:
+  registry:
+    restart: unless-stopped
+    image: registry:2
+    ports:
+      - 5000:5000
+    environment:
+      - REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io
+    volumes:
+      - data:/var/lib/registry
+volumes:
+  data:
+```
+This configuration sets up a Docker registry server running on port 5000 and uses a volume named data for storage.
+Start the Docker Registry:
+
+Run the following command in the directory where your docker-compose.yml file is located:
+```
+sudo docker-compose up -d
+```
+This command will start the Docker registry in detached mode.
+## Configuring Docker Clients
+To configure Docker clients to use the registry, follow these steps on each client machine:
+Edit the Docker Daemon Configuration:
+Run the following command to add your Docker registry as a mirror in the Docker daemon configuration:
+```
+echo '{
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "registry-mirrors": ["http://192.168.100.7:5000"]
+}' | sudo tee /etc/docker/daemon.json
+```
+Replace 192.168.100.7:5000 with the IP address and port of your Docker registry server.
+Restart Docker Daemon:
+```
+sudo systemctl restart docker
+```
+Verifying the Setup
+To verify that the Docker registry is set up correctly, you can try pulling an image from the registry:
+```
+docker pull 192.168.100.7:5000/your-image
+```
+Replace 192.168.100.7:5000/your-image with the appropriate registry URL and image name.
+
 
 
 ## Useful commands 
@@ -484,7 +553,7 @@ hit start
 ```
  if returns 0, then it's an interruptable rent.
 
-Command on host that provides logs of the deamon running 
+Command on a host that provides logs of the deamon running 
 ```
 tail /var/lib/vastai_kaalia/kaalia.log -f 
 ```
