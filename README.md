@@ -33,6 +33,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Connecting to running instance with VNC to see applications GUI](#connecting-to-running-instance-with-vnc-to-see-applications-gui)
 - [Setting up 3D accelerated desktop in web browser on vastai](https://github.com/jjziets/vasttools#setting-up-3d-accelerated-desktop-in-webbrowser-on-vastai)
 - [Useful commands](#useful-commands)
+- [How to set up a docker registry for the systems on your network](https://github.com/jjziets/vasttools/blob/main/README.md#how-to-set-up-a-docker-registry-for-the-systems-on-your-network)
 
 ## Host install guide for vast.ai 
 
