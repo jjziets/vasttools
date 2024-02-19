@@ -204,8 +204,8 @@ sudo chmod +x setprice.sh
 ```
 
 ## Background job or idle job for vast.
-The best way to manage your idle job is via the vast cli. To do this you will need to download the vast cli and run the followign commands.
-The idea is to rent your self as interruptible job. The vast cli allow you to setup one idle job for all the gpus or one gpu per instnace. You can also setup ssh connection method or any other method
+The best way to manage your idle job is via the vast cli. To do this, you will need to download the vast cli and run the following commands.
+The idea is to rent yourself as an interruptible job. The vast cli allows you to set one idle job for all the GPUs or one GPU per instance. You can also set the SSH connection method or any other method
 Go to  https://cloud.vast.ai/cli/ and install your flavour of the cli. 
 
 setup your account key so that you can use the vast cli. you get this key from your account page.
@@ -226,7 +226,7 @@ Once you have the offe_id. and in this case the -i switch will give you an inter
 Let's assume you want to mine with lolminer 
 
 ```
-./vast create instance 9554646 --price 0.2 --image nvidia/cuda:12.0.1-devel-ubuntu20.04   --env '-p 22:22' --onstart-cmd 'bash -c "apt  -y update; apt  -y install wget; apt  -y install libjansson4; apt -y install xz-utils; wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.77b/lolMiner_v1.77b_Lin64.tar.gz; tar -xf lolMiner_v1.77b_Lin64.tar.gz -C ./; cd 1.77b; ./lolMiner --algo ETCHASH --pool etc.2miners.com:1010 --user 0x155da78b788ab54bea1340c10a5422a8ae88142f.VASTtest"'  --ssh  --direct --disk 100 
+./vast create instance 9554646 --price 0.2 --image nvidia/cuda:12.0.1-devel-ubuntu20.04   --env '-p 22:22' --onstart-cmd 'bash -c "apt  -y update; apt  -y install wget; apt  -y install libjansson4; apt -y install xz-utils; wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.77b/lolMiner_v1.77b_Lin64.tar.gz; tar -xf lolMiner_v1.77b_Lin64.tar.gz -C ./; cd 1.77b; ./lolMiner --algo ETCHASH --pool etc.2miners.com:1010 --user 0x155YourKeyGoesHere.VASTtest"'  --ssh  --direct --disk 100 
 ```
 ```
 ./vast show instances # will give you the list of instance
