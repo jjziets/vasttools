@@ -209,20 +209,29 @@ The idea is to rent your self as interruptible job. The vast cli allow you to se
 Go to  https://cloud.vast.ai/cli/ and install your flavour of the cli. 
 
 setup your account key so that you can use the vast cli. you get this key from your account page.
+```
 ./vast  --api-key API_KEY 
+```
 
 to rent your self first find your machine with he machine id
+```
 ./vast search offers "machine_id=14109 verified=any gpu_frac=1 " # gpu_frac=1 will give you the instance with all the gpus. 
+```
 or
-./vast search offers -i "machine_id=14109 verified=any  min_bid>0.1 num_gpus=1" # it will give you the instance with one gpu
+```
+./vast search offers -i "machine_id=14109 verified=any  min_bid>0.1 num_gpus=1" # it will give you the instance with one GPU
+```
 Once you have the offe_id. and in this case the -i switch will give you an interruptible instance
 
 Let's assume you want to mine with lolminer 
 
+```
 ./vast create instance 9554646 --price 0.2 --image nvidia/cuda:12.0.1-devel-ubuntu20.04   --env '-p 22:22' --onstart-cmd 'bash -c "apt  -y update; apt  -y install wget; apt  -y install libjansson4; apt -y install xz-utils; wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.77b/lolMiner_v1.77b_Lin64.tar.gz; tar -xf lolMiner_v1.77b_Lin64.tar.gz -C ./; cd 1.77b; ./lolMiner --algo ETCHASH --pool etc.2miners.com:1010 --user 0x155da78b788ab54bea1340c10a5422a8ae88142f.VASTtest"'  --ssh  --direct --disk 100 
-
+```
+```
 ./vast show instances # will give you the list of instance
 ./vast change bid 9698573 --price 0.3 # This will change the price to 0.3 for the instance 
+```
 
 The GUI method might not work anymore. 
 ![image](https://user-images.githubusercontent.com/19214485/180140050-75547875-6a1b-41c6-a0c0-6f235f673a4b.png)
