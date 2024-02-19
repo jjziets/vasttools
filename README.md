@@ -198,7 +198,7 @@ This should be run on a vps not on a host. do not expose your Vast API keys by u
 ```
 wget https://github.com/jjziets/vast-python/blob/master/vast.py 
 sudo chmod +x vast.py
-./vast.py  set api-key UseYourVasset
+./vast.py set api-key UseYourVasset
 wget https://github.com/jjziets/vasttools/blob/main/setprice.sh
 sudo chmod +x setprice.sh
 ```
@@ -210,7 +210,7 @@ Go to  https://cloud.vast.ai/cli/ and install your flavour of the cli.
 
 setup your account key so that you can use the vast cli. you get this key from your account page.
 ```
-./vast  --api-key API_KEY 
+./vast set api-key API_KEY 
 ```
 
 to rent your self first find your machine with he machine id
