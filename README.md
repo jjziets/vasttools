@@ -102,8 +102,8 @@ sudo wget -O speedtest-cli https://raw.githubusercontent.com/jjziets/vasttools/m
 sudo chmod +x speedtest-cli
 ```
 
-This updated your speedtest to the newer one and tranlsate the output so that vast demon can use it. 
-If your now get slower speeds follow this
+This updated your speed test to the newer one and translated the output so that Vast Demon can use it. 
+If you now get slower speeds, follow this
 
 ```
 ## If migrating from prior bintray install instructions please first...
@@ -123,8 +123,8 @@ sudo apt-get install speedtest
 Prometheus Grafana monitoring systems, send alerts and track all metrics regarding your equipment and also track earnings and rentals. 
 https://github.com/jjziets/DCMontoring
 
-## Addressing Nvml error when using Ubuntu 22 and 24
-run the below script if you have problem swiht vast installer on 22,24 and nvml error
+## Addressing nvml error when using Ubuntu 22 and 24
+run the script below if you have a problem with vast installer on 22,24 and nvml error
 ```bash
 sudo wget https://github.com/jjziets/vasttools/raw/main/nvml_fix.sh
 sudo chmod +x nvml_fix.sh
