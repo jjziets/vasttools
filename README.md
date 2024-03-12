@@ -126,10 +126,10 @@ https://github.com/jjziets/DCMontoring
 
 ## Addressing nvml error when using Ubuntu 22 and 24
 run the script below if you have a problem with vast installer on 22,24 and nvml error
+this script is based on Bo26fhmC5M so credit go to him
 ```bash
 sudo wget https://raw.githubusercontent.com/jjziets/vasttools/main/nvml_fix.py
 sudo python nvml_fix.py
-
  
 ```
 
