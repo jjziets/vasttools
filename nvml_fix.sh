@@ -1,3 +1,4 @@
+# credit goes to Bo26fhmC5M. this is a slightly improved python script
 import json
 import pathlib
 import subprocess
