@@ -123,6 +123,15 @@ sudo apt-get install speedtest
 Prometheus Grafana monitoring systems, send alerts and track all metrics regarding your equipment and also track earnings and rentals. 
 https://github.com/jjziets/DCMontoring
 
+## Addressing Nvml error when using Ubuntu 22 and 24
+run the below script if you have problem swiht vast installer on 22,24 and nvml error
+```bash
+sudo wget https://github.com/jjziets/vasttools/raw/main/nvml_fix.sh
+sudo chmod +x nvml_fix.sh
+sudo ./nvml_fix.sh
+ 
+```
+
 ## Memory oc
 
 set the OC of the RTX 3090
