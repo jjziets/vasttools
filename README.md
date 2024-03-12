@@ -19,6 +19,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai) 
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
+- [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
 - [Stress testing GPUs on vast with Python benchmark of RTX3090's](https://github.com/jjziets/vasttools?tab=readme-ov-file#stress-testing-gpus-on-vast-with-this-python-benchmark-of-rtx3090s)
