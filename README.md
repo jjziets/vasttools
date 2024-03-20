@@ -546,6 +546,7 @@ services:
       - 5000:5000
     environment:
       - REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io
+      - REGISTRY_STORAGE_DELETE_ENABLED="true"
     volumes:
       - data:/var/lib/registry
 volumes:
@@ -574,6 +575,19 @@ echo '{
     "registry-mirrors": ["http://192.168.100.7:5000"]
 }' | sudo tee /etc/docker/daemon.json
 ```
+If space is limisted you can run this cleanup task as a cron job
+```
+wget https://github.com/jjziets/vasttools/raw/main/cleanup-registry.sh
+chmod +x cleanup-registry.sh
+```
+add this like to your corntab -e 
+
+```
+0 * * * * /path/to/cleanup-registry.sh
+
+```
+replace /path/to/ with where the file is saved. 
+
 Replace 192.168.100.7:5000 with the IP address and port of your Docker registry server.
 Restart Docker Daemon:
 ```
