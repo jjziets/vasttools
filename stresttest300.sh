@@ -1,4 +1,13 @@
 #!/bin/bash
+# Overview: This script is designed to manage Docker services and GPU-related operations on Linux systems.
+# It performs the following tasks:
+# 1. Stops the Docker and runpod services to ensure a clean state before operations.
+# 2. Starts the Docker services necessary for running containers.
+# 3. Deploys a Docker container to perform a GPU burn-in test to stress test the GPUs.
+# 4. Downloads and prepares a GPU temperature monitoring tool from a GitHub repository.
+# 5. Executes the GPU temperature monitoring tool for 300 seconds to collect temperature data during the test.
+# This script requires administrative privileges (sudo) to manage system services and Docker operations.
+
 
 # Stopping necessary services
 echo "Stopping services..."
