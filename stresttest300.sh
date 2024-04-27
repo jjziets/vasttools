@@ -25,4 +25,4 @@ echo "Monitoring GPU temperature for 300 seconds..."
 sudo timeout 300 ./nvml_direct_access
 
 echo "Operation completed."
-sudo systemctl start runpod.
+sudo systemctl start runpod
