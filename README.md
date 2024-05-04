@@ -39,22 +39,30 @@ Paypal  PayPal.Me/cryptolabsZA
 ## Host install guide for vast.ai 
 
 ```
-#Start with a clean install of ubunut 20.04.x server. Just add openssh.
-sudo apt update && sudo apt upgrade -y
-## this will remove nouveau from the system if it has been installed by the installer
-sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf" 
-sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
-sudo update-initramfs -u
-sudo echo 'GRUB_CMDLINE_LINUX=systemd.unified_cgroup_hierarchy=false' > /etc/default/grub.d/cgroup.cfg
-sudo update-grub
+#Start with a clean install of ubuntu 22.04.x HWE Kernal server. Just add openssh.
+sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt install update-manager-core -y
+#if you did not install HWE kernels do the following  
+sudo apt install --install-recommends linux-generic-hwe-22.04 -y
 sudo reboot
 
-#install the nvidia drivers after reboot. update the url to the latest driver from nvidia website https://www.nvidia.com/download/index.aspx
-sudo su
-bash -c 'apt install build-essential; wget https://us.download.nvidia.com/XFree86/Linux-x86_64/535.113.01/NVIDIA-Linux-x86_64-535.113.01.run; chmod +x NVIDIA-Linux-x86_64-535.113.01.run; ./NVIDIA-Linux-x86_64-535.113.01.run'
+#install the drivers.
+sudo apt install build-essential -y
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
+sudo apt update
+# to search for available NVIDIA drivers: use this command 
+sudo apt search nvidia-driver | grep nvidia-driver | sort -r
+sudo apt install nvidia-driver-550  -y    # assuming the latest is 550
 
-# this is needed to remove xserver so that clients can run a desktop gui in an continer wothout problems. It is also needed if one wants to change memory OC and fans speeds. 
+#Remove unattended-upgrades Package so that the dirver don't upgrade when you have clients
+sudo apt purge --auto-remove unattended-upgrades -y
+sudo systemctl disable apt-daily-upgrade.timer
+sudo systemctl mask apt-daily-upgrade.service 
+sudo systemctl disable apt-daily.timer
+sudo systemctl mask apt-daily.service
+
+# This is needed to remove xserver and genome if you started with ubunut desktop. clients can't run a desktop gui in an continer wothout if you have a xserver. 
 bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' 
+
 
 #if Ubuntu is installed to a SSD and you plan to have the vast client data stored on a nvme follow the below instructions. 
 #WARRNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE change this device to the intended device name that you pan to use.
@@ -75,16 +83,25 @@ df -h
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
 
 #run the install command for vast
+sudo apt install python3 -y
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
+
+#if you get  nvml error then run this 
+sudo wget https://raw.githubusercontent.com/jjziets/vasttools/main/nvml_fix.py
+sudo python nvml_fix.py
 
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 
 #test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
 sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
 sudo reboot 
-```
-#After reboot check that the drive is mounted to /var/lib/docker and that your systems shows up on vast dashboard. 
 
+#After reboot, check that the drive is mounted to /var/lib/docker and that your systems show up on the vast dashboard.
+df -h # look for /var/lib/docker mount
+sudo systemctl status vast 
+sudo systemctl status docker
+
+```
 ## Speedtest-cli fix for vast
 If you are having problems with your machine not showing its upload and download speed correctly. 
 combined
