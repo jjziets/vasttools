@@ -8,9 +8,13 @@ sudo apt-get update && sudo apt-get upgrade -y
 echo "Installing stress-ng and sysbench..."
 sudo apt-get install -y stress-ng sysbench
 
+# Calculate the number of cores minus one
+total_cores=$(nproc --all)
+let "stress_cores = total_cores - 1"
+
 # Run stress-ng tests
-echo "Running stress-ng CPU stress test..."
-stress-ng --cpu 4 --timeout 60s --metrics-brief
+echo "Running stress-ng CPU stress test on $stress_cores cores..."
+stress-ng --cpu $stress_cores --timeout 60s --metrics-brief
 
 echo "Running stress-ng drive stress test..."
 stress-ng --hdd 4 --timeout 60s --metrics-brief
