@@ -12,15 +12,21 @@ sudo apt-get install -y stress-ng sysbench
 total_cores=$(nproc --all)
 let "stress_cores = total_cores - 1"
 
+# Calculate 90% of total memory
+total_mem_kib=$(grep MemTotal /proc/meminfo | awk '{print $2}') # Total memory in KiB
+ninety_percent_mem_kib=$((total_mem_kib * 90 / 100)) # 90% of total memory in KiB
+ninety_percent_mem_mib=$((ninety_percent_mem_kib / 1024)) # Convert KiB to MiB
+
+
 # Run stress-ng tests
 echo "Running stress-ng CPU stress test on $stress_cores cores..."
 stress-ng --cpu $stress_cores --timeout 60s --metrics-brief
 
 echo "Running stress-ng drive stress test..."
-stress-ng --hdd 4 --timeout 60s --metrics-brief
+stress-ng --hdd $stress_core --timeout 60s --metrics-brief
 
 echo "Running stress-ng memory stress test..."
-stress-ng --vm 2 --vm-bytes 256M --timeout 60s --metrics-brief
+stress-ng --vm $stress_core --vm-bytes 256M --timeout 60s --metrics-brief
 
 # Run sysbench memory tests
 echo "Running sysbench memory latency test..."
