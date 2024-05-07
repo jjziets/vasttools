@@ -26,7 +26,7 @@ echo "Running stress-ng drive stress test..."
 stress-ng --hdd $stress_core --timeout 60s --metrics-brief
 
 echo "Running stress-ng memory stress test..."
-stress-ng --vm $stress_core --vm-bytes 256M --timeout 60s --metrics-brief
+stress-ng --vm $stress_core --vm-bytes $ninety_percent_mem_mib --timeout 60s --metrics-brief
 
 # Run sysbench memory tests
 echo "Running sysbench memory latency test..."
