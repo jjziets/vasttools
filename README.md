@@ -88,7 +88,7 @@ sudo wget https://console.vast.ai/install -O install; sudo python3 install YourK
 
 #if you get  nvml error then run this 
 sudo wget https://raw.githubusercontent.com/jjziets/vasttools/main/nvml_fix.py
-sudo python nvml_fix.py
+sudo python3 nvml_fix.py
 
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 
