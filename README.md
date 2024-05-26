@@ -138,6 +138,8 @@ sudo apt-get install speedtest
 
 
 ## Analytics dashboard
+![image](https://github.com/jjziets/vasttools/assets/19214485/4107d6a2-6a4a-4edd-973d-a733d8430071)
+
 Prometheus Grafana monitoring systems, send alerts and track all metrics regarding your equipment and also track earnings and rentals. 
 https://github.com/jjziets/DCMontoring
 
