@@ -86,9 +86,13 @@ sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
 sudo apt install python3 -y
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
 
+echo 'GRUB_CMDLINE_LINUX=systemd.unified_cgroup_hierarchy=false' > /etc/default/grub.d/cgroup.cfg
+update-grub
+
 #if you get  nvml error then run this 
 sudo wget https://raw.githubusercontent.com/jjziets/vasttools/main/nvml_fix.py
 sudo python3 nvml_fix.py
+sudo reboot
 
 #follow the Configure Networking instructions as per https://console.vast.ai/host/setup
 
