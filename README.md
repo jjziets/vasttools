@@ -17,7 +17,7 @@ Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
 - [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai)
-- 
+- [Self verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
 - [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
