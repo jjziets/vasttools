@@ -3,7 +3,7 @@
 ***I am open to offers for assistance in deployment on vast and continued support.*** Find me on Discord Etherion#0700
 
 The aim is to set up a list of tools that can be used with Vastai.
-The tools are free to use, modify and distribute. If you find this useful and wish to donate, you can send your donations to the following wallets.
+The tools are free to use, modify and distribute. If you find this helpful and would like to donate, you can send your donations to the following wallets.
 
 BTC 15qkQSYXP2BvpqJkbj2qsNFb6nd7FyVcou
 
@@ -17,7 +17,7 @@ Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
 - [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai)
-- [Self verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
+- [Self-verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
 - [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
