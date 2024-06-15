@@ -16,7 +16,8 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 Paypal  PayPal.Me/cryptolabsZA
 
 ## Table of Contents
-- [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai) 
+- [Host install guide for vast](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai)
+- 
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
 - [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
@@ -106,6 +107,93 @@ sudo systemctl status vast
 sudo systemctl status docker
 
 ```
+## Self verification test 
+You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, it means that there is a high chance that your machine will be eligible for verification  
+
+### Overview
+
+The `autoverify_machineid.sh` script is part of a suite of tools designed to automate the testing of machines on the Vast.ai marketplace. This script specifically tests a single machine to determine if it meets the minimum requirements necessary for further verification.
+
+### Prerequisites
+
+Before you start using `./autoverify_machineid.sh`, ensure you have the following:
+
+1. **Vast.ai Command Line Interface (vastcli)**: This tool is used to interact with the Vast.ai platform.
+2. **Vast.ai **: The machine should be listed on the vast marketplace.
+3. **Ubuntu OS**: The scripts are designed to run on Ubununt 20.04 or newer.
+
+### Setup and Installation
+
+1. **Download and Setup `vastcli`**:
+   - Download the Vast.ai CLI tool using the following command:
+     ```bash
+     wget https://raw.githubusercontent.com/vast-ai/vast-python/master/vast.py -O vast
+     chmod +x vast
+     ```
+
+   - Set your Vast.ai API key:
+     ```bash
+     ./vast set api-key 6189d1be9f15ad2dced0ac4e3dfd1f648aeb484d592e83d13aaf50aee2d24c07
+     ```
+
+2. **Download autoverify_machineid.sh**:
+   - Use wget to download autoverify_machineid.sh to your local machine:
+     ```bash
+     wget https://github.com/jjziets/VastVerification/releases/download/0.1-beta/autoverify_machineid.sh
+     ```
+     
+3. **Make Scripts Executable**:
+   - Change the permissions of the main scripts to make them executable:
+     ```bash
+     chmod +x autoverify_machineid.sh
+     ```
+
+### Using `./autoverify_machineid.sh`
+
+1. **Check Machine Requirements**:
+   - The `./autoverify_machineid.sh` script is designed to test if a single machine meets the minimum requirements for verification. This is useful for hosts who want to verify their own machines.
+   - To test a specific machine by its `machine_id`, use the following command:
+     ```bash
+     ./autoverify_machineid.sh <machine_id>
+     ```
+     Replace `<machine_id>` with the actual ID of the machine you want to test.
+
+2. **To Ignore Requirements Check**:
+    ```bash
+    ./autoverify_machineid.sh --ignore-requirements <machine_id>
+    ```
+    This command runs the tests for the machine, regardless of whether it meets the minimum requirements.
+
+### Monitoring and Results
+
+- **Progress and Results Logging**:
+  - The script logs the progress and results of the tests.
+  - Successful results and machines that pass the requirements will be logged in `Pass_testresults.log`.
+  - Machines that do not meet the requirements or encounter errors during testing will be logged in `Error_testresults.log`.
+
+- **Understanding the Logs**:
+  - **`Pass_testresults.log`**: This file contains entries for machines that successfully passed all tests.
+  - **`Error_testresults.log`**: This file contains entries for machines that failed to meet the minimum requirements or encountered errors during testing.
+
+### Example Usage
+
+Here’s how you can run the `autoverify_machineid.sh` script to test a machine with `machine_id` 10921:
+
+```bash
+./autoverify_machineid.sh 10921
+```
+
+### Troubleshooting
+
+- **API Key Issues**: Ensure your API key is correctly set using `./vast set api-key <your-api-key>`.
+- **Permission Denied**: If you encounter permission issues, make sure the script files have executable permissions (`chmod +x <script_name>`).
+- **Connection Issues**: Verify your network connection and ensure the Vast.ai CLI can communicate with the Vast.ai servers.
+
+### Summary
+
+By following this guide, you will be able to use the `./autoverify_machineid.sh` script to test individual machines on the Vast.ai marketplace. This process helps ensure that machines meet the required specifications for GPU and system performance, making them candidates for further verification and use in the marketplace.
+
+
 ## Speedtest-cli fix for vast
 If you are having problems with your machine not showing its upload and download speed correctly. 
 combined
