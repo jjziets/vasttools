@@ -1,9 +1,9 @@
 # vasttools
 
-***I am open to offers for assistance in deployment on vast and continued support.*** Find me on Discored Etherion#0700
+***I am open to offers for assistance in deployment on vast and continued support.*** Find me on Discord Etherion#0700
 
-The aim is to setup a list of usble tools that can be used with vastai.
-The tools are free to use, modify and distribute. If you find this useful and wish to donate your welcome to send your donations to the following wallets.
+The aim is to set up a list of tools that can be used with Vastai.
+The tools are free to use, modify and distribute. If you find this useful and wish to donate, you can send your donations to the following wallets.
 
 BTC 15qkQSYXP2BvpqJkbj2qsNFb6nd7FyVcou
 
