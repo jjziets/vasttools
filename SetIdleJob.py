@@ -6,8 +6,6 @@ SetIdleJob.py
 Description:
 This script searches the user's Vast.ai account for available machine offers and creates interruptible instances for each machine at the minimum listed price. It utilizes the Vast.ai API to gather information about available machines and their offers, then constructs and executes commands to create instances with specified configurations.
 
-The script allows for custom configuration of the Docker image, environment variables, disk size, startup commands, and additional arguments to be passed to the instance.
-
 Usage Example:
 To use the script, you can run it with various options to configure the instances. Below is an example command:
 
@@ -37,13 +35,11 @@ Error Handling:
 The script includes error handling to manage issues during command execution and JSON parsing. It prints helpful error messages and the command output when exceptions occur.
 
 Author:
-[JJZietsman or Crypto Labs (Pty) Ltd]
+[Your Name or Company]
 [Date]
 
 License:
 MIT License
-
-Copyright (c) [Year] [Your Name or Your Company]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -112,7 +108,6 @@ def get_machine_details(api_key=None):
 def get_offers_for_machine(machine_id, api_key=None):
     try:
         # Define the command and options to search for offers
-
         command = [
             './vast', 'search', 'offers', 
             '--disable-bundling', f"machine_id={machine_id} verified=any rentable=any num_gpus=1", 
@@ -173,7 +168,7 @@ def create_instance_commands(api_key, image, env_vars, disk_size, onstart_cmd, a
                             f"--image {image} "
                             f"--price {min_price} --direct --env '{env_vars}' "
                             f"--disk {disk_size} --onstart-cmd '{onstart_cmd}' "
-                            f"--args -c '{args_cmd}'"
+                            f"--args \"-c '{args_cmd}'\""
                         )
                         
                         print(f"Command to Execute: {create_cmd}")
