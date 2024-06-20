@@ -6,10 +6,12 @@ SetIdleJob.py
 Description:
 This script searches the user's Vast.ai account for available machine offers and creates interruptible instances for each machine at the minimum listed price. It utilizes the Vast.ai API to gather information about available machines and their offers, then constructs and executes commands to create instances with specified configurations.
 
+The script allows for custom configuration of the Docker image, environment variables, disk size, startup commands, and additional arguments to be passed to the instance.
+
 Usage Example:
 To use the script, you can run it with various options to configure the instances. Below is an example command:
 
-python3 SetIdleJob.py --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 16 --args 'env | grep _ >> /etc/environment; echo "starting up"; apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done' --api-key b149b011a1481cd852b7a1cf1ccc9248a5182431b23f9410c1537fca063a68b1
+python3 SetIdleJob.py --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 16 --args 'env | grep _ >> /etc/environment; echo "starting up"; apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done' --api-key YOUR_API_KEY
 
 In this example:
 - `--image nvidia/cuda:12.4.1-runtime-ubuntu22.04`: Specifies the Docker image to use for the instance.
@@ -168,7 +170,7 @@ def create_instance_commands(api_key, image, env_vars, disk_size, onstart_cmd, a
                             f"--image {image} "
                             f"--price {min_price} --direct --env '{env_vars}' "
                             f"--disk {disk_size} --onstart-cmd '{onstart_cmd}' "
-                            f"--args \"-c '{args_cmd}'\""
+                            f"--args -c \"{args_cmd}\""
                         )
                         
                         print(f"Command to Execute: {create_cmd}")
@@ -192,7 +194,7 @@ if __name__ == "__main__":
     # Set up argument parsing
     parser = argparse.ArgumentParser(
         description='Fetch machine details and offers using Vast API and create instances based on those offers.',
-        epilog='Example usage: python3 create_vast_instances.py --api-key YOUR_API_KEY --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 30'
+        epilog='Example usage: python3 SetIdleJob.py --api-key YOUR_API_KEY --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 30'
     )
     parser.add_argument('--api-key', type=str, help='Your API key for accessing the Vast API')
     parser.add_argument('--image', type=str, default='nvidia/cuda:12.4.1-runtime-ubuntu22.04', help='Docker image to use for the instance')
