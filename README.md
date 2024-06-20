@@ -325,15 +325,31 @@ sudo chmod +x setprice.sh
 ```
 
 ## Background job or idle job for vast.
-The best way to manage your idle job is via the vast cli. To do this, you will need to download the vast cli and run the following commands.
-The idea is to rent yourself as an interruptible job. The vast cli allows you to set one idle job for all the GPUs or one GPU per instance. You can also set the SSH connection method or any other method
-Go to  https://cloud.vast.ai/cli/ and install your flavour of the cli. 
+The best way to manage your idle job is via the vast cli. To my knowledge, the GUI set job is broken. So to set an idle job follow the following steps. You will need to download the vast cli and run the following commands.
+The idea is to rent yourself as an interruptible job. The vast cli allows you to set one idle job for all the GPUs or one GPU per instance. You can also set the SSH connection method or any other method.
+Go to  https://cloud.vast.ai/cli/ and install your cli flavour. 
 
 setup your account key so that you can use the vast cli. you get this key from your account page.
 ```
 ./vast set api-key API_KEY 
 ```
+You can use my SetIdleJob.py scrip to setup your idle job based on the minimum price set on your machines.
+```
+wget https://github.com/jjziets/vasttools/blob/main/SetIdleJob.py
+```
 
+Here is an example of how I mine to nicehash
+
+```
+python3 SetIdleJob.py --args 'env | grep _ >> /etc/environment; echo "starting up"; apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done'
+```
+Or the full command if you don't want to use the defaults
+```
+python3 SetIdleJob.py --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 16 --args 'env | grep _ >> /etc/environment; echo "starting up"; apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done' --api-key b149b011a1481cd852b7a1cf1ccc9248a5182431b23f9410c1537fca063a68b1
+
+```
+
+Alternatively, you can rent yourself with the following command and then log in and load what you want to run. Make sure to add your process to onstart.sh 
 to rent your self first find your machine with he machine id
 ```
 ./vast search offers "machine_id=14109 verified=any gpu_frac=1 " # gpu_frac=1 will give you the instance with all the gpus. 
@@ -342,7 +358,7 @@ or
 ```
 ./vast search offers -i "machine_id=14109 verified=any  min_bid>0.1 num_gpus=1" # it will give you the instance with one GPU
 ```
-Once you have the offe_id. and in this case the -i switch will give you an interruptible instance
+Once you have the offe_id. and in this case, the search with a -i switch will give you an interruptible instance_id
 
 Let's assume you want to mine with lolminer 
 
@@ -355,18 +371,6 @@ it will start the instance on price 0.2.
 ./vast change bid 9554646  --price 0.3 # This will change the price to 0.3 for the instance 
 ```
 
-The GUI method might not work anymore. 
-![image](https://user-images.githubusercontent.com/19214485/180140050-75547875-6a1b-41c6-a0c0-6f235f673a4b.png)
-
-use imnage nvidia/cuda:11.2.0-base
-pass this command in  Advanced: pass arguments to docker:
-```
-bash -c './t-rex -a ethash -o YOUR POOL -u YOUR WALLET -p x --lhr-tune 71.5; apt update; apt install -y wget libpci3 xz-utils; wget -O miner.tar.gz https://github.com/trexminer/T-Rex/releases/download/0.25.8/t-rex-0.25.8-linux.tar.gz; tar -xf miner.tar.gz; ./t-rex -a ethash -o YOUR POOL -u YOUR WALLET -p x --lhr-tune 71.5'
-```  
-or if you pefer ethminer
-```  
-bash -c 'apt -y update; apt -y install wget; apt -y install libcurl3; apt -y install libjansson4; apt -y install xz-utils; apt -y install curl; ./bin/ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; wget https://github.com/jjziets/test/raw/master/ethminer; chmod +x ethminer; while true; do ./ethminer -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@eu1.ethermine.org:5555 -P stratum+ssl://0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f.farm@us1.ethermine.org:5555; done'
-```  
 
 ## setting fans speeds if you have headless system.
 Here is a repo with two programs and a few scripts that you can use to manage your fans
