@@ -65,6 +65,7 @@ SOFTWARE.
 import subprocess
 import json
 import argparse
+import shlex
 
 def get_machine_details(api_key=None):
     try:
@@ -170,7 +171,7 @@ def create_instance_commands(api_key, image, env_vars, disk_size, onstart_cmd, a
                             f"--image {image} "
                             f"--price {min_price} --direct --env '{env_vars}' "
                             f"--disk {disk_size} --onstart-cmd '{onstart_cmd}' "
-                            f"--args -c \"{args_cmd}\""
+                            f"--args -c {shlex.quote(args_cmd)}"  # Use shlex.quote to properly escape the args_cmd
                         )
                         
                         print(f"Command to Execute: {create_cmd}")
@@ -201,7 +202,7 @@ if __name__ == "__main__":
     parser.add_argument('--env', type=str, default='-e TZ=PDT -e XNAME=XX4 -p 22:22 -h hostname', help='Environment variables for the instance')
     parser.add_argument('--disk', type=int, default=16, help='Disk size for the instance in GB')
     parser.add_argument('--onstart-cmd', type=str, default='bash', help='Onstart command for the instance')
-    parser.add_argument('--args', type=str, default="apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH; done", help='Command to run in the instance')
+    parser.add_argument('--args', type=str, default="apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done", help='Command to run in the instance')
     
     # Parse the arguments
     args = parser.parse_args()
