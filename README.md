@@ -244,6 +244,13 @@ sudo python nvml_fix.py
  
 ```
 
+## Remove Pressitent red error messages
+if you have a red error message on your machine that you have confirmed has been addressed. It might help to delete /var/lib/vastai_kaalia/kaalia.log and reboot
+```
+sudo rm /var/lib/vastai_kaalia/kaalia.log
+sudo systemctl restart vastai
+```
+
 ## Memory oc
 
 set the OC of the RTX 3090
