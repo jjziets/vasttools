@@ -2,7 +2,7 @@
 
 # Update and Upgrade the system
 echo "Updating and upgrading the system..."
-sudo apt-get update && sudo apt-get upgrade -y
+#sudo apt-get update && sudo apt-get upgrade -y
 
 # Install stress-ng and sysbench
 echo "Installing stress-ng and sysbench..."
