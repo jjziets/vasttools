@@ -148,7 +148,12 @@ Before you start using `./autoverify_machineid.sh`, ensure you have the followin
      ```bash
      chmod +x autoverify_machineid.sh
      ```
-
+4. **Dependencies**
+   - Run the the following to install the required packages
+   ```
+   apt update
+   apt install bc jq
+   ```
 ### Using `./autoverify_machineid.sh`
 
 1. **Check Machine Requirements**:
