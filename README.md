@@ -120,7 +120,7 @@ The `autoverify_machineid.sh` script is part of a suite of tools designed to aut
 Before you start using `./autoverify_machineid.sh`, ensure you have the following:
 
 1. **Vast.ai Command Line Interface (vastcli)**: This tool is used to interact with the Vast.ai platform.
-2. **Vast.ai **: The machine should be listed on the vast marketplace.
+2. **Vast.ai Listing** : The machine should be listed on the vast marketplace.
 3. **Ubuntu OS**: The scripts are designed to run on Ubununt 20.04 or newer.
 
 ### Setup and Installation
