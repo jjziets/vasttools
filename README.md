@@ -280,7 +280,7 @@ sudo chmod +x ocminitor.sh
 sudo ./ocminitor.sh # I suggest running this in tmux or screen so that when you close the ssh connetion. It looks for ethminer and if it finds it it will set the oc based on your choice. you can also set powerlimits with nvidia-smi -pl 350 
 ```
 
-Too load at reboot use the crontab below
+To load at reboot use the crontab below
 ```
 sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.sh") | crontab -  #replace the user with your user
 ```
@@ -289,7 +289,7 @@ sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.
 Mining does not stress your system the same as python work loads do, so this is a good test to run as well. 
 https://github.com/jjziets/pytorch-benchmark-volta
 
-a full suit of stress tests can be found docker image jjziets/vastai-benchmarks:latest 
+a full suite of stress tests can be found docker image jjziets/vastai-benchmarks:latest 
 in folder /app/
 ```
 stress-ng - CPU stress
@@ -361,6 +361,11 @@ Or the full command if you don't want to use the defaults
 python3 SetIdleJob.py --image nvidia/cuda:12.4.1-runtime-ubuntu22.04 --disk 16 --args 'env | grep _ >> /etc/environment; echo "starting up"; apt -y update; apt -y install wget; apt -y install libjansson4; apt -y install xz-utils; wget https://github.com/develsoftware/GMinerRelease/releases/download/3.44/gminer_3_44_linux64.tar.xz; tar -xvf gminer_3_44_linux64.tar.xz; while true; do ./miner --algo kawpow --server stratum+tcp://kawpow.auto.nicehash.com:9200 --user 3LNHVWvUEufL1AYcKaohxZK2P58iBHdbVH.${VAST_CONTAINERLABEL:2}; done' --api-key b149b011a1481cd852b7a1cf1ccc9248a5182431b23f9410c1537fca063a68b1
 
 ```
+Trouble shoot your bash -c command by using the logs on the instance page
+
+![image](https://github.com/user-attachments/assets/a980f2e3-e444-499a-92b9-750edb0993cf)
+
+
 
 Alternatively, you can rent yourself with the following command and then log in and load what you want to run. Make sure to add your process to onstart.sh 
 to rent your self first find your machine with he machine id
