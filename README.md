@@ -348,7 +348,7 @@ setup your account key so that you can use the vast cli. you get this key from y
 ```
 You can use my SetIdleJob.py scrip to setup your idle job based on the minimum price set on your machines.
 ```
-wget https://github.com/jjziets/vasttools/blob/main/SetIdleJob.py
+wget https://raw.githubusercontent.com/jjziets/vasttools/main/SetIdleJob.py
 ```
 
 Here is an example of how I mine to nicehash
