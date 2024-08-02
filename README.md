@@ -20,7 +20,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Self-verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
-- 
+- [Monitor your Nvidia 3000/4000 Core, GPU Hotspot and Vram temps](https://github.com/jjziets/vasttools?tab=readme-ov-file#monitor-your-nvidia-30004000-core-gpu-hotspot-and-vram-temps)
 - [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
 - [Remove Pressitent red error messages](https://github.com/jjziets/vasttools/blob/main/README.md#remove-pressitent-red-error-messages)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
