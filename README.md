@@ -20,6 +20,7 @@ Paypal  PayPal.Me/cryptolabsZA
 - [Self-verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
 - [Analytics dashboard](https://github.com/jjziets/vasttools?tab=readme-ov-file#analytics-dashboard)
+- 
 - [nvml-error-when-using-ubuntu-22-and-24](https://github.com/jjziets/vasttools/blob/main/README.md#addressing-nvml-error-when-using-ubuntu-22-and-24)
 - [Remove Pressitent red error messages](https://github.com/jjziets/vasttools/blob/main/README.md#remove-pressitent-red-error-messages)
 - [Memory oc](https://github.com/jjziets/vasttools#memory-oc)
@@ -255,6 +256,15 @@ if you have a red error message on your machine that you have confirmed has been
 ```
 sudo rm /var/lib/vastai_kaalia/kaalia.log
 sudo systemctl restart vastai
+```
+
+## Monitor your Nvidia 3000/4000 Core, GPU Hotspot and Vram temps 
+If you do not want to setup the Analytics dashboard and you just want to see all the Temps on your gpu then you can use the below tool
+![image](https://github.com/user-attachments/assets/9070c1a2-3a7b-4fd8-b16c-50b3eb3c7633)
+```
+sudo wget https://github.com/jjziets/gddr6_temps/raw/master/nvml_direct_access
+sudo chmod +x nvml_direct_access
+sudo ./nvml_direct_access
 ```
 
 ## Memory oc
