@@ -105,7 +105,7 @@ sudo reboot
 
 #After reboot, check that the drive is mounted to /var/lib/docker and that your systems show up on the vast dashboard.
 df -h # look for /var/lib/docker mount
-sudo systemctl status vast 
+sudo systemctl status vastai
 sudo systemctl status docker
 
 ```
