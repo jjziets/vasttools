@@ -110,7 +110,7 @@ sudo systemctl status docker
 
 ```
 ## Self verification test 
-You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, it means that there is a high chance that your machine will be eligible for verification  
+You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, there is a high chance that your machine will be eligible for verification. Take not that your router need to allow loopback if you run this from a machine on the same network as the machine you want to test. If you do not know how to enable loopback it will be better to run this on a VM from a cloud provider or with mobile connection to your pc.   
 
 ### Overview
 
