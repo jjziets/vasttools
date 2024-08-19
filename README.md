@@ -297,6 +297,9 @@ sudo (crontab -l; echo "@reboot screen -dmS ocmonitor /home/jzietsman/ocminitor.
 
 ## Stress testing gpus on vast with this python Benchmark of RTX3090's
 Mining does not stress your system the same as python work loads do, so this is a good test to run as well. 
+
+First, set a maintenance window, and then once you have no clients running, you can do the stress testing. 
+
 https://github.com/jjziets/pytorch-benchmark-volta
 
 a full suite of stress tests can be found docker image jjziets/vastai-benchmarks:latest 
@@ -311,7 +314,7 @@ Hashcat - Benchmark
 bandwithTest - GPU bandwith benchmark
 pytorch - Pytorch DL benchmark
 ```
-#test or bash inteface
+#test or bash interface
 ```
 sudo docker run --shm-size 1G --rm -it --gpus all jjziets/vastai-benchmarks /bin/bash
 apt update && apt upgrade -y
@@ -325,6 +328,19 @@ sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it --gpus all j
 Run with params SLEEP_TIME/BENCH_TIME
 sudo docker run -v ${PWD}/output:/app/output --shm-size 1G --rm -it -e SLEEP_TIME=2 -e BENCH_TIME=2 --gpus all jjziets/vastai-benchmarks
 ```
+
+You can also do a GPU burn test. 
+
+```
+sudo docker run --gpus all --rm oguzpastirmaci/gpu-burn <test duration in seconds>
+
+```
+If you want to run it for one GPU, run the command below, replacing the x with the GPU number starting at 0.
+
+```
+sudo docker run --gpus '"device=x"' --rm oguzpastirmaci/gpu-burn <test duration in seconds>
+```
+
 
 *based on leona / vast.ai-tools
 
