@@ -54,7 +54,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt update
 # to search for available NVIDIA drivers: use this command 
 sudo apt search nvidia-driver | grep nvidia-driver | sort -r
-sudo apt install nvidia-driver-555  -y    # assuming the latest is 555
+sudo apt install nvidia-driver-560  -y    # assuming the latest is 560
 
 #Remove unattended-upgrades Package so that the dirver don't upgrade when you have clients
 sudo apt purge --auto-remove unattended-upgrades -y
