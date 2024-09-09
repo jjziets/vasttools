@@ -141,7 +141,7 @@ Before you start using `./autoverify_machineid.sh`, ensure you have the followin
 2. **Download autoverify_machineid.sh**:
    - Use wget to download autoverify_machineid.sh to your local machine:
      ```bash
-     wget https://github.com/jjziets/VastVerification/releases/download/0.3-beta/autoverify_machineid.sh
+     wget https://github.com/jjziets/VastVerification/releases/download/0.4-beta/autoverify_machineid.sh
      ```
      
 3. **Make Scripts Executable**:
