@@ -228,7 +228,7 @@ running speedtest on random server id 19897
 {"type":"result","timestamp":"2024-10-03T08:50:24Z","ping":{"jitter":0.243,"latency":21.723,"low":21.526,"high":22.047},"download":{"bandwidth":116386091,"bytes":1010581968,"elapsed":8806,"latency":{"iqm":22.562,"low":20.999,"high":296.975,"jitter":3.976}},"upload":{"bandwidth":116439919,"bytes":980885877,"elapsed":8508,"latency":{"iqm":36.457,"low":6.852,"high":349.495,"jitter":34.704}},"packetLoss":0,"isp":"Vox Telecom","interface":{"internalIp":"192.168.1.101","name":"bond0","macAddr":"F2:6A:67:0C:85:8B","isVpn":false,"externalIp":"41.193.204.66"},"server":{"id":19897,"host":"speedtest.wibernet.co.za","port":8080,"name":"Wibernet","location":"Cape Town","country":"South Africa","ip":"102.165.64.110"},"result":{"id":"18bb02e4-466d-43dd-b1fc-3f106319a9f6","url":"https://www.speedtest.net/result/c/18bb02e4-466d-43dd-b1fc-3f106319a9f6","persisted":true}}
 ....
 ```
-combined
+If the above speedtest does not work, you can try to install an alternative newer one. Due to the newer speed test output not having the same format, a script will translate it so that vast can use the new speed test. All the commands combined
 ```
 bash -c "sudo apt-get install curl -y && sudo curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash && sudo apt-get install speedtest -y && sudo apt install python3 -y && cd /var/lib/vastai_kaalia/latest && sudo mv speedtest-cli speedtest-cli.old && sudo wget -O speedtest-cli https://raw.githubusercontent.com/jjziets/vasttools/main/speedtest-cli.py && sudo chmod +x speedtest-cli"
 ```
