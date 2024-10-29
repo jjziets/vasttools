@@ -1,7 +1,5 @@
 # vasttools
 
-***I am open to assisting in deployment on Vast.ai,Runpod.io,CUDO Compute and TensorDock, as well as continued support.*** Find me on Discord Etherion#0700
-
 The aim is to set up a list of tools that can be used with Vastai.
 The tools are free to use, modify and distribute. If you find this helpful and would like to donate, you can send your donations to the following wallets.
 
