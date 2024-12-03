@@ -87,6 +87,7 @@ sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
 sudo apt install python3 -y
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
 
+nano /etc/default/grub   # find the GRUB_CMDLINE_LINUX="" and ensure it looks like this. 
 GRUB_CMDLINE_LINUX="amd_iommu=on nvidia_drm.modeset=0 systemd.unified_cgroup_hierarchy=false"
 
 #only run this command if you plan to support VM's on your machines.  read vast guide to understand more https://vast.ai/docs/hosting/vms
