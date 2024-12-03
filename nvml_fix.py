@@ -72,7 +72,7 @@ def main():
     check_root_privileges()
     check_ubuntu_version()
     update_docker_configuration()
-    #blacklist_nouveau_driver()
+    #blacklist_nouveau_driver() Only needed of you use nvidia.run commands 
     update_grub_configuration()
     print("Complete. Run vastai install script again if necessary.")
 
