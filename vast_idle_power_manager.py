@@ -251,41 +251,73 @@ def set_gpu_clock_range(gpu_index, min_clock, max_clock):
 
 def get_gpus_for_container(container, skip_when_all=False):
     """
-    Identify which GPU(s) the container is assigned to by checking
-    container.attrs["HostConfig"]["DeviceRequests"] for GPU capabilities.
+    Identify which GPU(s) the container is assigned to:
+      1) If 'DeviceRequests' is set (typical docker run --gpus), parse it.
+      2) Otherwise (Vast.ai scenario), fall back to environment variables:
+         - NV_GPU="0,1"
+         - or VAST_DEVICE_IDXS="0,1"
 
-    If the container was run with '--gpus all', 'DeviceIDs' might be null or ["-1"].
-    If the container was run with '--gpus device=0,1', you'll see DeviceIDs = ['0','1'].
-
-    skip_when_all=True means we skip setting anything if the container uses all GPUs.
+    skip_when_all=True means skip if it indicates "use all GPUs" rather than returning them.
     """
-    dev_requests = container.attrs["HostConfig"].get("DeviceRequests") or []
-    gpu_indices = []
+    dev_requests = container.attrs["HostConfig"].get("DeviceRequests")
 
-    for req in dev_requests:
-        # Look for GPU capabilities
-        caps = req.get("Capabilities", [])
-        # Flatten sublists e.g. [["gpu"]]
-        flat_caps = sum(caps, [])
-        if "gpu" in flat_caps:
-            device_ids = req.get("DeviceIDs")
-            # 'device_ids' could be None or ["-1"] if --gpus all
-            if not device_ids or "-1" in device_ids:
-                # Means `--gpus all`
+    # 1) Check if we have a "normal" DeviceRequests structure
+    if dev_requests:
+        gpu_indices = []
+        for req in dev_requests:
+            caps = req.get("Capabilities", [])
+            flat_caps = sum(caps, [])  # e.g. [["gpu"]] -> ["gpu"]
+            if "gpu" in flat_caps:
+                device_ids = req.get("DeviceIDs")
+                if not device_ids or "-1" in device_ids:
+                    # Means `--gpus all`
+                    if skip_when_all:
+                        logging.debug(f"Container {container.short_id}: '--gpus all' -> skipping.")
+                        return []
+                    else:
+                        indices = list_all_gpu_indices()
+                        logging.debug(f"Container {container.short_id}: '--gpus all' -> GPUs={indices}")
+                        return indices
+                else:
+                    gpu_indices.extend(device_ids)
+
+        logging.debug(f"Container {container.short_id} has GPU indices (DeviceRequests) = {gpu_indices}")
+        return gpu_indices
+
+    # 2) If we get here, DeviceRequests is null -> try environment fallback
+    env_vars = container.attrs["Config"].get("Env", []) or []
+    # e.g. look for "NV_GPU=0,1" or "VAST_DEVICE_IDXS=0,1"
+    env_map = {}
+    for kv in env_vars:
+        # kv is like "NV_GPU=0,1"
+        if '=' in kv:
+            key, val = kv.split('=', 1)
+            env_map[key] = val
+
+    # Preferred fallback variables: "NV_GPU" or "VAST_DEVICE_IDXS"
+    possible_vars = ["NV_GPU", "VAST_DEVICE_IDXS"]
+    for var_name in possible_vars:
+        if var_name in env_map:
+            val = env_map[var_name].strip()
+            # If it's blank or "all", interpret as all GPUs
+            if not val or val.lower() == "all":
                 if skip_when_all:
-                    logging.debug(f"Container {container.short_id}: '--gpus all' -> skipping.")
+                    logging.debug(f"Container {container.short_id}: {var_name}=all -> skipping.")
                     return []
                 else:
-                    # set for all GPUs
                     indices = list_all_gpu_indices()
-                    logging.debug(f"Container {container.short_id}: '--gpus all' -> GPUs={indices}")
+                    logging.debug(f"Container {container.short_id}: {var_name}=all -> GPUs={indices}")
                     return indices
-            else:
-                # e.g. ["0"], or ["0","1"]
-                gpu_indices.extend(device_ids)
 
-    logging.debug(f"Container {container.short_id} has GPU indices = {gpu_indices}")
-    return gpu_indices
+            # Typically something like "0,1"
+            gpu_indices = [x.strip() for x in val.split(',') if x.strip()]
+            logging.debug(f"Container {container.short_id} has GPU indices ({var_name}) = {gpu_indices}")
+            return gpu_indices
+
+    # 3) If none of the above worked, we have no idea which GPUs are used.
+    logging.debug(f"Container {container.short_id} has GPU indices = [] (no DeviceRequests, no known env).")
+    return []
+
 
 def signal_handler(sig, frame):
     print("Caught Ctrl + C, exiting gracefully...")
