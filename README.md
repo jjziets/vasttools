@@ -767,7 +767,7 @@ If space is limisted you can run this cleanup task as a cron job
 wget https://github.com/jjziets/vasttools/raw/main/cleanup-registry.sh
 chmod +x cleanup-registry.sh
 ```
-add this like to your corntab -e 
+add this like to your crontab -e 
 
 ```
 0 * * * * /path/to/cleanup-registry.sh
