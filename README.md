@@ -747,6 +747,20 @@ Run the following command in the directory where your docker-compose.yml file is
 sudo docker-compose up -d
 ```
 This command will start the Docker registry in detached mode.
+
+If space is limited, you can run this cleanup task as a cron job on the server.
+```
+wget https://github.com/jjziets/vasttools/raw/main/cleanup-registry.sh
+chmod +x cleanup-registry.sh
+```
+add this like to your crontab -e 
+
+```
+0 * * * * /path/to/cleanup-registry.sh
+
+```
+replace /path/to/ with where the file is saved. 
+
 ## Configuring Docker Clients
 To configure Docker clients to use the registry, follow these steps on each client machine:
 Edit the Docker Daemon Configuration:
@@ -762,18 +776,6 @@ echo '{
     "registry-mirrors": ["http://192.168.100.7:5000"]
 }' | sudo tee /etc/docker/daemon.json
 ```
-If space is limisted you can run this cleanup task as a cron job
-```
-wget https://github.com/jjziets/vasttools/raw/main/cleanup-registry.sh
-chmod +x cleanup-registry.sh
-```
-add this like to your crontab -e 
-
-```
-0 * * * * /path/to/cleanup-registry.sh
-
-```
-replace /path/to/ with where the file is saved. 
 
 Replace 192.168.100.7:5000 with the IP address and port of your Docker registry server.
 Restart Docker Daemon:
