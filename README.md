@@ -113,9 +113,33 @@ sudo systemctl status docker
 
 ```
 ## Self verification test 
-You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, there is a high chance that your machine will be eligible for verification. Take not that your router need to allow loopback if you run this from a machine on the same network as the machine you want to test. If you do not know how to enable loopback it will be better to run this on a VM from a cloud provider or with mobile connection to your pc.   
+You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, there is a high chance that your machine will be eligible for verification. Take not that your router need to allow loopback if you run this from a machine on the same network as the machine you want to test. If you do not know how to enable loopback it will be better to run this on a VM from a cloud provider or with mobile connection to your PC.   
 
-### Overview
+Download the latest vastcli and set your api key
+```wget https://raw.githubusercontent.com/vast-ai/vast-python/master/vast.py; chmod +x vast.py;```
+```./vast.py set api-key xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx```
+
+## Usage Examples
+
+1. **Single machine, fail if not meeting requirements**:
+   ```
+   ./vast.py self-test machine 54321
+   ```
+   If it fails, you see the failing requirements in the output, and the test ends.
+
+2. **Single machine, continue testing anyway**:
+   ```
+   ./vast.py self-test machine 54321 --ignore-requirements
+   ```
+   Prints the failure reasons but **still** runs the tests.  
+
+3. **Multiple machines** from a single host ID, ignoring requirements:
+   ```
+   python3 vast_machine_tester.py --host_id 123456 --ignore-requirements
+   ```
+   In a few minutes, you’ll have **passed_machines.txt** and **failed_machines.txt** with a summary.
+
+### Overview(Old and deprecited use new self test build in to the vastcli)
 
 The `autoverify_machineid.sh` script is part of a suite of tools designed to automate the testing of machines on the Vast.ai marketplace. This script specifically tests a single machine to determine if it meets the minimum requirements necessary for further verification.
 
