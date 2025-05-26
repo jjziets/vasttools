@@ -41,6 +41,7 @@ Paypal  PayPal.Me/cryptolabsZA
 ## Host install guide for vast.ai 
 
 ```
+#Start with a clean install of ubuntu 22.04.x HWE Kernal server. Just add openssh.
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt install update-manager-core -y
 #if you did not install HWE kernal do the following  
 sudo apt install --install-recommends linux-generic-hwe-22.04 -y
