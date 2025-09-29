@@ -89,8 +89,8 @@ df -h
 #this will enable Persistence mode on reboot so that the gpus can go to idle power when not used. Normal: no crontab for root message is gotten
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
 
-#run the install command for vast
-sudo apt install python3 -y
+#run the install command for vast. It will install docker as well
+sudo apt install python3 -y # No need for modern Ubuntu distributions
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
 
 # Add the flag --no-partitioning if decided to boot from a ssd
