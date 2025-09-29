@@ -46,6 +46,11 @@ sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt i
 #if you did not install HWE kernal do the following  
 sudo apt install --install-recommends linux-generic-hwe-22.04 -y
 sudo reboot
+
+# Expand disk if just 100GB are used
+sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+sudo resize2fs /dev/ubuntu-vg/ubuntu-lv
+
 #install the drivers.
 sudo apt install build-essential -y
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
