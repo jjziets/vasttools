@@ -86,7 +86,7 @@ sudo mount -a
 # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
 df -h
 
-#this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
+#this will enable Persistence mode on reboot so that the gpus can go to idle power when not used. Normal: no crontab for root message is gotten
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
 
 #run the install command for vast
