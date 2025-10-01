@@ -47,13 +47,17 @@ sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt i
 sudo apt install --install-recommends linux-generic-hwe-22.04 -y
 sudo reboot
 
+# Expand disk if just 100GB are used
+sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+sudo resize2fs /dev/ubuntu-vg/ubuntu-lv
+
 #install the drivers.
 sudo apt install build-essential -y
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt update
 # to search for available NVIDIA drivers: use this command 
 sudo apt search nvidia-driver | grep nvidia-driver | sort -r
-sudo apt install nvidia-driver-560  -y    # assuming the latest is 560
+sudo apt install nvidia-driver-570  -y    # assuming the latest is 570. Use nvidia-driver-570-open for blackwell architecture gpus
 
 #Remove unattended-upgrades Package so that the dirver don't upgrade when you have clients
 sudo apt purge --auto-remove unattended-upgrades -y
@@ -73,7 +77,8 @@ bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y l
 echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 
 sudo mkdir /var/lib/docker
 
-#I added discard so that the ssd is trimeds by ubunut and nofail if there is some problem with the drive the system will still boot.  
+# I added discard so that the ssd is trimeds by ubuntu and nofail if there is some problem with the drive the system will still boot.  
+# You must ensure your nvme disk is properly partitioned and formatted with the XFS file system.
 sudo bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1  | sed -n "2p" | awk "{print \$NF}"); echo "UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0" >> /etc/fstab'
 
 sudo mount -a
@@ -81,12 +86,15 @@ sudo mount -a
 # check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
 df -h
 
-#this will enable Persistence mode on reboot so that the gpus can go to idle power when not used 
+#this will enable Persistence mode on reboot so that the gpus can go to idle power when not used. Normal: no crontab for root message is gotten
 sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
 
-#run the install command for vast
-sudo apt install python3 -y
+#run the install command for vast. It will install docker as well. If nvml error is gotten, reboot or check the solutions in this README. Run several times if some error is gotten.
+sudo apt install python3 -y # No need for modern Ubuntu distributions
 sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
+
+# Add the flag --no-partitioning if decided to boot from a ssd
+sudo wget https://console.vast.ai/install -O install; sudo python3 install --no-partitioning; history -d $((HISTCMD-1));
 
 nano /etc/default/grub   # find the GRUB_CMDLINE_LINUX="" and ensure it looks like this. 
 GRUB_CMDLINE_LINUX="amd_iommu=on nvidia_drm.modeset=0 systemd.unified_cgroup_hierarchy=false"
