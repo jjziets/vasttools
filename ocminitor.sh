@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Check if ethminer  is running and change the memory oc accardingly
+# Check if ethminer is running and change the memory OC accordingly
 # -x flag only match processes whose name (or command line if -f is
 # specified) exactly match the pattern.
 
@@ -21,7 +21,7 @@ while true;do
                 echo "ethminer is running and mem oc not set"
                 let OCset=1
                 nvidia-smi -rgc
-                /home/user/set_mem.sh 2000                #change the path to where set_men.sh is stored
+                /home/user/set_mem.sh 2000                # change the path to where set_mem.sh is stored
                 
         fi
 
@@ -30,7 +30,7 @@ while true;do
                 echo "ethminer not running and mem oc is set"
                 let OCset=0
                 nvidia-smi --lock-gpu-clocks=100,1740
-                /home/user/set_mem.sh 0 #change the path to where set_men.sh is stored
+                /home/user/set_mem.sh 0 # change the path to where set_mem.sh is stored
                 
         fi
 

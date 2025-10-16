@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# set_mem.sh  This script will OC the memory of nvidi 3000 
+# set_mem.sh  This script will OC the memory of Nvidia 3000
 #
-# Description:  A script to set memory OC on headless (non-X) linux nodes
+# Description:  A script to set memory OC on headless (non-X) Linux nodes
 
 # Original Script by Axel Kohlmeyer <akohlmey@gmail.com>
 # https://sites.google.com/site/akohlmey/random-hacks/nvidia-gpu-coolness
@@ -17,7 +17,7 @@
 # * xorg
 # * Coolbits enabled and empty config setting
 #     nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
-#  * dependances  sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
+#  * dependencies  sudo apt-get install libgtk-3-0 && sudo apt-get install xinit && sudo apt-get install xserver-xorg-core && sudo update-grub && sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
 
 
 # You may have to run this as root or with sudo if the current user is not authorized to start X sessions.
@@ -39,19 +39,19 @@ fi
 # Read a numerical command line arg between 0 and 3000
 if [ "$1" -eq "$1" ] 2>/dev/null && [ "0$1" -ge "0" ]  && [ "0$1" -le "3000" ]
 then
-    $SMI -pm 1 # enable persistance mode
+    $SMI -pm 1 # enable persistence mode
     speed=$1   # set speed
 
-    echo "Setting mem oc to%."
+    echo "Setting memory OC to $speed."
 
-    # how many GPU's are in the system?
+    # how many GPUs are in the system?
     NUMGPU="$(nvidia-smi -L | wc -l)"
 
     # loop through each GPU and individually set mem oc
     n=0
     while [  $n -lt  $NUMGPU ];
     do
-        # start an x session, and call nvidia-settings to enable memo oc
+        # start an X session, and call nvidia-settings to enable memory OC
         xinit ${SET} -a [gpu:${n}]/GPUPowerMizerMode=1   -a [gpu:${n}]/GPUMemoryTransferRateOffsetAllPerformanceLevels=$speed   --  :0 -once
 
         let n=n+1
@@ -61,18 +61,18 @@ then
 
 elif [ "x$1" = "xstop" ]
 then
-    $SMI -pm 0 # disable persistance mode
+    $SMI -pm 0 # disable persistence mode
 
-    echo "Enabling default auto mem  control."
+    echo "Enabling default automatic memory control."
 
-    # how many GPU's are in the system?
+    # how many GPUs are in the system?
     NUMGPU="$(nvidia-smi -L | wc -l)"
 
     # loop through each GPU and individually set mem oc
     n=0
     while [  $n -lt  $NUMGPU ];
     do
-        # start an x session, and call nvidia-settings to enable mem oc
+        # start an X session, and call nvidia-settings to enable memory OC
         xinit ${SET} -a [gpu:${n}]/GPUMemoryTransferRateOffsetAllPerformanceLevels=0 --  :0 -once
         let n=n+1
     done

@@ -26,7 +26,7 @@ set_bj_instance() { # arg id price
 #	sleep 0
         while [ $? -gt 0 ]
         do
-                echo "Faild to  send command resend"
+                echo "Failed to send command. Resending."
                 sleep 2
                        ./vast change bid $1 --price $2
         done
@@ -39,7 +39,7 @@ list_machine() { # arg id price
        sleep 2
         while [ $? -gt 0 ]
         do
-                echo "Faild to  send command resend"
+                echo "Failed to send command. Resending."
                 sleep 1
                 ./vast list machine $1  --price_gpu $2 --price_disk $3 --price_inetu 0.02 --price_inetd 0.02 --min_chunk $4 --end_date $5
         done

@@ -1,11 +1,11 @@
 #!/bin/bash
-#this script will create a window in tmux for each docker running shwoing the logs .
+# This script will create a window in tmux for each Docker container running, showing the logs.
 
-        containerIDs=($(docker ps | sed 's/|/ /'  | awk '{print $1}' )) # get all the instanses number from vast
-        unset containerIDs[0] #delte the first index as it containe ID
+        containerIDs=($(docker ps | sed 's/|/ /'  | awk '{print $1}' )) # get all the instance numbers from Vast.ai
+        unset containerIDs[0] # delete the first index as it contains the ID header
         tmux new -d -s DockerLogs
         for i in "${containerIDs[@]}"; do
-                echo "creat new window of container $i"
+                echo "Create new window for container $i"
                 #echo  "$i -t DockerLogs: docker logs -f -n 100  $i"
                 tmux new-window -n "$i" -t DockerLogs: "docker logs -f -n 100  $i"
                 #tmux new -d -s DockerLogs -n "$i"  "docker logs -f -n 100  $i"  #set the price for each
