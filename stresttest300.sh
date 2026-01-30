@@ -7,6 +7,9 @@
 # 4. Downloads and prepares a GPU temperature monitoring tool from a GitHub repository.
 # 5. Executes the GPU temperature monitoring tool for 300 seconds to collect temperature data during the test.
 # This script requires administrative privileges (sudo) to manage system services and Docker operations.
+#
+# NOTE: For modern GPU monitoring, consider using dc-exporter-rs from:
+# https://github.com/cryptolabsza/dc-exporter-releases
 
 
 # Stopping necessary services

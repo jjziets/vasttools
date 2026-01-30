@@ -297,7 +297,11 @@ sudo apt-get install speedtest
 ![image](https://github.com/jjziets/vasttools/assets/19214485/4107d6a2-6a4a-4edd-973d-a733d8430071)
 
 Prometheus and Grafana monitoring systems send alerts and track all metrics regarding your equipment while also tracking earnings and rentals.
-https://github.com/jjziets/DCMontoring
+
+**NEW:** For a modern, integrated monitoring solution with IPMI/BMC support, SSH log collection, and AI-powered dashboards, see:
+https://github.com/cryptolabsza/dc-overview
+
+Legacy DCMontoring (archived): https://github.com/jjziets/DCMontoring
 
 ## Addressing NVML error when using Ubuntu 22 and 24
 Run the script below if you have a problem with the Vast.ai installer on 22 or 24 and receive an NVML error.
@@ -316,7 +320,12 @@ sudo systemctl restart vastai
 ```
 
 ## Monitor your Nvidia 3000/4000 Core, GPU Hotspot and VRAM temps
-If you do not want to set up the Analytics dashboard and you just want to see all the temps on your GPU, then you can use the below tool
+If you do not want to set up the Analytics dashboard and you just want to see all the temps on your GPU, you can use **dc-exporter-rs** - a modern Rust-based GPU metrics exporter that includes GDDR6 temperature monitoring:
+
+**dc-exporter-rs** (recommended):
+https://github.com/cryptolabsza/dc-exporter-releases
+
+Legacy nvml_direct_access tool (archived):
 ![image](https://github.com/user-attachments/assets/9070c1a2-3a7b-4fd8-b16c-50b3eb3c7633)
 ```
 sudo wget https://github.com/jjziets/gddr6_temps/raw/master/nvml_direct_access
