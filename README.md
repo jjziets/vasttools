@@ -14,7 +14,26 @@ USDT(ETH ERC20) 0xa5955cf9fe7af53bcaa1d2404e2b17a1f28aac4f
 
 PayPal PayPal.Me/cryptolabsZA
 
+---
+
+## CryptoLabs Datacenter Tools
+
+These tools have evolved into a complete **datacenter management suite** under the [CryptoLabs](https://github.com/orgs/cryptolabsza/repositories) organisation. If you're running GPU infrastructure on Vast.ai, RunPod, or bare metal, check out the full toolkit:
+
+| Tool | Description | Link |
+|------|-------------|------|
+| **IPMI Monitor** | IPMI/BMC server monitoring with AI-powered insights, SSH log collection, and web dashboard. Monitors SEL events, sensors, GPU health, and more. | [cryptolabsza/ipmi-monitor](https://github.com/cryptolabsza/ipmi-monitor) |
+| **DC Overview** | Prometheus/Grafana datacenter monitoring dashboards. Full visibility into your fleet with pre-built dashboards for GPU, network, and system metrics. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
+| **DC Exporter** | Rust-based GPU metrics exporter (dc-exporter-rs). Collects GPU core, hotspot, and VRAM temps including GDDR6X. **Runs alongside Vast.ai and RunPod without interference.** | [cryptolabsza/dc-exporter-releases](https://github.com/cryptolabsza/dc-exporter-releases) |
+| **DC Watchdog** | SaaS uptime monitoring for your fleet. Replaces the old Telegram uptime bot with a managed service — multi-machine agents, alerts, and a dashboard. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
+| **CL Fleety** | Mobile app for CryptoLabs fleet monitoring. Monitor your servers from your phone. | [cryptolabsza/cl-fleety-releases](https://github.com/cryptolabsza/cl-fleety-releases) |
+
+> **Recommended:** Start with [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, and [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access to your servers.
+
+---
+
 ## Table of Contents
+- [CryptoLabs Datacenter Tools](#cryptolabs-datacenter-tools)
 - [Host install guide for Vast.ai](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai)
 - [Self-verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
@@ -25,7 +44,7 @@ PayPal PayPal.Me/cryptolabsZA
 - [Memory OC](https://github.com/jjziets/vasttools#memory-oc)
 - [OC monitor](https://github.com/jjziets/vasttools#oc-monitor)
 - [Stress testing GPUs on Vast with Python benchmark of RTX3090's](https://github.com/jjziets/vasttools?tab=readme-ov-file#stress-testing-gpus-on-vast-with-this-python-benchmark-of-rtx3090s)
-- [Telegram-Vast-Uptime-Bot](#telegram-vast-uptime-bot)
+- [Telegram-Vast-Uptime-Bot / DC Watchdog](#telegram-vast-uptime-bot--dc-watchdog)
 - [Auto update the price for host listing based on mining profits](#auto-update-the-price-for-host-listing-based-on-mining-profits)
 - [Background job or idle job for Vast.ai](#background-job-or-idle-job-for-vastai)
 - [Setting fan speeds if you have a headless system](https://github.com/jjziets/vasttools/blob/main/README.md#setting-fan-speeds-if-you-have-a-headless-system)
@@ -294,12 +313,13 @@ sudo apt-get install speedtest
 
 
 ## Analytics dashboard
+
+> **Recommended:** Use the CryptoLabs monitoring stack for a modern, production-ready solution:
+> - **[DC Overview](https://github.com/cryptolabsza/dc-overview)** — Prometheus/Grafana dashboards with pre-built panels for GPU, network, earnings, and system metrics.
+> - **[DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases)** — Rust-based GPU metrics exporter. Runs as a lightweight binary alongside Vast.ai and RunPod **without affecting your rentals**.
+> - **[IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor)** — IPMI/BMC monitoring with AI-powered insights, SSH log collection, and a web dashboard.
+
 ![image](https://github.com/jjziets/vasttools/assets/19214485/4107d6a2-6a4a-4edd-973d-a733d8430071)
-
-Prometheus and Grafana monitoring systems send alerts and track all metrics regarding your equipment while also tracking earnings and rentals.
-
-**NEW:** For a modern, integrated monitoring solution with IPMI/BMC support, SSH log collection, and AI-powered dashboards, see:
-https://github.com/cryptolabsza/dc-overview
 
 Legacy DCMontoring (archived): https://github.com/jjziets/DCMontoring
 
@@ -320,10 +340,17 @@ sudo systemctl restart vastai
 ```
 
 ## Monitor your Nvidia 3000/4000 Core, GPU Hotspot and VRAM temps
-If you do not want to set up the Analytics dashboard and you just want to see all the temps on your GPU, you can use **dc-exporter-rs** - a modern Rust-based GPU metrics exporter that includes GDDR6 temperature monitoring:
 
-**dc-exporter-rs** (recommended):
-https://github.com/cryptolabsza/dc-exporter-releases
+> **Recommended: [dc-exporter-rs](https://github.com/cryptolabsza/dc-exporter-releases)** — A modern Rust-based GPU metrics exporter that collects GPU core, hotspot, and VRAM temperatures (including GDDR6X). Exposes Prometheus metrics for Grafana dashboards.
+>
+> **Key advantage:** Runs as a lightweight system binary and does **not interfere with Vast.ai or RunPod** — your rentals and workloads are unaffected.
+>
+> ```bash
+> # Quick install (see repo for full instructions)
+> wget https://github.com/cryptolabsza/dc-exporter-releases/releases/latest/download/dc-exporter-rs-linux-amd64
+> chmod +x dc-exporter-rs-linux-amd64
+> sudo ./dc-exporter-rs-linux-amd64
+> ```
 
 Legacy nvml_direct_access tool (archived):
 ![image](https://github.com/user-attachments/assets/9070c1a2-3a7b-4fd8-b16c-50b3eb3c7633)
@@ -410,7 +437,15 @@ sudo docker run --gpus '"device=x"' --rm oguzpastirmaci/gpu-burn <test duration 
 
 *Based on Leona / vast.ai-tools
 
-## Telegram-Vast-Uptime-Bot
+## Telegram-Vast-Uptime-Bot / DC Watchdog
+
+> **Recommended: [DC Watchdog](https://github.com/cryptolabsza/dc-overview)** — A managed SaaS uptime monitoring service that replaces the self-hosted Telegram bot. Features include:
+> - Multi-machine monitoring with lightweight agents
+> - Alerts via Telegram, email, and push notifications (via [CL Fleety](https://github.com/cryptolabsza/cl-fleety-releases) mobile app)
+> - Centralized dashboard with history and analytics
+> - No need to run your own server — the agents report to the CryptoLabs cloud
+
+Legacy self-hosted bot (still works for simple setups):
 This is a set of scripts for monitoring machine crashes. Run the client on your Vast.ai machine and the server on a remote one. You get notifications on Telegram if no heartbeats are sent within the timeout (default 12 seconds).
 https://github.com/jjziets/Telegram-Vast-Uptime-Bot
 
