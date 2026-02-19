@@ -26,7 +26,6 @@ These tools have evolved into a complete **datacenter management suite** under t
 | **DC Overview** | Prometheus/Grafana datacenter monitoring dashboards. Full visibility into your fleet with pre-built dashboards for GPU, network, and system metrics. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
 | **DC Exporter** | Rust-based GPU metrics exporter (dc-exporter-rs). Collects GPU core, hotspot, and VRAM temps including GDDR6X. **Runs alongside Vast.ai and RunPod without interference.** | [cryptolabsza/dc-exporter-releases](https://github.com/cryptolabsza/dc-exporter-releases) |
 | **DC Watchdog** | SaaS uptime monitoring for your fleet. Replaces the old Telegram uptime bot with a managed service — multi-machine agents, alerts, and a dashboard. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
-| **CL Fleety** | Mobile app for CryptoLabs fleet monitoring. Monitor your servers from your phone. | [cryptolabsza/cl-fleety-releases](https://github.com/cryptolabsza/cl-fleety-releases) |
 
 > **Recommended:** Start with [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, and [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access to your servers.
 
@@ -441,7 +440,7 @@ sudo docker run --gpus '"device=x"' --rm oguzpastirmaci/gpu-burn <test duration 
 
 > **Recommended: [DC Watchdog](https://github.com/cryptolabsza/dc-overview)** — A managed SaaS uptime monitoring service that replaces the self-hosted Telegram bot. Features include:
 > - Multi-machine monitoring with lightweight agents
-> - Alerts via Telegram, email, and push notifications (via [CL Fleety](https://github.com/cryptolabsza/cl-fleety-releases) mobile app)
+> - Alerts via Telegram, email, and push notifications
 > - Centralized dashboard with history and analytics
 > - No need to run your own server — the agents report to the CryptoLabs cloud
 
