@@ -1,6 +1,4 @@
 # vasttools
-# ALERT: WITH VAST VMs ENABLED, DO NOT USE ANY OF THE TOOLS THAT RUN ON YOUR HOST MACHINE. THEY WILL PREVENT VMs FROM STARTING.
-
 The aim is to set up a list of tools that can be used with Vast.ai.
 The tools are free to use, modify and distribute. If you find this helpful and would like to donate, you can send your donations to the following wallets.
 
