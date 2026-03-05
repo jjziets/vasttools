@@ -56,78 +56,292 @@ These tools have evolved into a complete **datacenter management suite** under t
 
 ## Host install guide for Vast.ai
 
-```
-#Start with a clean install of ubuntu 22.04.x HWE Kernel server. Just add openssh.
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt install update-manager-core -y
-#if you did not install HWE kernel do the following  
-sudo apt install --install-recommends linux-generic-hwe-22.04 -y
-sudo reboot
+Start with a **clean install of Ubuntu 22.04.x Server** (HWE kernel recommended). During the installer, just add OpenSSH — nothing else.
 
-#install the drivers.
+---
+
+### Step 1: Update the system
+
+```bash
+sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
+sudo apt install update-manager-core -y
+```
+
+If you didn't select the HWE kernel during install, install it now:
+
+```bash
+sudo apt install --install-recommends linux-generic-hwe-22.04 -y
+```
+
+Reboot after kernel changes:
+
+```bash
+sudo reboot
+```
+
+---
+
+### Step 2: Install NVIDIA drivers
+
+```bash
 sudo apt install build-essential -y
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt update
-# to search for available NVIDIA drivers: use this command 
-sudo apt search nvidia-driver | grep nvidia-driver | sort -r
-sudo apt install nvidia-driver-560  -y    # assuming the latest is 560
+```
 
-#Remove unattended-upgrades Package so that the drivers don't upgrade when you have clients
+Find the latest available driver:
+
+```bash
+sudo apt search nvidia-driver | grep nvidia-driver | sort -r
+```
+
+Install the latest stable driver (replace `560` with whatever is newest):
+
+```bash
+sudo apt install nvidia-driver-560 -y
+```
+
+Reboot and verify:
+
+```bash
+sudo reboot
+nvidia-smi
+```
+
+---
+
+### Step 3: Disable automatic updates
+
+Automatic updates can break drivers while clients are renting your machine. Disable them:
+
+```bash
 sudo apt purge --auto-remove unattended-upgrades -y
 sudo systemctl disable apt-daily-upgrade.timer
-sudo systemctl mask apt-daily-upgrade.service 
+sudo systemctl mask apt-daily-upgrade.service
 sudo systemctl disable apt-daily.timer
 sudo systemctl mask apt-daily.service
+```
 
-# This is needed to remove xserver and GNOME if you started with Ubuntu desktop. Clients can't run a desktop GUI in a container without an X server.
-bash -c 'sudo apt-get update; sudo apt-get -y upgrade; sudo apt-get install -y libgtk-3-0; sudo apt-get install -y xinit; sudo apt-get install -y xserver-xorg-core; sudo apt-get remove -y gnome-shell; sudo update-grub; sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus' 
+Only update manually when your machine is unlisted and idle (see [How to update a host](#how-to-update-a-host)).
 
+---
 
-#if Ubuntu is installed to an SSD and you plan to have the Vast.ai client data stored on an NVMe follow the below instructions.
-#WARNING IF YOUR OS IS ON /dev/nvme0n1 IT WILL BE WIPED. CHECK TWICE. Change this device to the intended device name that you plan to use.
+### Step 4: Remove desktop environment (if installed)
 
-# This is one command that will create the XFS partition and write it to the disk /dev/nvme0n1.
-echo -e "n\n\n\n\n\n\nw\n" | sudo cfdisk /dev/nvme0n1 && sudo mkfs.xfs /dev/nvme0n1p1 
-sudo mkdir /var/lib/docker
+If you started with Ubuntu Desktop instead of Server, remove the desktop environment. Vast.ai containers need the X server config but not GNOME:
 
-#I added discard so that the SSD is trimmed by Ubuntu and nofail so that if there is some problem with the drive the system will still boot.
-sudo bash -c 'uuid=$(sudo xfs_admin -lu /dev/nvme0n1p1  | sed -n "2p" | awk "{print \$NF}"); echo "UUID=$uuid /var/lib/docker/ xfs rw,auto,pquota,discard,nofail 0 0" >> /etc/fstab'
+```bash
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get install -y libgtk-3-0
+sudo apt-get install -y xinit
+sudo apt-get install -y xserver-xorg-core
+sudo apt-get remove -y gnome-shell
+sudo update-grub
+sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
+```
 
+If you installed Ubuntu Server, you can skip removing GNOME but still run the `nvidia-xconfig` line:
+
+```bash
+sudo nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration --enable-all-gpus
+```
+
+---
+
+### Step 5: Mount NVMe for Docker storage
+
+This is the most important step. Vast.ai stores all client data at `/var/lib/docker`. You need to mount a dedicated NVMe drive there, formatted as **XFS with pquota**.
+
+**⚠️ WARNING:** The steps below will **wipe the target drive**. If your OS is on `/dev/nvme0n1`, do NOT use that device. Check with `lsblk` first.
+
+**5a. Identify your drives:**
+
+```bash
+lsblk -f
+```
+
+Find the NVMe you want to use for Docker. It must be a different drive from your OS.
+
+**5b. Partition the drive:**
+
+Open the interactive partition tool (replace `/dev/nvme0n1` with your device):
+
+```bash
+sudo cfdisk /dev/nvme0n1
+```
+
+In the menu:
+1. Choose **gpt** if asked for label type
+2. Select **New** — press Enter to use the full disk
+3. Select **Write** — type **yes** to confirm
+4. Select **Quit**
+
+This creates a partition at `/dev/nvme0n1p1`.
+
+**5c. Format as XFS:**
+
+```bash
+sudo mkfs.xfs /dev/nvme0n1p1
+```
+
+Do not use `mkfs.ext4` — Vast.ai requires XFS for storage quotas.
+
+**5d. Create the Docker directory:**
+
+```bash
+sudo mkdir -p /var/lib/docker
+```
+
+**5e. Get the drive's UUID:**
+
+```bash
+sudo blkid /dev/nvme0n1p1
+```
+
+This outputs something like:
+
+```
+/dev/nvme0n1p1: UUID="a1b2c3d4-e5f6-7890-abcd-ef1234567890" TYPE="xfs"
+```
+
+Copy the UUID value (the part between the quotes). Using UUID is safer than device names because device names can change between reboots.
+
+**5f. Add to /etc/fstab:**
+
+Open fstab in a text editor:
+
+```bash
+sudo nano /etc/fstab
+```
+
+Add this line at the bottom (replace the UUID with yours):
+
+```
+UUID=a1b2c3d4-e5f6-7890-abcd-ef1234567890  /var/lib/docker  xfs  rw,auto,pquota,nofail  0  0
+```
+
+What each option means:
+
+| Option | Purpose |
+|--------|---------|
+| `rw` | Read-write access |
+| `auto` | Mount automatically at boot |
+| `pquota` | **Required by Vast.ai** — enables per-container storage quotas |
+| `nofail` | System still boots if the drive has an issue |
+
+Save and exit (`Ctrl+O`, Enter, `Ctrl+X` in nano).
+
+**5g. Mount and verify:**
+
+```bash
 sudo mount -a
+df -h /var/lib/docker
+```
 
-# check that /dev/nvme0n1p1 is mounted to /var/lib/docker/
-df -h
+You should see your NVMe mounted at `/var/lib/docker` with the correct size.
 
-#this will enable Persistence mode on reboot so that the GPUs can go to idle power when not used
-sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -' 
+---
 
-#run the install command for Vast.ai
+### Step 6: Enable GPU persistence mode
+
+This keeps GPUs initialised between jobs so they idle at low power instead of fully reinitialising each time:
+
+```bash
+sudo bash -c '(crontab -l; echo "@reboot nvidia-smi -pm 1" ) | crontab -'
+```
+
+---
+
+### Step 7: Install Vast.ai
+
+```bash
 sudo apt install python3 -y
-sudo wget https://console.vast.ai/install -O install; sudo python3 install YourKey; history -d $((HISTCMD-1)); 
+sudo wget https://console.vast.ai/install -O install
+sudo python3 install YourKey
+```
 
-nano /etc/default/grub   # find the GRUB_CMDLINE_LINUX="" and ensure it looks like this. 
+Replace `YourKey` with your actual Vast.ai API key from [console.vast.ai/host/setup](https://console.vast.ai/host/setup).
+
+---
+
+### Step 8: Configure GRUB (optional)
+
+Open the GRUB config:
+
+```bash
+sudo nano /etc/default/grub
+```
+
+Find the `GRUB_CMDLINE_LINUX=""` line and update it to:
+
+```
 GRUB_CMDLINE_LINUX="amd_iommu=on nvidia_drm.modeset=0 systemd.unified_cgroup_hierarchy=false"
+```
 
-#only run this command if you plan to support VMs on your machines. Read the Vast.ai guide to understand more https://vast.ai/docs/hosting/vms
-sudo bash -c 'sed -i "/^GRUB_CMDLINE_LINUX=\"\"/s/\"\"/\"amd_iommu=on nvidia_drm.modeset=0\"/" /etc/default/grub && update-grub'
+**What these options do:**
 
-update-grub
+| Option | Purpose |
+|--------|---------|
+| `amd_iommu=on` | Enables IOMMU for AMD CPUs (needed for VM support and PCIe passthrough) |
+| `nvidia_drm.modeset=0` | Disables NVIDIA kernel modesetting (prevents conflicts with containers) |
+| `systemd.unified_cgroup_hierarchy=false` | Uses cgroup v1 (required by some Docker configurations) |
 
-#if you get an NVML error then run this
+Apply the changes:
+
+```bash
+sudo update-grub
+```
+
+**Note:** If you want to support VMs on your machines, see [Vast.ai VM documentation](https://vast.ai/docs/hosting/vms).
+
+---
+
+### Step 9: Configure networking
+
+Follow the [Vast.ai networking instructions](https://console.vast.ai/host/setup) for your router/firewall.
+
+Set the port range for client instances:
+
+```bash
+sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
+```
+
+You can test that ports are open by running `sudo nc -l -p PORT` on the host and checking with [portchecker.co](https://portchecker.co).
+
+---
+
+### Step 10: Fix NVML error (if needed)
+
+If the Vast.ai installer shows an NVML error:
+
+```bash
 sudo wget https://raw.githubusercontent.com/jjziets/vasttools/main/nvml_fix.py
 sudo python3 nvml_fix.py
+```
+
+---
+
+### Step 11: Reboot and verify
+
+```bash
 sudo reboot
+```
 
-#follow the Configure Networking instructions as per https://console.vast.ai/host/setup
+After reboot, check everything is working:
 
-#test the ports with running sudo nc -l -p port on the host machine and use https://portchecker.co to verify  
-sudo bash -c 'echo "40000-40019" > /var/lib/vastai_kaalia/host_port_range'
-sudo reboot 
+```bash
+# Check NVMe is mounted to /var/lib/docker
+df -h /var/lib/docker
 
-#After reboot, check that the drive is mounted to /var/lib/docker and that your systems show up on the Vast.ai dashboard.
-df -h # look for /var/lib/docker mount
+# Check Vast.ai daemon is running
 sudo systemctl status vastai
+
+# Check Docker is running
 sudo systemctl status docker
 
+# Check GPUs are visible
+nvidia-smi
 ```
 ## Self-verification test
 You can run the following test to ensure your new machine will be on the shortlist for verification testing. If you pass, there is a high chance that your machine will be eligible for verification. Take note that your router needs to allow loopback if you run this from a machine on the same network as the machine you want to test. If you do not know how to enable loopback it will be better to run this on a VM from a cloud provider or with a mobile connection to your PC.
@@ -583,18 +797,18 @@ This guide illustrates how to back up Vast.ai Docker data from an existing drive
    ```
    sudo mkfs.xfs -f /dev/md0p1
    ```
-8. **Retrieve the UUID**:
-   You'll need the UUID for updating `/etc/fstab`.
+8. **Get the UUID of the new partition**:
    ```
-   sudo xfs_admin -lu /dev/md0p1
+   sudo blkid /dev/md0p1
    ```
+   Copy the UUID value from the output.
 9. **Update `/etc/fstab` with the New Drive**:
    ```
    sudo nano /etc/fstab
    ```
-   Add the following line (replace the UUID with the one you retrieved):
+   Add the following line (replace the UUID with yours from step 8):
    ```
-   UUID="YOUR_UUID_HERE" /var/lib/docker xfs rw,auto,pquota,discard,nofail 0 0
+   UUID=YOUR_UUID_HERE /var/lib/docker xfs rw,auto,pquota,nofail 0 0
    ```
 10. **Mount the new partition**:
     ```
