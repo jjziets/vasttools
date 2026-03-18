@@ -24,8 +24,9 @@ These tools have evolved into a complete **datacenter management suite** under t
 | **DC Overview** | Prometheus/Grafana datacenter monitoring dashboards. Full visibility into your fleet with pre-built dashboards for GPU, network, and system metrics. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
 | **DC Exporter** | Rust-based GPU metrics exporter (dc-exporter-rs). Collects GPU core, hotspot, and VRAM temps including GDDR6X. **Runs alongside Vast.ai and RunPod without interference.** | [cryptolabsza/dc-exporter-releases](https://github.com/cryptolabsza/dc-exporter-releases) |
 | **DC Watchdog** | SaaS uptime monitoring for your fleet. Replaces the old Telegram uptime bot with a managed service — multi-machine agents, alerts, and a dashboard. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
+| **AI SRE** | Autonomous AI Site Reliability Engineer for Linux servers. Describe a problem, the AI investigates, diagnoses root cause, and fixes it — with your approval. No more 3 AM debugging. [Watch it fix a broken NVIDIA driver →](https://youtu.be/QYr3mj9HoRY) | [AI SRE Overview](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) |
 
-> **Recommended:** Start with [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, and [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access to your servers.
+> **Recommended:** Start with [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access, and [AI SRE](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) to handle incidents automatically.
 
 ---
 
