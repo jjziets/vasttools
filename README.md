@@ -14,19 +14,30 @@ PayPal PayPal.Me/cryptolabsZA
 
 ---
 
+## 🆕 AI SRE — Autonomous Linux Expert
+
+**No more 3 AM debugging.** AI SRE is an autonomous Site Reliability Engineer for your GPU fleet. Describe a problem in plain English — the AI connects to your server, investigates, diagnoses root cause, and fixes it with your approval. Every investigation runs in an isolated container. You control exactly what it can do.
+
+[**Get Started →**](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/)
+
+[![Watch AI SRE fix a broken NVIDIA driver](https://img.youtube.com/vi/QYr3mj9HoRY/maxresdefault.jpg)](https://youtu.be/QYr3mj9HoRY)
+> 🎬 **Demo:** Watch the AI diagnose and fix a corrupted NVIDIA driver stack — DKMS conflicts, dpkg locks, mixed package versions — fully autonomously.
+
+---
+
 ## CryptoLabs Datacenter Tools
 
 These tools have evolved into a complete **datacenter management suite** under the [CryptoLabs](https://github.com/orgs/cryptolabsza/repositories) organisation. If you're running GPU infrastructure on Vast.ai, RunPod, or bare metal, check out the full toolkit:
 
 | Tool | Description | Link |
 |------|-------------|------|
-| **IPMI Monitor** | IPMI/BMC server monitoring with AI-powered insights, SSH log collection, and web dashboard. Monitors SEL events, sensors, GPU health, and more. | [cryptolabsza/ipmi-monitor](https://github.com/cryptolabsza/ipmi-monitor) |
+| **AI SRE** | Autonomous incident response for Linux servers. Investigates, diagnoses, and fixes problems with your approval. | [AI SRE Overview](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) |
 | **DC Overview** | Prometheus/Grafana datacenter monitoring dashboards. Full visibility into your fleet with pre-built dashboards for GPU, network, and system metrics. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
+| **IPMI Monitor** | IPMI/BMC server monitoring with AI-powered insights, SSH log collection, and web dashboard. Monitors SEL events, sensors, GPU health, and more. | [cryptolabsza/ipmi-monitor](https://github.com/cryptolabsza/ipmi-monitor) |
 | **DC Exporter** | Rust-based GPU metrics exporter (dc-exporter-rs). Collects GPU core, hotspot, and VRAM temps including GDDR6X. **Runs alongside Vast.ai and RunPod without interference.** | [cryptolabsza/dc-exporter-releases](https://github.com/cryptolabsza/dc-exporter-releases) |
 | **DC Watchdog** | SaaS uptime monitoring for your fleet. Replaces the old Telegram uptime bot with a managed service — multi-machine agents, alerts, and a dashboard. | [cryptolabsza/dc-overview](https://github.com/cryptolabsza/dc-overview) |
-| **AI SRE** | Autonomous AI Site Reliability Engineer for Linux servers. Describe a problem, the AI investigates, diagnoses root cause, and fixes it — with your approval. No more 3 AM debugging. [Watch it fix a broken NVIDIA driver →](https://youtu.be/QYr3mj9HoRY) | [AI SRE Overview](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) |
 
-> **Recommended:** Start with [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access, and [AI SRE](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) to handle incidents automatically.
+> **Recommended:** Start with [AI SRE](https://www.cryptolabs.co.za/ai-sre-autonomous-server-investigation/) to handle incidents automatically, [DC Overview](https://github.com/cryptolabsza/dc-overview) + [DC Exporter](https://github.com/cryptolabsza/dc-exporter-releases) for monitoring, and [IPMI Monitor](https://github.com/cryptolabsza/ipmi-monitor) if you have IPMI/BMC access.
 
 ---
 
