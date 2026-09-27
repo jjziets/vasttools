@@ -4,6 +4,8 @@ Use this procedure in order; reuse passing evidence only while its underlying st
 
 ## 1. Discover and prepare the change
 
+At the beginning, obtain the user's intended public address and inclusive TCP/UDP start–end range for this exact host, plus whether a router/firewall needs forwarding. Reuse explicit values already supplied for this target; otherwise ask and wait before network configuration. Do not request credentials in chat. If the user does not yet have an allocation, help them select one after read-only discovery. Record the selected allocation and firewall-change scope privately.
+
 Collect only necessary fields: OS/kernel/architecture, system/chassis identity, disk serials/WWNs and ancestry, mounts/swap/arrays/pools, GPU UUIDs/BDFs, NIC identities, network route, firmware, boot mode, recovery access, and workload inventory. Read logs through a secret-filtering boundary. Full `ps aux`, process argv, Docker inspect JSON, service environment, installer logs and provider JSON may expose credentials or tenant data; select safe fields.
 
 Record which actions are already authorized and what remains undecided. For a reused host, provider state and local state must agree. Stopped rentals and retained volumes still matter. Coordinate automation that could relist the host or launch jobs during maintenance; scope any pause to this machine and record restoration policy.
@@ -50,13 +52,19 @@ Select a supported production driver for the actual GPU and kernel. Record packa
 
 After a controlled reboot, require every expected GPU UUID, healthy storage and working access. Record temperatures, power limits, PCIe width/speed, ECC/recovery counters where supported, and new Xid/SXid/AER errors. Unsupported telemetry is NOT APPLICABLE with its reason, not zero. On NVSwitch systems verify compatible Fabric Manager, all expected links and the topology. A visible GPU alone does not establish a working fabric.
 
+For DGX/HGX and other NVSwitch hardware, follow [fabric-and-workload.md](fabric-and-workload.md): install the platform-required Fabric Manager release matching the NVIDIA driver, install required companion components, and verify actual fabric initialization and post-reboot health. Merely noting that Fabric Manager is absent is not completion.
+
 ## 4. Network before registration
 
-Allocate a continuous, non-overlapping TCP/UDP range meeting current Vast requirements and the intended GPU density. Use current provider guidance rather than copying an old twenty-port example. Verify the public address belongs to this host's service path; outbound NAT discovery alone is insufficient.
+Validate the user-specified continuous TCP/UDP range: integer bounds `1 <= start <= end <= 65535`, inclusive count `end - start + 1`, current Vast requirements and intended GPU density. Check public-address/port allocations across hosts as well as local listeners; an unused local port is not proof the public range is available. Identify management ports, provider listeners and other existing services before changes. Do not use an overlapping or unsuitable selection; explain the conflict and obtain a corrected range. Verify the public address belongs to this host's service path; outbound NAT discovery alone is insufficient.
+
+**Configure the selected allocation.** Within authorized network scope, create or update the exact host-firewall rules and, where applicable, router/firewall NAT for both TCP and UDP with same-number mapping across the entire range. Preserve administrative access and unrelated rules. Back up the affected configuration, inspect the proposed changes, apply them through the supported interface and read back the effective configuration. Directly routed public hosts still need the applicable upstream/host filtering checks. If router access or an upstream change is unavailable, give the operator the exact required change and mark networking HOLD until applied and independently tested; do not claim the range is configured merely because the host accepts listeners.
 
 Prove same-number public-to-host port delivery across the advertised range. Use authorized external probes and bounded temporary listeners with per-port nonces; record sent/received sets for TCP and UDP. `open|filtered` is not UDP proof. Test private-IP, external-public-IP and host-to-own-public-IP paths separately; the latter checks reflection where the workflow needs it.
 
-Never replace an occupied service to fit the test harness. Classify its owner, test that endpoint safely where possible and report any unproven port. Preserve management access when modifying firewall/NAT rules. Remove only this run's listeners. Repeat affected proofs after network changes and after commissioning reboot.
+Host-bound listeners before installation prove only the preliminary host/NAT path. Final acceptance after installation and reboot must also traverse **Vast's actual Docker network and port-publication path**, using owned non-root diagnostic containers with the same supported networking policy. Test every allocatable TCP/UDP port in bounded batches if necessary, verify its actual external-to-container mapping and nonce response, and preserve intended source restrictions. Do not substitute host networking or host-bound listeners for this proof: Docker forwarding can behave differently from host INPUT rules. Separately prove any provider-reserved service endpoint using a safe protocol/identity check; identify those ports explicitly rather than counting them as container nonce passes. An unproved rental path is HOLD. Any provider operation requiring listing or a billable instance must first fit the authorized exposure/cost scope. [Docker firewall behavior](https://docs.docker.com/engine/network/packet-filtering-firewalls/)
+
+Never replace an occupied service to fit the test harness. Classify its owner, test that endpoint safely where possible and report any unproven port. Preserve management access when modifying firewall/NAT rules. Remove only this run's listeners. Record expected, attempted, passed, failed and untested ports separately for each protocol, including both range boundaries and probe source. All advertised ports require delivery evidence; an untested/failed port is HOLD, not a complete-range pass. Repeat affected proofs after network changes and after commissioning reboot.
 
 ## 5. Review and run the Vast installer
 
@@ -72,7 +80,9 @@ Some reviewed installers launched detached self-tests that could list machines. 
 
 Run in a controlled administrative session with restricted log permissions (`umask 077`), no shell tracing, no recording of secrets and no unattended upload of secret-bearing logs. A hidden input prompt prevents terminal echo but does not hide an argv credential from process/audit capture. If the installer requires argv secrets, evaluate that exposure before proceeding and use an operator-controlled secure session where necessary. Keep diagnostic logs private; sanitize copies for reporting. Do not delete system audit records to hide an exposure. Rotate/revoke affected credentials through the owner's credential workflow when needed.
 
-On completion, reconcile installer exit status, new machine ID, services, controller heartbeat, provider listing state and background tasks. Verify exact port-range/address values from the installed files and provider advertisement. Do not overwrite an address from an unrelated outbound-IP probe. Inspect actual service names rather than assuming a unit from another build.
+Pass the confirmed start/end range to the reviewed installer through its supported interface. After installation, explicitly reconcile the active Vast port configuration with the user's allocation. Where the installed version uses `/var/lib/vastai_kaalia/host_port_range` and `host_ipaddr`, back up those files, write the exact approved values in the format this version expects, and read them back; do not overwrite other configuration or infer the public address from outbound NAT. Apply any required scoped daemon reload/restart while still idle, then independently compare the provider-advertised public address/range with the host and firewall configuration. Installer prompt success alone is not proof.
+
+On completion, reconcile installer exit status, new machine ID, services, controller heartbeat, provider listing state and background tasks. Inspect actual service names rather than assuming a unit from another build. Repeat external TCP/UDP delivery tests against the final configured range through the owned container publication path, preserving occupied provider listeners as described above, and repeat after reboot. Verify owned network-test containers/listeners are removed. Any allocation/advertisement mismatch or unproved rental network path blocks release.
 
 ## 6. Container commissioning
 
@@ -85,7 +95,7 @@ Require:
 - A scratch write exceeding its agreed small limit is rejected without consuming the whole filesystem; remove only that scratch container/data. Configure bytes/time bounds before starting it.
 - Each intended GPU completes compute correctness, and selected-GPU containers cannot access unallocated GPUs. Compare UUIDs, not only counts.
 - On multi-GPU hosts, required peer-copy and all-rank NCCL correctness pass with recorded topology, image and message sizes. Do not hide P2P defects with disabled transports and label that a full pass.
-- Sustained load covers every advertised GPU for an agreed bounded duration, with power/cooling observations and no new faults. Record test duration and limits; a finite acceptance run is not a guarantee of long-term reliability.
+- Sustained load covers every advertised GPU through the bounded compute/NCCL Docker workload in [fabric-and-workload.md](fabric-and-workload.md), with power/cooling observations and no new faults. Record test duration and limits; extended burn-in is a separately selected profile.
 - Disk/network results identify the exact target, test method and limits. Never use raw-device write benchmarks. Treat vendor speed-test helpers as potentially mutating maintenance tools until reviewed.
 
 For VM requests follow [vms.md](vms.md); retain separate container and VM results.
@@ -93,6 +103,8 @@ For VM requests follow [vms.md](vms.md); retain separate container and VM result
 ## 7. Reboot, self-test and release
 
 Perform the agreed unattended boot test while idle, with independent recovery access. Verify storage UUID/quota enforcement, every GPU UUID/binding, cgroup/runtime tuple, service dependencies, controller connection, networking and new diagnostic-container behavior after boot. Restarting a service is not a reboot test.
+
+Then run the mandatory [final Docker workload](fabric-and-workload.md) on every host. Require fresh non-root container startup, per-GPU compute correctness, completed all-GPU NCCL on multi-GPU systems, bounded active load, clean exit and cleanup. Ordinary PCIe multi-GPU systems are included; Fabric Manager is not a prerequisite on hardware that does not need it. A service-status or enumeration check alone cannot satisfy this gate.
 
 Run the current normal `vastai self-test machine MACHINE_ID` only after reviewing the installed CLI's behavior and authorizing any required temporary offer, rental/test instance, costs, capacity and duration. Configure credentials securely outside the transcript. If listing is required but not authorized, mark this gate HOLD; retain the completed local qualification. `--ignore-requirements` is diagnostic evidence only and cannot satisfy normal acceptance.
 

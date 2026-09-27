@@ -27,8 +27,11 @@ Check mutable sources again at execution time and record the version/date used. 
 - [Vast self-test](https://docs.vast.ai/host/how-to-self-test): current test procedure and prerequisites.
 - [Vast VM guidance](https://docs.vast.ai/host/vms): optional VM capability and helper interface.
 - [Docker cgroups](https://docs.docker.com/engine/containers/runmetrics/): hierarchy and driver distinction.
+- [Docker firewall behavior](https://docs.docker.com/engine/network/packet-filtering-firewalls/): published-container traffic versus host firewall paths.
 - [Docker containerd image store](https://docs.docker.com/engine/storage/containerd/): separate image/snapshot storage and backend migration behavior.
 - [NVIDIA runtime troubleshooting](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html): GPU loss after container updates/reloads and documented mitigations.
+- [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html) and [driver optional components](https://docs.nvidia.com/datacenter/tesla/driver-installation-guide/optional-components.html): platform-specific fabric packages, versions and service behavior.
+- [NVIDIA nccl-tests](https://github.com/NVIDIA/nccl-tests): collective correctness workload and supported arguments.
 - [Ubuntu NVIDIA installation](https://documentation.ubuntu.com/server/how-to/graphics/install-nvidia-drivers/), [Subiquity reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html), and [Curtin storage](https://curtin.readthedocs.io/en/latest/topics/storage.html): consult for the selected OS/media rather than assuming historical syntax.
 
 ## Public artifact hygiene

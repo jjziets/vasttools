@@ -7,11 +7,16 @@ description: Prepare, install and commission NVIDIA GPU hosts for Vast.ai using 
 
 Produce a reproducible host build with observed acceptance results. Support preparation, authorized installation, and commissioning. Begin with read-only discovery when the target or change scope is unclear. A request to write or publish this runbook is not permission to operate a host.
 
+## Opening installation questions
+
+When preparing or executing an actual host installation, ask the user at the beginning for the **public address and inclusive start–end TCP/UDP port range allocated to this host**, unless they already supplied those exact values for this target. Confirm whether it is directly routed or behind NAT and who can configure the relevant firewall/router. Never pick a sample range or assume discovered open ports belong to this host. If no allocation exists, help propose one after checking the environment and wait for the user's selection before configuring it. Read-only inventory may continue meanwhile. Ask for storage preferences early too, then confirm the concrete disk layout after discovery. Keep these answers in the private host record, not the public skill.
+
 ## Read the relevant procedure
 
 - For installation or rebuild: [install.md](references/install.md).
 - For every container commissioning: [cgroups.md](references/cgroups.md). Linux hierarchy, Docker cgroup driver and GPU injection mode are separate facts.
 - Before installer/runtime changes and for every commissioning: [privileges.md](references/privileges.md). Preserve workload identities and tenant isolation; administrative Docker access is not rental permission.
+- For DGX/HGX or other NVSwitch platforms, and for the final Docker workload on every host: [fabric-and-workload.md](references/fabric-and-workload.md). Install the required matching fabric stack and prove real GPU/NCCL work completes.
 - For VM requests, VM warnings, or deciding how to prevent automatic VM enablement: [vms.md](references/vms.md).
 - Start a private working record from [host-record.md](references/host-record.md). Keep identifiers and evidence outside the public skill tree.
 - Before reusing a historical recipe: [evidence.md](references/evidence.md). Distinguish observed success, bounded failure and untested guidance.
@@ -38,9 +43,9 @@ Use these checkpoints, retaining timestamped private evidence for each:
 | Checkpoint | Required evidence |
 |---|---|
 | IDENTIFIED | Host identity, inventory, trusted access, retained-data decision and authorized scope |
-| PREPARED | Boot/recovery path, selected OS/driver, healthy GPU inventory, user-confirmed disk layout, approved XFS mount and network plan |
+| PREPARED | Boot/recovery path, selected OS/driver, healthy GPU inventory, user-confirmed disk layout, approved XFS mount, user-specified port allocation configured and externally tested |
 | REGISTERED | Reviewed installer outcome, correct account/machine, current provider state and no unexpected background actions |
-| CONTAINER-QUALIFIED | Preserved workload identity/privilege boundary, storage quota, GPU compute/isolation, CPU/memory limits, cgroup regression, multi-GPU checks when applicable, reboot and network proof |
+| CONTAINER-QUALIFIED | Preserved workload identity/privilege boundary, storage quota, GPU compute/isolation, CPU/memory limits, cgroup regression, matching healthy fabric stack where required, final post-reboot Docker compute/NCCL workload, and network proof |
 | VM-QUALIFIED | Separate requested VM profile passes assignment, guest, isolation and host-recovery tests |
 | RELEASE-READY | Required provider self-test, cleanup, monitoring and commercial terms recorded; listing state independently verified |
 

@@ -77,6 +77,10 @@ Start with a read-only assessment. Installing this skill does not authorize disk
 
 Before changing storage, the agent presents the proposed disk layout and confirms your preference, including OS/data placement, RAID, capacity and which disks or data must be preserved.
 
+It asks for your host's public address and TCP/UDP port range at the beginning, configures the confirmed allocation in the applicable firewall/NAT and Vast settings, then verifies external delivery and the final advertised range after reboot.
+
+On supported DGX/HGX NVSwitch systems it installs and verifies the driver-matched Fabric Manager stack. Every host must complete a final non-root Docker GPU workload; multi-GPU hosts also run an all-GPU NCCL correctness test. The default is five minutes of active work with a ten-minute deadline; longer burn-in is a separate choice. See [fabric setup and Docker acceptance](skills/vast-host-install/references/fabric-and-workload.md).
+
 **Install in Codex:** clone this repository, then run from its root:
 
 ```bash
