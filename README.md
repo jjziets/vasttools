@@ -2,6 +2,8 @@
 The aim is to set up a list of tools that can be used with Vast.ai.
 The tools are free to use, modify and distribute. If you find this helpful and would like to donate, you can send your donations to the following wallets.
 
+[Join our Discord](https://discord.gg/8GmrQzTvF): a small GPU infrastructure community where we discuss Vast.ai hosting, this skill and running GPU servers.
+
 BTC 15qkQSYXP2BvpqJkbj2qsNFb6nd7FyVcou
 
 XMR 897VkA8sG6gh7yvrKrtvWningikPteojfSgGff3JAUs3cu7jxPDjhiAZRdcQSYPE2VGFVHAdirHqRZEpZsWyPiNK6XPQKAg
@@ -71,7 +73,6 @@ These tools have evolved into a complete **datacenter management suite** under t
 
 Use the [Vast.ai host installation skill](skills/vast-host-install/SKILL.md) with a coding or infrastructure agent to assess, prepare and commission a GPU host. It covers storage and network verification, conditional cgroup troubleshooting, optional VM qualification, credential handling and recovery gates. It preserves non-root workload identities and forbids privileged/root fallbacks that weaken tenant isolation.
 
-[Join our Discord](https://discord.gg/8GmrQzTvF): a small GPU infrastructure community where we discuss Vast.ai hosting, this skill and running GPU servers.
 
 Start with a read-only assessment. Installing this skill does not authorize disk erasure, downtime or marketplace listing. The packaged workflow still requires an end-to-end pilot; its checks are not a guarantee of host compatibility.
 
