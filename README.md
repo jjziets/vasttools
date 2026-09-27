@@ -71,7 +71,11 @@ These tools have evolved into a complete **datacenter management suite** under t
 
 Use the [Vast.ai host installation skill](skills/vast-host-install/SKILL.md) with a coding or infrastructure agent to assess, prepare and commission a GPU host. It covers storage and network verification, conditional cgroup troubleshooting, optional VM qualification, credential handling and recovery gates. It preserves non-root workload identities and forbids privileged/root fallbacks that weaken tenant isolation.
 
+[Join our Discord](https://discord.gg/8GmrQzTvF): a small GPU infrastructure community where we discuss Vast.ai hosting, this skill and running GPU servers.
+
 Start with a read-only assessment. Installing this skill does not authorize disk erasure, downtime or marketplace listing. The packaged workflow still requires an end-to-end pilot; its checks are not a guarantee of host compatibility.
+
+Before changing storage, the agent presents the proposed disk layout and confirms your preference, including OS/data placement, RAID, capacity and which disks or data must be preserved.
 
 **Install in Codex:** clone this repository, then run from its root:
 

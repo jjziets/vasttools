@@ -20,6 +20,8 @@ Copy outside the public repository. Replace fields with observed values or an ex
 - OS/architecture, source ISO/signature/checksum if rebuilt:
 - Kernel running / next boot; NVIDIA driver/module coverage:
 - Storage topology/failure tolerance; member serials, XFS UUID/mount, ftype and quotas:
+- Preferred disk-layout plan: per-disk roles/partitions, RAID or independent disks, usable capacity, reserves/spares and preserved contents:
+- User's explicit layout selection/confirmation, timestamp, exact plan reference and approved target/scope:
 - Docker data root/storage driver; fail-closed startup guard:
 - Image-store backend; containerd instance/content/snapshot roots where applicable; all persistent paths, mounts/capacity, startup guards and backend-specific quota proof:
 - Docker/containerd/runc/toolkit versions and package origins:
@@ -51,6 +53,7 @@ Use PASS / FAIL / HOLD / NOT TESTED / NOT APPLICABLE with reason and timestamped
 |---|---|---|
 | Exact host identity and authorized scope | | |
 | Workloads/data/dependencies resolved | | |
+| Preferred disk layout explicitly confirmed; fresh inventory still matches | | |
 | Recovery access and storage/driver preparation | | |
 | Installer side effects controlled; registration verified | | |
 | XFS quota accounting and enforcement; scratch limit | | |

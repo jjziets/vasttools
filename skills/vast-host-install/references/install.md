@@ -14,6 +14,14 @@ Prove an independent console/recovery route. A target providing its own installe
 
 Select a currently supported OS/architecture combination using Vast and hardware vendor guidance. Existing healthy installations can skip OS reinstall; an example release is not a requirement for every architecture.
 
+### Confirm the preferred disk layout
+
+Before partitioning, formatting, assembling a new array, migrating data or changing persistent storage mounts, show the user a concrete layout based on live disk inventory. In the private plan, map each disk by serial/WWN and capacity to its intended role, partition sizes, RAID/independent-disk arrangement, filesystem, mountpoint and preserved contents. Include boot redundancy, usable capacity, failure consequences, spare/free-space allocation and the Docker/containerd storage paths. Offer only alternatives supported by the actual inventory, with their capacity/resilience tradeoffs; keeping a suitable existing layout is a valid choice.
+
+Ask the user to confirm their preferred layout and wait before those storage changes. Record their selection and the exact plan it approves. If an earlier explicit confirmation already covers the same target, inventory, layout and execution scope, reuse it without asking again. A generic installation request, permission to wipe disks or preference for maximum capacity is not confirmation of a specific layout. Never default to RAID0 or allocate every available disk without that confirmation.
+
+Revalidate the selected disk identities before the first write. If the inventory or proposed layout changes, return the revised plan for confirmation; do not substitute disks or silently change RAID level, sizes or OS/data placement. Read-only discovery may continue while the choice is pending. Keep the completed plan and confirmation private.
+
 For reinstall, verify the official ISO against its signed checksum manifest. Generate a host-specific layout matching exact disk serials, preserve excluded devices and validate autoinstall against the schema for that ISO. A YAML parse alone is insufficient. Immediately before the first destructive confirmation, recheck hardware identity and storage consumers from trusted live media. A changed or ambiguous mapping stops the write.
 
 Choose the layout deliberately: dedicated OS disks plus a data tier, or a reviewed shared-disk layout. RAID0's capacity advantage includes complete array loss if a member fails; it is not a universal default. Record the selected failure tolerance, backup/retention decision, boot redundancy and available space.

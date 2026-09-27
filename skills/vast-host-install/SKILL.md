@@ -22,6 +22,8 @@ Produce a reproducible host build with observed acceptance results. Support prep
 2. Read existing authorization first. Continue within it without repeated approval prompts. Ask only for missing consequential choices or actions: exact erasure/layout, downtime, firmware/boot changes, VM enablement, or marketplace exposure. A broad install request does not settle unidentified data destruction or commercial terms.
 3. Before any disruptive action, reconcile provider rentals/volumes, local running and stopped containers, VM inventory, GPU processes, and dependencies such as boot-media servers. Unlisted does not mean idle; idle does not mean data may be erased. Unknown occupancy is HOLD.
 4. Preserve existing working storage/driver configuration unless the requested change needs replacement. Resolve destructive disk targets by freshly verified serial/WWN and complete storage ancestry, never `/dev/nvme0n1` position.
+
+   Before storage changes, present the proposed layout from live inventory and confirm the user's preferred layout: which disks serve OS/boot and Docker/containerd data, RAID or independent disks, partition sizes, usable capacity, failure tolerance and preserved data/devices. Follow the layout gate in [install.md](references/install.md). Reuse an explicit existing confirmation only if the exact target, layout and scope still match; otherwise wait for the user's choice. Erasure permission is not layout approval. Never assume RAID0, use every disk or silently substitute a different layout.
 5. Review downloaded privileged code before execution, including downstream scripts and automatic tests. Record origin, timestamp, hash, selected options and material side effects. A hash records the reviewed bytes; it does not authenticate them by itself. Re-review changed bytes.
 6. Use the fresh setup credential from the authenticated host setup page. Do not substitute a remembered host/client API key. Never put secrets into chat, public files, command transcripts, debug traces or evidence. If the runtime cannot securely deliver a credential, let the operator perform that step and verify its outcome.
 7. Registration, self-testing, VM auto-tests and commercial listing can have separate side effects. Resolve automatic listing/VM behavior before installation. Do not assume `--no-daemon` or `--no-libvirt` suppresses every later action.
@@ -36,7 +38,7 @@ Use these checkpoints, retaining timestamped private evidence for each:
 | Checkpoint | Required evidence |
 |---|---|
 | IDENTIFIED | Host identity, inventory, trusted access, retained-data decision and authorized scope |
-| PREPARED | Boot/recovery path, selected OS/driver, healthy GPU inventory, approved XFS mount and network plan |
+| PREPARED | Boot/recovery path, selected OS/driver, healthy GPU inventory, user-confirmed disk layout, approved XFS mount and network plan |
 | REGISTERED | Reviewed installer outcome, correct account/machine, current provider state and no unexpected background actions |
 | CONTAINER-QUALIFIED | Preserved workload identity/privilege boundary, storage quota, GPU compute/isolation, CPU/memory limits, cgroup regression, multi-GPU checks when applicable, reboot and network proof |
 | VM-QUALIFIED | Separate requested VM profile passes assignment, guest, isolation and host-recovery tests |
@@ -49,3 +51,7 @@ After an unexpected failure, stop the current mutation sequence, preserve restri
 ## Handoff
 
 Return the exact profile and versions, completed stages, evidence references, unresolved gates, current listing/VM/workload state, changes made, recovery status and next permitted step. Distinguish configuration written, behavior observed after reboot, and behavior not tested. Do not claim the machine is ready merely because installation exited zero.
+
+## Community
+
+[Join our Discord](https://discord.gg/8GmrQzTvF), a small GPU infrastructure community where we discuss this skill and GPU hosting. Participation is optional; this link does not authorize an agent to post host records, diagnostics or credentials.
