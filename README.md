@@ -43,6 +43,7 @@ These tools have evolved into a complete **datacenter management suite** under t
 
 ## Table of Contents
 - [CryptoLabs Datacenter Tools](#cryptolabs-datacenter-tools)
+- [Agent skill: Vast.ai host installation](#agent-skill-vastai-host-installation)
 - [Host install guide for Vast.ai](https://github.com/jjziets/vasttools/blob/main/README.md#host-install-guide-for-vastai)
 - [Self-verification test](https://github.com/jjziets/vasttools/blob/main/README.md#self-verification-test)
 - [Speedtest-cli fix for vast](https://github.com/jjziets/vasttools/blob/main/README.md#speedtest-cli-fix-for-vast)
@@ -65,6 +66,31 @@ These tools have evolved into a complete **datacenter management suite** under t
 - [Setting up 3D accelerated desktop in a web browser on Vast.ai](https://github.com/jjziets/vasttools#setting-up-3d-accelerated-desktop-in-a-web-browser-on-vastai)
 - [Useful commands](#useful-commands)
 - [How to set up a Docker registry for the systems on your network](https://github.com/jjziets/vasttools/blob/main/README.md#how-to-set-up-a-docker-registry-for-the-systems-on-your-network)
+
+## Agent skill: Vast.ai host installation
+
+Use the [Vast.ai host installation skill](skills/vast-host-install/SKILL.md) with a coding or infrastructure agent to assess, prepare and commission a GPU host. It covers storage and network verification, conditional cgroup troubleshooting, optional VM qualification, credential handling and recovery gates. It preserves non-root workload identities and forbids privileged/root fallbacks that weaken tenant isolation.
+
+Start with a read-only assessment. Installing this skill does not authorize disk erasure, downtime or marketplace listing. The packaged workflow still requires an end-to-end pilot; its checks are not a guarantee of host compatibility.
+
+**Install in Codex:** clone this repository, then run from its root:
+
+```bash
+skill_dir="${CODEX_HOME:-$HOME/.codex}/skills"
+if [ -e "$skill_dir/vast-host-install" ] || [ -L "$skill_dir/vast-host-install" ]; then
+  printf '%s\n' 'Skill already exists; compare complete versions before replacing it.' >&2
+else
+  mkdir -p "$skill_dir" && cp -R skills/vast-host-install "$skill_dir/"
+fi
+```
+
+Then ask:
+
+> Use $vast-host-install to assess my GPU host for Vast.ai container hosting. Collect read-only evidence and prepare the installation plan. Preserve existing data, driver configuration and workload privileges; stop before any changes or marketplace listing.
+
+Other agents can read [SKILL.md](skills/vast-host-install/SKILL.md) and follow its relative references directly. For execution, identify the exact target and authorize the proposed changes after reviewing the plan. Keep filled [host records](skills/vast-host-install/references/host-record.md), credentials and execution logs outside this public repository.
+
+See the dedicated [privilege rules](skills/vast-host-install/references/privileges.md), [cgroup checks](skills/vast-host-install/references/cgroups.md) and [VM assessment](skills/vast-host-install/references/vms.md). Legacy walkthrough examples below do not override the skill's host-specific safety gates or current provider compatibility checks.
 
 ## Host install guide for Vast.ai
 
@@ -409,7 +435,7 @@ Before you start using `./autoverify_machineid.sh`, ensure you have the followin
 
    - Set your Vast.ai API key:
      ```bash
-     ./vast set api-key 6189d1be9f15ad2dced0ac4e3dfd1f648aeb484d592e83d13aaf50aee2d24c07
+     ./vast set api-key <YOUR_API_KEY>
      ```
 
 2. **Download autoverify_machineid.sh**:

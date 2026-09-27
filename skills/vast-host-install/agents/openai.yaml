@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vast.ai Host Installation"
+  short_description: "Install and qualify Vast GPU hosts with safety gates"
+  default_prompt: "Use $vast-host-install to assess a GPU host and prepare its installation and commissioning plan."
