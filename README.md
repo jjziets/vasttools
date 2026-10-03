@@ -2,7 +2,7 @@
 The aim is to set up a list of tools that can be used with Vast.ai.
 The tools are free to use, modify and distribute. If you find this helpful and would like to donate, you can send your donations to the following wallets.
 
-[Join our Discord](https://discord.gg/8GmrQzTvF): a small GPU infrastructure community where we discuss Vast.ai hosting, this skill and running GPU servers.
+[Join our Discord](https://discord.gg/8GmrQzTvF): a small GPU infrastructure community where we discuss hosting on all markets, this skill and running GPU servers.
 
 BTC 15qkQSYXP2BvpqJkbj2qsNFb6nd7FyVcou
 
